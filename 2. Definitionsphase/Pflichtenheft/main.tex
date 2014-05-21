@@ -1,0 +1,77 @@
+\RequirePackage[l2tabu, orthodox]{nag}
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{capt-of}
+\usepackage{german}
+\usepackage[colorlinks,pdfpagelabels,pdfstartview=FitH,bookmarksopen=true,bookmarksnumbered=true,linkcolor=black,plainpages=false,hypertexnames=false,citecolor=black]{hyperref}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{pdfpages}
+
+\newcommand{\appname}{Flashcard-Website}
+
+\lstset{numbers=left, numberstyle=\tiny, numbersep=5pt} 
+\lstset{language=Java}
+
+\begin{document}
+\begin{titlepage}
+    \large
+    \begin{flushleft}
+        Web Engineering, 2. Semester \\
+        TINF13B2
+    \end{flushleft}
+    
+    \vfill
+
+    \begin{center}
+        \Huge Pflichtenheft\\
+        \Large \appname \\
+        \vspace{1cm}
+        \normalsize David Ehlen, Julien Hadley Jack, Sebastian Dernbach, \\
+        \vspace\medskipamount
+        \vspace\medskipamount
+        Version 1\\
+        Karlsruhe, 22.05.2014
+    \end{center}
+    
+    \vfill
+    
+    \begin{flushright}
+        Duale Hochschule \\
+        Baden-Württemberg \\
+        \vspace\medskipamount
+        Betreuer: Jörn Eisenbiegler,\\
+        Simone Freudenmann
+    \end{flushright}
+\end{titlepage}
+
+\newpage
+
+% removes the page numbers for the toc
+\pagestyle{empty}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\tableofcontents
+\cleardoublepage
+
+% normal page numbering for the rest of the document
+\setcounter{page}{1}
+\pagestyle{plain}
+\setcounter{page}{1}
+
+\section{Einleitung}
+
+\include{chapters/Zielbestimmung}
+\include{chapters/Produkteinsatz}
+\include{chapters/Anforderungen}
+\include{chapters/Produktdaten}
+\include{chapters/Testfaelle}
+\include{chapters/Systemmodelle}
+
+
+\end{document}

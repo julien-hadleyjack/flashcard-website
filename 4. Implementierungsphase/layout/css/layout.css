@@ -1,0 +1,318 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+html {
+    background: #14446a;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #14446a 0%, #278c64 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #14446a), color-stop(100%, #278c64));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #14446a 0%, #278c64 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #14446a 0%, #278c64 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #14446a 0%, #278c64 100%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, #14446a 0%, #278c64 100%);
+    /* W3C */
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#14446a', endColorstr='#278c64', GradientType=0);
+    /* IE6-9 */
+}
+body,
+html {
+    height: 100%;
+    width: 100%;
+}
+h1 {
+    display:inline-block;
+    /*border-bottom: 2px solid #fff;*/
+    color: #fff;
+    font-family: 'Megrim', cursive;
+    font-size: 65px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    position: absolute;
+    top:100px;
+    width:100%;
+    text-align: center;
+    height:50px;
+    line-height: 50px;
+}
+
+a {
+ color:#fff;
+    
+}
+
+.circle-button {
+    display: block;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: calc((100% - 100px)/2);
+    -webkit-transition: all 400ms ease-in-out;
+    -moz-transition: all 400ms ease-in-out;
+    -o-transition: all 400ms ease-in-out;
+    -ms-transition: all 400ms ease-in-out;
+    transition: all 400ms ease-in-out
+}
+#left-button {
+    left: 20px;
+    background-image: url(../graphic/left.png);
+}
+#left-button:hover {
+    background-image: url(../graphic/left_hover.png);
+}
+#right-button {
+    right: 20px;
+    background-image: url(../graphic/right.png);
+}
+#right-button:hover {
+    background-image: url(../graphic/right_hover.png);
+}
+.answerButton {
+    width: 450px;
+    height: 50px;
+    background-color: #fff;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    border: 0px;
+    position: absolute;
+    left: calc((100% - 450px)/2);
+    top: 80%;
+    color: #000;
+    text-decoration: none;
+    opacity: 0.4;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 50px;
+    -webkit-transition: all 400ms ease-in-out;
+    -moz-transition: all 400ms ease-in-out;
+    -o-transition: all 400ms ease-in-out;
+    -ms-transition: all 400ms ease-in-out;
+    transition: all 400ms ease-in-out
+}
+.answerButton:hover {
+    background-color: #fff;
+    opacity: 1.0;
+}
+/*Karteikarte */
+
+#wrapper {
+    margin: 0 auto;
+    width: calc(100% - 300px*1);
+    height: 80%;
+}
+.paper {
+    position: relative;
+    padding: 10px 20px 20px 10px;
+    top: calc((100% - 300px)/2);
+    width: 650px;
+    box-shadow: 4px 5px 8px rgba(75, 75, 75, 0.78);
+    -webkit-transform: rotate(-3deg);
+    height: 400px;
+    margin: 0 auto;
+    background: white;
+    
+    /* Abstand fehlt
+    border-top: 1px solid;
+    border-color: #f00;
+    margin-top: 10px;
+    */
+}
+.paper2 {
+    position: relative;
+    padding-top: 40px;
+    width: 105%;
+    box-shadow: 4px 5px 8px rgba(75, 75, 75, 0.78);
+    height: 105%;
+    -webkit-transform: rotate(3deg);
+    background-color: #fff; 
+background-image: 
+linear-gradient(#eee .1em, transparent .1em);
+background-size: 100% 40px;
+}
+
+.redBorder {
+ padding: 10px;
+line-height: 40px;
+ border-top: 1px solid red;
+ width: 100%;
+height: 95%;
+overflow: hidden;
+}
+
+#paper:after {
+    border-top: 1px solid red;
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    content: '';
+}
+/*Loginform*/
+
+.form-5 {
+    /* Size and position */
+    width: 300px;
+    height: 100px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /* Styles */
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1), 0 3px 2px rgba(0, 0, 0, 0.1);
+}
+.form-5 p {
+    width: 70%;
+    float: left;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid #fff;
+    border-right: none;
+}
+.form-5 input[type=text],
+.form-5 input[type=password] {
+    /* Size and position */
+    width: 100%;
+    height: 50px;
+    padding: 0 10px;
+    /* Styles */
+    border: none;
+    /* Remove the default border */
+    background: white;
+    /* Fallback */
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+    /* Font styles */
+    font-family: 'Montserrat', sans-serif;
+    text-indent: 10px;
+    color: #4cdbee;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    font-size: 20px;
+}
+.form-5 input[type=text] {
+    border-bottom: 1px solid #fff;
+    /* Fallback */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 5px 0 0 0;
+}
+.form-5 input[type=password] {
+    border-top: 1px solid #CCC;
+    /* Fallback */
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 0 5px;
+}
+.form-5 input[type=text]:hover,
+.form-5 input[type=password]:hover,
+.form-5 input[type=text]:focus,
+.form-5 input[type=password]:focus {
+    background: #f7def7;
+    /* Fallback */
+    background: rgba(255, 255, 255, 0.4);
+    outline: none;
+}
+.form-5 input::-webkit-input-placeholder {
+    color: #fff;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.4);
+    /* font-family: 'Handlee', cursive; */
+}
+.form-5 input:-moz-placeholder {
+    color: #fff;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.4);
+    /* font-family: 'Handlee', cursive; */
+}
+.form-5 input:-ms-input-placeholder {
+    color: #fff;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.4);
+    /* font-family: 'Handlee', cursive; */
+}
+.form-5 button {
+    /* Size and position */
+    width: 30%;
+    height: 102px;
+    float: left;
+    position: relative;
+    overflow: hidden;
+    /* Styles */
+    background: url(../graphic/noise.png), radial-gradient(ellipse at center, #4cdbee 0%, #3c8efd 100%);
+    border-radius: 0 5px 5px 0;
+    box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.7), inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+    border: none;
+    border-left: 1px solid silver;
+    cursor: pointer;
+    line-height: 102px;
+    /* Same as height */
+}
+.form-5 button i {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: -20px;
+    font-size: 64px;
+    line-height: 109px;
+    color: #3c8efd;
+    opacity: 0;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+    transition: all 0.2s ease-out;
+}
+.form-5 button span {
+    display: block;
+    /* Font styles */
+    color: #3c8efd;
+    /* font-family: 'Montserrat', Arial, sans-serif; */
+    font-size: 20px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+    transform: rotate(-90deg);
+    transition: all 0.2s linear;
+}
+.form-5 button:focus {
+    outline: none;
+}
+.form-5 button:hover span,
+.form-5 button:focus span {
+    opacity: 0;
+    transform: rotate(-90deg) translateY(-20px);
+}
+.form-5 button:hover i,
+.form-5 button:focus i {
+    opacity: 0.5;
+    left: 0;
+    transition-delay: 0.2s;
+}
+/* Click on button */
+
+.form-5 button:active span,
+.form-5 button:active i {
+    transition: none;
+}
+.form-5 button:active span {
+    opacity: 0;
+}
+.form-5 button:active i {
+    opacity: 0.5;
+    left: 0;
+    color: #fff;
+}

@@ -161,6 +161,14 @@ header {
 }
 
 
+/* Dashboard */
+.dashboard #wrapper {
+	padding: 0 40px;
+	width: 100%;
+	height: 80%;
+	text-align: center;
+}
+
 /* Karteikarte */
 #wrapper {
     margin: 0 auto;
@@ -169,10 +177,13 @@ header {
 }
 .paper {
     position: relative;
-    padding: 10px 20px 20px 10px;
     top: calc((100% - 300px)/2);
     box-shadow: 4px 5px 8px rgba(75, 75, 75, 0.78);
-    -webkit-transform: rotate(-3deg);
+    -moz-transform: rotate(-3deg);
+	-webkit-transform: rotate(-3deg);
+	-o-transform: rotate(-3deg);
+	-ms-transform: rotate(-3deg);
+	transform: rotate(-3deg);
     background: white;
     
     /* Abstand fehlt
@@ -182,18 +193,20 @@ header {
     */
 }
 .paper-small {
-    height: 150px;
-    width: 250px;
+    height: 180px;
+    width: 320px;
+    padding: 5px 20px 10px 5px;
 }
 .paper-dashboard {
 	font-size: 24px;
 	text-align: center;
-	float: left;
 	margin: 15px;
+	display: inline-block;
 }
 .paper-big {
     height: 400px;
     width: 650px;
+    padding: 5px 20px 20px 5px;
 }
 .paper2 {
     position: relative;
@@ -201,7 +214,11 @@ header {
     width: 105%;
     box-shadow: 4px 5px 8px rgba(75, 75, 75, 0.78);
     height: 105%;
-    -webkit-transform: rotate(3deg);
+    -moz-transform: rotate(3deg);
+	-webkit-transform: rotate(3deg);
+	-o-transform: rotate(3deg);
+	-ms-transform: rotate(3deg);
+	transform: rotate(3deg);
     background-color: #fff; 
 	background-image: linear-gradient(#eee .1em, transparent .1em);
 	background-size: 100% 40px;

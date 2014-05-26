@@ -115,6 +115,9 @@ a {
     background-color: #fff;
     opacity: 1.0;
 }
+.center {
+	margin: 0 auto;
+}
 
 /* header */
 header {
@@ -168,11 +171,8 @@ header {
     position: relative;
     padding: 10px 20px 20px 10px;
     top: calc((100% - 300px)/2);
-    width: 650px;
     box-shadow: 4px 5px 8px rgba(75, 75, 75, 0.78);
     -webkit-transform: rotate(-3deg);
-    height: 400px;
-    margin: 0 auto;
     background: white;
     
     /* Abstand fehlt
@@ -180,6 +180,20 @@ header {
     border-color: #f00;
     margin-top: 10px;
     */
+}
+.paper-small {
+    height: 150px;
+    width: 250px;
+}
+.paper-dashboard {
+	font-size: 24px;
+	text-align: center;
+	float: left;
+	margin: 15px;
+}
+.paper-big {
+    height: 400px;
+    width: 650px;
 }
 .paper2 {
     position: relative;
@@ -195,7 +209,7 @@ header {
 
 .redBorder {
 	padding: 10px;
-	line-height: 40px;
+	line-height: 38px;
 	border-top: 1px solid red;
 	width: 100%;
 	height: 95%;

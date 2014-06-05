@@ -282,14 +282,14 @@ header {
 }
 .loginform input[type=text] {
     position: absolute;
-    top: 30%;
+    top: 25%;
     left: 10%;
     background: url(../graphic/user-icon.png) no-repeat scroll 7px 7px;
     padding-left: 30px;
 }
 .loginform input[type=password] {
     position: absolute;
-    top: 45%;
+    top: 40%;
     left: 10%;
     background: url(../graphic/pw-icon.png) no-repeat scroll 7px 7px;
     padding-left: 30px;
@@ -324,4 +324,16 @@ header {
     @include background-image(linear-gradient(#5fc1ff 0%, #0088de 100%));
     border-radius: 3px;
     box-shadow: inset 0 0 7px 0 rgba(white, 0.5);
+}
+
+.signup {
+position:absolute;
+ top:55%;   
+left:15%;
+}
+
+.forgotPW {
+position:absolute;
+ top:55%;   
+left:55%;
 }

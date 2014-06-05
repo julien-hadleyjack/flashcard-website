@@ -115,3 +115,8 @@ sympy-plots-for-*.tex/
 
 # xindy
 *.xdy
+
+#modified
+*.tks
+Thumbs.db
+*.tex.bak

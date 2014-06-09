@@ -2,7 +2,6 @@
 <%
     String userid = request.getParameter("uname");    
     String pwd = request.getParameter("password");
-    //Entscheiden ob Registrieren oder Login
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/web_engineering",
             "root", "test");

@@ -334,14 +334,14 @@ header {
 }
 .loginform input[type=text] {
     position: absolute;
-    top: 25%;
+    top: 30%;
     left: 10%;
     background: url(../graphic/user-icon.png) no-repeat scroll 7px 7px;
     padding-left: 30px;
 }
 .loginform input[type=password] {
     position: absolute;
-    top: 40%;
+    top: 45%;
     left: 10%;
     background: url(../graphic/pw-icon.png) no-repeat scroll 7px 7px;
     padding-left: 30px;
@@ -383,9 +383,8 @@ header {
   background-color:#5fc1ff;
 }
  
-
-.forgotPW {
+.register {
 position:absolute;
- top:55%;   
-left:10%;
+ top:68%;   
+left:55%;
 }

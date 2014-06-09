@@ -5,7 +5,7 @@
     //Entscheiden ob Registrieren oder Login
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/web_engineering",
-            "root", "tennis1506");
+            "root", "test");
    
     String queryString = "INSERT INTO Users(email,pwhash,salt) VALUES (?, ?, ?)";
                   PreparedStatement pstatement = null;

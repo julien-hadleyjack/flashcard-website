@@ -33,7 +33,7 @@ public class User {
 		    Connection con;
 		    ResultSet rs;
 			try {
-				con = DriverManager.getConnection("jdbc:mysql://aa7gk7un53jie1.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
+				con = DriverManager.getConnection("jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
 				        "david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
 				 Statement st = con.createStatement();
 				    rs = st.executeQuery("select * from Users where email='" + username + "' and pwhash='" + pass + "'");
@@ -51,7 +51,7 @@ public class User {
 	public boolean registerUser() {
 		 Connection con;
 		try {
-			con = DriverManager.getConnection("jdbc:mysql://aa7gk7un53jie1.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
+			con = DriverManager.getConnection("jdbc:mysql:/aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
 			            "david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
 		
 		   

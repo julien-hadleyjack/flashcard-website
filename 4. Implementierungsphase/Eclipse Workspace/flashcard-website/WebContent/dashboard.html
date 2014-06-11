@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 
 <head>
     <meta charset="UTF-8">
@@ -22,7 +22,8 @@
     		},
     		height: 134,
     		width: 309,
-       		force_p_newlines : false
+       		force_p_newlines : false,
+       		content_css : "layout/css/tinymce.css"
 		});
 	</script>
 
@@ -43,8 +44,8 @@
 			
 			$(document).on("click", ".save", function(e) {
 				var element = $(this).parents().eq(1).children(".paper2"),
-					value = tinyMCE.activeEditor.getContent({format : 'raw'});
-
+					value = $(element).find("iframe").contents().find("body").text();
+					
 				$(element).children(".mce-container").hide();
 				$(element).children(".redBorder").show();
 				
@@ -76,6 +77,8 @@
 	</header>
 
     <div id="wrapper">
+    
+    <div>
         <div class="paper paper-small paper-dashboard">
         	<div class="paper-buttons">
         		<a href="#" class="icon edit">
@@ -99,7 +102,7 @@
                 <div class="redBorder">
 					Biologie      
 				</div>     
-				<textarea id="editor-0" class="paper-textarea">Biologie</textarea>         
+				<textarea id="editor-1" class="paper-textarea">Biologie</textarea>         
 			</div>
         </div>
         <div class="paper paper-small paper-dashboard">
@@ -112,7 +115,7 @@
                 <div class="redBorder">
 					Biologie      
 				</div>     
-				<textarea id="editor-0" class="paper-textarea">Biologie</textarea>         
+				<textarea id="editor-2" class="paper-textarea">Biologie</textarea>         
 			</div>
         </div>
         <div class="paper paper-small paper-dashboard">
@@ -125,7 +128,7 @@
                 <div class="redBorder">
 					Biologie      
 				</div>     
-				<textarea id="editor-0" class="paper-textarea">Biologie</textarea>         
+				<textarea id="editor-3" class="paper-textarea">Biologie</textarea>         
 			</div>
         </div>
         <div class="paper paper-small paper-dashboard">
@@ -138,7 +141,7 @@
                 <div class="redBorder">
 					Biologie      
 				</div>     
-				<textarea id="editor-0" class="paper-textarea">Biologie</textarea>         
+				<textarea id="editor-4" class="paper-textarea">Biologie</textarea>         
 			</div>
         </div>
         <div class="paper paper-small paper-dashboard">
@@ -151,10 +154,12 @@
                 <div class="redBorder">
 					Biologie      
 				</div>     
-				<textarea id="editor-0" class="paper-textarea">Biologie</textarea>         
+				<textarea id="editor-5" class="paper-textarea">Biologie</textarea>         
 			</div>
+        </div>
         </div>
     </div>
+    <div class="clear" style="clear:both;"></div>
 </body>
 
 </html>

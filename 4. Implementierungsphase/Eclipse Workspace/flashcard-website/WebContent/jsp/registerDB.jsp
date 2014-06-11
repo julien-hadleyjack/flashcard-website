@@ -16,7 +16,7 @@ response.sendRedirect("success.jsp");
 %>
 </c:when>
 <c:otherwise>
-      <%  out.println("Bei der Registrierung gab es einen Fehler. <a href='login.jsp'>Nochmal versuchen</a>");   
+      <%  out.println("Bei der Registrierung gab es einen Fehler. <a href='login.html'>Nochmal versuchen</a>");   
       %>
  </c:otherwise>
 </c:choose> 

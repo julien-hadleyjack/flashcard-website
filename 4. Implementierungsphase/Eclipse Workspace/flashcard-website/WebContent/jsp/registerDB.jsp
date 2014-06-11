@@ -6,9 +6,9 @@
     String pwd = request.getParameter("password"); 
 %>
  <jsp:setProperty name="loginBean" property="username"  
-                    value=userid/>
+                    value="${userid}"/>
  <jsp:setProperty name="loginBean" property="pass"  
-                    value=pwd/>
+                    value="${pwd}"/>
 <c:choose>
 <c:when test="${loginBean.registerUser()}">
 <% session.setAttribute("userid",userid);        

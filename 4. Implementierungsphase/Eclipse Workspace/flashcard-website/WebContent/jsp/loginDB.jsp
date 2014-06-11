@@ -5,9 +5,9 @@
 %>
 <jsp:useBean id="loginBean" class="beans.User" scope="session"></jsp:useBean>
  <jsp:setProperty name="loginBean" property="username"  
-                    value=userid/>
+                    value="${userid}"/>
  <jsp:setProperty name="loginBean" property="pass"  
-                    value=pwd/>
+                    value="${pwd}"/>
 <c:choose>
 <c:when test="${loginBean.isLoggedIn()}">
 <%session.setAttribute("userid",userid);        

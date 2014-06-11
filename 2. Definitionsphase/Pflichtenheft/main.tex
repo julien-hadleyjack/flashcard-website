@@ -16,10 +16,14 @@
 % http://tex.stackexchange.com/questions/167948/package-rerunfilecheck-warning-file-out-has-changed
 \usepackage{bookmark}
 
+% gantt charts: http://ctan.mirrorcatalogs.com/graphics/pgf/contrib/pgfgantt/pgfgantt.pdf
+\usepackage{pgfgantt}
+
+% change margins to 2.5 cm
+\usepackage[margin=3cm]{geometry}
+
 \newcommand{\appname}{Flashcard-Website}
 
-%\lstset{numbers=left, numberstyle=\tiny, numbersep=5pt} 
-%\lstset{language=Java}
 
 \begin{document}
 \begin{titlepage}
@@ -79,6 +83,6 @@
 \include{GlobaleTestfaelle}
 \include{Systemmodelle}
 \include{Benutzeroberflaeche}
-
+\include{Termine}
 
 \end{document}

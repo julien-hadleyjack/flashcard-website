@@ -116,7 +116,28 @@ sympy-plots-for-*.tex/
 # xindy
 *.xdy
 
+#eclipse
+*.pydevproject
+.metadata
+.gradle
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
 #modified
 *.tks
 Thumbs.db
 *.tex.bak
+AwsCredentials.properties

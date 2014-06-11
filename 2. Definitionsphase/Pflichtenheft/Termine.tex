@@ -1,0 +1,23 @@
+\section{Termine}
+\begin{ganttchart}[link/.style={-latex, draw=blue}]{1}{20}
+\gantttitle{Arbeitstage}{20} \\
+\gantttitlelist{1,...,20}{1} \\
+\ganttgroup{Definitionsphase}{1}{4} \\
+\ganttbar{Pflichtenheft}{1}{4} \\
+%\ganttbar{Task 2}{3}{7} \\
+\ganttmilestone{Finales Pflichtenheft}{4} \\
+
+\ganttgroup{Entwurfsphase}{5}{10} \\
+\ganttbar{Entwurf Systemmodell}{5}{6} \\
+\ganttbar{Entwurf Benutzeroberfläche}{5}{6} \\
+
+\ganttgroup{Implementierungsphase}{8}{10} \\
+
+\ganttgroup{Testphase}{11}{15} \\
+
+
+\ganttlink{elem1}{elem2}
+\ganttlink{elem2}{elem3}
+\ganttlink[link type=s-s]{elem3}{elem4}
+\ganttlink[link type=s-s]{elem4}{elem5}
+\end{ganttchart}

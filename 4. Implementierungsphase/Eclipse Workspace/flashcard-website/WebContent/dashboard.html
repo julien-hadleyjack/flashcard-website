@@ -1,0 +1,160 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="layout/css/layout.css">
+    <link rel="stylesheet" href="layout/css/font-awesome.min.css">
+    
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
+    
+    <script type="text/javascript">
+		tinymce.init({
+		    selector: "textarea",
+		    theme: "modern",
+		    toolbar: false,
+		    menubar: false,
+		    statusbar: false,
+		    setup: function(ed) {
+        		ed.on('init', function(e) {
+            		e.target.hide();
+        		});
+    		},
+    		height: 134,
+    		width: 309,
+       		force_p_newlines : false
+		});
+	</script>
+
+
+    <script type="text/javascript">
+    
+    	$(document).ready(function() {    		
+			$(document).on("click", ".edit", function(e){
+				var element = $(this).parents().eq(1).children(".paper2");
+
+				$(element).children(".redBorder").hide();
+				$(element).children(".mce-container").show();
+								
+				$(this).html('<i class="fa fa-save fa-fw"></i>');
+				$(this).removeClass("edit");
+				$(this).addClass("save");
+			});
+			
+			$(document).on("click", ".save", function(e) {
+				var element = $(this).parents().eq(1).children(".paper2"),
+					value = tinyMCE.activeEditor.getContent({format : 'raw'});
+
+				$(element).children(".mce-container").hide();
+				$(element).children(".redBorder").show();
+				
+				$(element).children(".redBorder").html(value);
+				//TODO: send Ajax Request with new title (get id of database entry via data-id attribute)
+								
+				$(this).html('<i class="fa fa-pencil fa-fw"></i>');
+				$(this).removeClass("save");
+				$(this).addClass("edit");
+			});			
+		});
+    </script>
+</head>
+
+<body class="dashboard">
+	<header>
+		<div class="menubar">
+			<div class="menubar-container">
+				<ul class="menubar-nav">
+					<li class="active"><a href="/">Home</a></li>
+					<li><a href="punkt1.html">Punkt 1</a></li>
+					<li><a href="punkt2.html">Punkt 2</a></li>
+					<li><a href="punkt3.html">Punkt 3</a></li>
+					<li><a href="punkt4.html">Punkt 4</a></li>
+					<li><a href="punkt5.html">Punkt 5</a></li>
+				</ul>
+			</div>
+		</div>    
+	</header>
+
+    <div id="wrapper">
+        <div class="paper paper-small paper-dashboard">
+        	<div class="paper-buttons">
+        		<a href="#" class="icon edit">
+        			<i class="fa fa-pencil fa-fw"></i>
+        		</a>
+        	</div>
+            <div class="paper2">
+                <div class="redBorder">
+					Biologie Kurs Mustermann 2014   
+				</div> 
+				<textarea id="editor-0" class="paper-textarea">Biologie Kurs Mustermann 2014</textarea>         
+			</div>
+        </div>
+        <div class="paper paper-small paper-dashboard">
+        	<div class="paper-buttons">
+        		<a href="#" class="icon edit">
+        			<i class="fa fa-pencil fa-fw"></i>
+        		</a>
+        	</div>
+            <div class="paper2">
+                <div class="redBorder">
+					Biologie      
+				</div>     
+				<textarea id="editor-0" class="paper-textarea">Biologie</textarea>         
+			</div>
+        </div>
+        <div class="paper paper-small paper-dashboard">
+        	<div class="paper-buttons">
+        		<a href="#" class="icon edit">
+        			<i class="fa fa-pencil fa-fw"></i>
+        		</a>
+        	</div>
+            <div class="paper2">
+                <div class="redBorder">
+					Biologie      
+				</div>     
+				<textarea id="editor-0" class="paper-textarea">Biologie</textarea>         
+			</div>
+        </div>
+        <div class="paper paper-small paper-dashboard">
+        	<div class="paper-buttons">
+        		<a href="#" class="icon edit">
+        			<i class="fa fa-pencil fa-fw"></i>
+        		</a>
+        	</div>
+            <div class="paper2">
+                <div class="redBorder">
+					Biologie      
+				</div>     
+				<textarea id="editor-0" class="paper-textarea">Biologie</textarea>         
+			</div>
+        </div>
+        <div class="paper paper-small paper-dashboard">
+        	<div class="paper-buttons">
+        		<a href="#" class="icon edit">
+        			<i class="fa fa-pencil fa-fw"></i>
+        		</a>
+        	</div>
+            <div class="paper2">
+                <div class="redBorder">
+					Biologie      
+				</div>     
+				<textarea id="editor-0" class="paper-textarea">Biologie</textarea>         
+			</div>
+        </div>
+        <div class="paper paper-small paper-dashboard">
+        	<div class="paper-buttons">
+        		<a href="#" class="icon edit">
+        			<i class="fa fa-pencil fa-fw"></i>
+        		</a>
+        	</div>
+            <div class="paper2">
+                <div class="redBorder">
+					Biologie      
+				</div>     
+				<textarea id="editor-0" class="paper-textarea">Biologie</textarea>         
+			</div>
+        </div>
+    </div>
+</body>
+
+</html>

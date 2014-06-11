@@ -140,4 +140,5 @@ local.properties
 *.tks
 Thumbs.db
 *.tex.bak
+.classpath
 AwsCredentials.properties

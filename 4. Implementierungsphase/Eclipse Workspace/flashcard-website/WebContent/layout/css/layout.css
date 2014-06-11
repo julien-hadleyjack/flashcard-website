@@ -42,8 +42,6 @@ h1 {
     font-size: 65px;
     letter-spacing: .2em;
     text-transform: uppercase;
-    position: absolute;
-    top:100px;
     width:100%;
     text-align: center;
     height:50px;
@@ -272,16 +270,19 @@ header {
 
 /*Loginform*/
 
+.login-holder {
+	margin: 100px auto 0;
+	height: 520px;
+	width: 500px;
+}
+
 .loginform {
     /* Size and position */
     width: 450px;
     height: 330px;
     margin: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    position: relative; 
+    top: 50px;
     /* Styles */
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -374,17 +375,16 @@ header {
     text-decoration: none;
     background-color: rgba(45, 201, 238, 0.5);
     @include background-image(linear-gradient(#5fc1ff 0%, #0088de 100%));
-    box-shadow: inset 0 0 7px 0 rgba(white, 0.5);
+    /*box-shadow: inset 0 0 7px 0 rgba(white, 0.5);*/
     border:0;
     
 }
 
  .loginButton:hover {
-  background-color:#5fc1ff;
+	background-color:#5fc1ff;
 }
  
 .register {
-position:absolute;
- top:68%;   
-left:55%;
+	float: right;
+	margin: 60px 30px 0;
 }

@@ -1,0 +1,11 @@
+﻿.mce-content-body {
+	/*background-image: linear-gradient(#EEEEEE 0.1em, rgba(0, 0, 0, 0) 0.1em);*/
+	font-size: 24px; 
+	line-height: 38px;
+}
+
+.mce-content-body p {
+	padding: 0px; 
+	margin: 0px; 
+}
+

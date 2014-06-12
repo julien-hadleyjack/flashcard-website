@@ -1,5 +1,6 @@
 package beans;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ public class User {
 
 	private String username;
 	private String pass;
+	private String salt;
 	
 	public String getUsername() {
 		return username;
@@ -22,12 +24,34 @@ public class User {
 	}
 	
 	public void setPass(String pass) {
-		this.pass = pass;
+		String str = null;
+		String salt = existingSalt();
+		try {
+			if(salt != null && this.username != null) {
+			str = new String(PasswordBean.hash(pass.toCharArray(), salt.getBytes()), "UTF-8");
+			}
+			else {
+			String helper = new String(PasswordBean.getNextSalt(),"UTF-8");
+			salt = helper;
+			str = new String(PasswordBean.hash(pass.toCharArray(),salt.getBytes()),"UTF-8");
+			}
+		}
+		
+			catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			finally {
+				this.pass = str;
+				this.salt = salt;
+
+			}
 	}
 	
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
 	
 	public boolean isLoggedIn() {
 		    Connection con;
@@ -36,17 +60,45 @@ public class User {
 				con = DriverManager.getConnection("jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
 				        "david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
 				 Statement st = con.createStatement();
-				    rs = st.executeQuery("select * from Users where email='" + username + "' and pwhash='" + pass + "'");
+				    rs = st.executeQuery("select * from Users where email='" + username+"");
 				    if (rs.next()) {
-					      return true;
+					     String dbSalt = rs.getNString("salt");
+					     String pwHash = rs.getNString("pwhash");
+					     byte[] enteredPwHash = PasswordBean.hash(this.pass.toCharArray(), dbSalt.getBytes());
+					     String enteredPwHashString = new String(enteredPwHash,"UTF-8");
+					     if(pwHash.equals(enteredPwHashString)) {
+					    	 return true;
+					     }
 					} 
 			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return false;
 		   
 	}
+	
+	public String existingSalt() {
+	    Connection con;
+	    ResultSet rs;
+		try {
+			con = DriverManager.getConnection("jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
+			        "david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
+			 Statement st = con.createStatement();
+			    rs = st.executeQuery("select * from Users where email='" + username +"");
+			    if (rs.next()) {
+				      return rs.getNString("salt");
+				} 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	   
+}
 	
 	public boolean registerUser() {
 		 Connection con;
@@ -60,9 +112,9 @@ public class User {
 		          int updateQuery = 0;
 
 		              pstatement = con.prepareStatement(queryString);
-		              pstatement.setString(1, username);
-		                          pstatement.setString(2, pass);
-		                          pstatement.setString(3, "salz");
+		              pstatement.setString(1, this.username);
+		                          pstatement.setString(2, this.pass);
+		                          pstatement.setString(3, this.salt);
 		              updateQuery = pstatement.executeUpdate();
 		                            if (updateQuery != 0) {
 		      return true;

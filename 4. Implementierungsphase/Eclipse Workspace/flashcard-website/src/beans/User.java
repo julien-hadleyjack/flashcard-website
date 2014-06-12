@@ -62,21 +62,15 @@ public class User {
 				 Statement st = con.createStatement();
 				    rs = st.executeQuery("select * from Users where email='" + username+"");
 				    if (rs.next()) {
-					     String dbSalt = rs.getNString("salt");
 					     String pwHash = rs.getNString("pwhash");
-					     byte[] enteredPwHash = PasswordBean.hash(this.pass.toCharArray(), dbSalt.getBytes());
-					     String enteredPwHashString = new String(enteredPwHash,"UTF-8");
-					     if(pwHash.equals(enteredPwHashString)) {
+					     if(pwHash.equals(this.pass)) {
 					    	 return true;
 					     }
 					} 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} 
 			return false;
 		   
 	}

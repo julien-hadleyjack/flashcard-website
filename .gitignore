@@ -144,3 +144,4 @@ Thumbs.db
 AwsCredentials.properties
 MANIFEST.MF
 pom.properties
+*.~vsdx

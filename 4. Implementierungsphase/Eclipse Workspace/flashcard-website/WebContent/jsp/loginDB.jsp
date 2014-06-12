@@ -15,7 +15,7 @@ response.sendRedirect("success.jsp");
 %>
 </c:when>
 <c:otherwise>
- <%out.println("Passwort war nicht korrekt! <a href='../login.html'>Nochmal versuchen</a>"); 
+ <%out.println("Passwort war nicht korrekt! <a href='../index.jsp'>Nochmal versuchen</a>"); 
  %>
  </c:otherwise>
 </c:choose> 

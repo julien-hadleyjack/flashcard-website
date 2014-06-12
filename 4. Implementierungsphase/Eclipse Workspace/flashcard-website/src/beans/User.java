@@ -46,6 +46,7 @@ public class User {
 				this.salt = salt;
 
 			}
+		
 	}
 	
 	public void setUsername(String username) {
@@ -57,10 +58,12 @@ public class User {
 		    Connection con;
 		    ResultSet rs;
 			try {
+			    Class.forName("com.mysql.jdbc.Driver");
+
 				con = DriverManager.getConnection("jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
 				        "david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
 				 Statement st = con.createStatement();
-				    rs = st.executeQuery("select * from Users where email='" + username+"");
+				    rs = st.executeQuery("select * from Users where email='" + username+"'");
 				    if (rs.next()) {
 					     String pwHash = rs.getNString("pwhash");
 					     if(pwHash.equals(this.pass)) {
@@ -68,6 +71,9 @@ public class User {
 					     }
 					} 
 			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
@@ -79,14 +85,19 @@ public class User {
 	    Connection con;
 	    ResultSet rs;
 		try {
+		    Class.forName("com.mysql.jdbc.Driver");
+
 			con = DriverManager.getConnection("jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
 			        "david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
 			 Statement st = con.createStatement();
-			    rs = st.executeQuery("select * from Users where email='" + username +"");
+			    rs = st.executeQuery("select * from Users where email='" + username +"'");
 			    if (rs.next()) {
 				      return rs.getNString("salt");
 				} 
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -97,6 +108,8 @@ public class User {
 	public boolean registerUser() {
 		 Connection con;
 		try {
+		   Class.forName("com.mysql.jdbc.Driver");
+
 			con = DriverManager.getConnection("jdbc:mysql:/aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
 			            "david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
 		
@@ -109,11 +122,15 @@ public class User {
 		              pstatement.setString(1, this.username);
 		                          pstatement.setString(2, this.pass);
 		                          pstatement.setString(3, this.salt);
+		               assert updateQuery != 0;
 		              updateQuery = pstatement.executeUpdate();
 		                            if (updateQuery != 0) {
 		      return true;
 		    }
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

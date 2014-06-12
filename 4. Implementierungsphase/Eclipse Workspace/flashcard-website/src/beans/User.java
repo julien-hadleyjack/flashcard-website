@@ -14,6 +14,14 @@ public class User {
 	private String username;
 	private String pass;
 	private String salt;
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 	
 	public String getUsername() {
 		return username;
@@ -96,10 +104,12 @@ public class User {
 				} 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		
 		}
 		return null;
 	   
@@ -110,7 +120,7 @@ public class User {
 		try {
 		   Class.forName("com.mysql.jdbc.Driver");
 
-			con = DriverManager.getConnection("jdbc:mysql:/aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
+			con = DriverManager.getConnection("jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
 			            "david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
 		
 		   

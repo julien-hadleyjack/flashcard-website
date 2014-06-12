@@ -2,7 +2,7 @@
 <%
     String userid = request.getParameter("uname");    
 %>
-<jsp:useBean id="loginBean" class="beans.user.UserBean" scope="session"></jsp:useBean>
+<jsp:useBean id="loginBean" class="user.UserBean" scope="session"></jsp:useBean>
 
 <c:set target="${loginBean}" property="username" value="${param.uname}"/>    
 <c:set target="${loginBean}" property="pass" value="${param.password}"/> 

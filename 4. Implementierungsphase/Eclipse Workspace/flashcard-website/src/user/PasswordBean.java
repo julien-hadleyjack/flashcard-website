@@ -1,4 +1,4 @@
-package beans.user;
+package user;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.RandomStringUtils;

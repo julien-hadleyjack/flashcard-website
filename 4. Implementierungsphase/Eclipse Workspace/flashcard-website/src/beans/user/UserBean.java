@@ -1,6 +1,5 @@
 package beans.user;
 
-import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -34,26 +33,21 @@ public class UserBean {
 	public void setPass(String pass) {
 		String str = null;
 		String salt = existingSalt();
-		try {
 			if(salt != null && this.username != null) {
-			str = new String(PasswordBean.hash(pass.toCharArray(), salt.getBytes()), "UTF-8");
+			str = PasswordBean.hash(pass, salt);
 			}
 			else {
-			String helper = new String(PasswordBean.getNextSalt(),"UTF-8");
-			salt = helper;
-			str = new String(PasswordBean.hash(pass.toCharArray(),salt.getBytes()),"UTF-8");
+			
+			salt = PasswordBean.getNextSalt();
+			str = PasswordBean.hash(pass,salt);
 			}
-		}
 		
-			catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-			finally {
-				this.pass = str;
-				this.salt = salt;
+		
+		
+			this.pass = str;
+			this.salt = salt;
 
-			}
+			
 		
 	}
 	
@@ -124,15 +118,14 @@ public class UserBean {
 			            "david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
 		
 		   
-		    String queryString = "INSERT INTO Users(email,pwhash,salt) VALUES (?, ?, ?)";
+		    String queryString = "INSERT INTO Users(email,salt,pwhash) VALUES (?, ?, ?)";
 		                  PreparedStatement pstatement = null;
 		          int updateQuery = 0;
 
 		              pstatement = con.prepareStatement(queryString);
 		              pstatement.setString(1, this.username);
-		                          pstatement.setString(2, this.pass);
-		                          pstatement.setString(3, this.salt);
-		               assert updateQuery != 0;
+		                          pstatement.setString(2, this.salt);
+		                          pstatement.setString(3, this.pass);
 		              updateQuery = pstatement.executeUpdate();
 		                            if (updateQuery != 0) {
 		      return true;

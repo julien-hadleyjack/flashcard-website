@@ -1,6 +1,5 @@
 package user;
 
-import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -34,26 +33,21 @@ public class UserBean {
 	public void setPass(String pass) {
 		String str = null;
 		String salt = existingSalt();
-		try {
 			if(salt != null && this.username != null) {
-			str = new String(PasswordBean.hash(pass.toCharArray(), salt.getBytes()), "UTF-8");
+			str = PasswordBean.hash(pass, salt);
 			}
 			else {
-			String helper = new String(PasswordBean.getNextSalt(),"UTF-8");
-			salt = helper;
-			str = new String(PasswordBean.hash(pass.toCharArray(),salt.getBytes()),"UTF-8");
+			
+			salt = PasswordBean.getNextSalt();
+			str = PasswordBean.hash(pass,salt);
 			}
-		}
 		
-			catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-			finally {
-				this.pass = str;
-				this.salt = salt;
+		
+		
+			this.pass = str;
+			this.salt = salt;
 
-			}
+			
 		
 	}
 	
@@ -64,20 +58,24 @@ public class UserBean {
 	
 	public boolean isLoggedIn() {
 		    Connection con;
-		    ResultSet rs;
-			try {
+		    String pwHash = null;
+
+		    try {
 			    Class.forName("com.mysql.jdbc.Driver");
 
 				con = DriverManager.getConnection("jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
 				        "david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
-				 Statement st = con.createStatement();
-				    rs = st.executeQuery("select * from Users where email='" + username+"'");
-				    if (rs.next()) {
-					     String pwHash = rs.getNString("pwhash");
-					     if(pwHash.equals(this.pass)) {
-					    	 return true;
-					     }
-					} 
+				PreparedStatement prepStatement = null;
+				prepStatement = con.prepareStatement("select * from Users where email= (?)");
+				prepStatement.setString(1, username); 
+		        ResultSet rs = null;
+
+	           rs = prepStatement.executeQuery();
+	           while (rs.next()) {
+	        	  pwHash = rs.getString("pwhash");
+	        	  
+	        	}  
+					 
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -85,24 +83,36 @@ public class UserBean {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
-			return false;
+			
+			 if(pwHash.equals(this.pass)) {
+				 return true;
+			}
+			 else {
+				 return false;
+			 }
+		     
 		   
 	}
 	
 	public String existingSalt() {
+        String dbSalt = null;
+
 	    Connection con;
-	    ResultSet rs;
 		try {
 		    Class.forName("com.mysql.jdbc.Driver");
 
 			con = DriverManager.getConnection("jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
 			        "david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
-			 Statement st = con.createStatement();
-			    rs = st.executeQuery("select * from Users where email='" + username +"'");
-			    if (rs.next()) {
-				      return rs.getNString("salt");
-				} 
-		} catch (SQLException e) {
+			PreparedStatement prepStatement = null;
+			prepStatement = con.prepareStatement("select * from Users where email= (?)");
+			prepStatement.setString(1, username); 
+	        ResultSet rs = null;
+
+           rs = prepStatement.executeQuery();
+           while (rs.next()) {
+        	  dbSalt = rs.getString("salt");
+        	}
+       		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 		
 			e.printStackTrace();
@@ -111,7 +121,7 @@ public class UserBean {
 			e.printStackTrace();
 		
 		}
-		return null;
+		return dbSalt;
 	   
 }
 	
@@ -124,15 +134,14 @@ public class UserBean {
 			            "david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
 		
 		   
-		    String queryString = "INSERT INTO Users(email,pwhash,salt) VALUES (?, ?, ?)";
+		    String queryString = "INSERT INTO Users(email,salt,pwhash) VALUES (?, ?, ?)";
 		                  PreparedStatement pstatement = null;
 		          int updateQuery = 0;
 
 		              pstatement = con.prepareStatement(queryString);
 		              pstatement.setString(1, this.username);
-		                          pstatement.setString(2, this.pass);
-		                          pstatement.setString(3, this.salt);
-		               assert updateQuery != 0;
+		                          pstatement.setString(2, this.salt);
+		                          pstatement.setString(3, this.pass);
 		              updateQuery = pstatement.executeUpdate();
 		                            if (updateQuery != 0) {
 		      return true;

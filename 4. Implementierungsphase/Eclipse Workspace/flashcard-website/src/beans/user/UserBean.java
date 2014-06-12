@@ -55,25 +55,22 @@ public class UserBean {
 		this.username = username;
 	}
 	
-	
 	public boolean isLoggedIn() {
 		    Connection con;
-		    String pwHash = null;
 
 		    try {
 			    Class.forName("com.mysql.jdbc.Driver");
 
 				con = DriverManager.getConnection("jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
 				        "david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
-				PreparedStatement prepStatement = null;
-				prepStatement = con.prepareStatement("select * from Users where email= (?)");
+				PreparedStatement prepStatement = con.prepareStatement("select * from Users where email= (?)");
 				prepStatement.setString(1, username); 
-		        ResultSet rs = null;
-
-	           rs = prepStatement.executeQuery();
+		        ResultSet rs = prepStatement.executeQuery();
 	           while (rs.next()) {
-	        	  pwHash = rs.getString("pwhash");
-	        	  
+	   		    String pwHash = rs.getString("pwhash");
+	        	  if(pwHash.equals(this.pass)) {
+	 				 return true;
+	        	  }
 	        	}  
 					 
 			} catch (SQLException e) {
@@ -84,12 +81,9 @@ public class UserBean {
 				e.printStackTrace();
 			} 
 			
-			 if(pwHash.equals(this.pass)) {
-				 return true;
-			}
-			 else {
-				 return false;
-			 }
+		
+		 return false;
+			
 		     
 		   
 	}

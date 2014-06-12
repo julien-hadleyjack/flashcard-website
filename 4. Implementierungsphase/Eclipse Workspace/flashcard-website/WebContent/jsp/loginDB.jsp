@@ -1,13 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <%
     String userid = request.getParameter("uname");    
-    String pwd = request.getParameter("password"); 
 %>
 <jsp:useBean id="loginBean" class="beans.user.UserBean" scope="session"></jsp:useBean>
- <jsp:setProperty name="loginBean" property="username"  
-                    value="${userid}"/>
- <jsp:setProperty name="loginBean" property="pass"  
-                    value="${pwd}"/>
+
+<c:set target="${loginBean}" property="username" value="${param.uname}"/>    
+<c:set target="${loginBean}" property="pass" value="${param.password}"/> 
+
 <c:choose>
 <c:when test="${loginBean.isLoggedIn()}">
 <%session.setAttribute("userid",userid);        

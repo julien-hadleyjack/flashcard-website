@@ -1,4 +1,4 @@
-package beans;
+package beans.user;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;

@@ -3,7 +3,7 @@
     String userid = request.getParameter("uname");    
     String pwd = request.getParameter("password"); 
 %>
-<jsp:useBean id="loginBean" class="beans.User" scope="session"></jsp:useBean>
+<jsp:useBean id="loginBean" class="beans.UserBean" scope="session"></jsp:useBean>
  <jsp:setProperty name="loginBean" property="username"  
                     value="${userid}"/>
  <jsp:setProperty name="loginBean" property="pass"  

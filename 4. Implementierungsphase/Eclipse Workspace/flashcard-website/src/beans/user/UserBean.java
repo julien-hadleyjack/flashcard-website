@@ -1,4 +1,4 @@
-package beans;
+package beans.user;
 
 import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-public class User {
+public class UserBean {
 
 	private String username;
 	private String pass;

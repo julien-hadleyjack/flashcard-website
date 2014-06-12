@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 
-<jsp:useBean id="loginBean" class="beans.User" scope="session"></jsp:useBean>
+<jsp:useBean id="loginBean" class="beans.UserBean" scope="session"></jsp:useBean>
 <%
     String userid = request.getParameter("uname");    
     String pwd = request.getParameter("password"); 

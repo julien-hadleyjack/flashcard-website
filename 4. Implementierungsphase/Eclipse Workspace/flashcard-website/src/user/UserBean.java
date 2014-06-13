@@ -114,6 +114,36 @@ public class UserBean {
 		return dbSalt;
 
 	}
+	
+	public boolean userTaken() {
+		Connection con;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+
+			con = DriverManager
+					.getConnection(
+							"jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
+							"david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
+			PreparedStatement prepStatement = con
+					.prepareStatement("select * from Users where email= (?)");
+			prepStatement.setString(1, username);
+			ResultSet rs = prepStatement.executeQuery();
+			while (rs.next()) {
+					return true;
+				
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
+	}
 
 	public boolean registerUser() {
 		Connection con;

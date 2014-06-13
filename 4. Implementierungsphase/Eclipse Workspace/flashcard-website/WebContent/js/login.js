@@ -34,24 +34,53 @@ function setCorrectAction() {
 }
 
 
-
 function checkForm() {
+    document.loginForm.action = "javascript: void(0);";
+
     var x = document.getElementById("login").value;
     var passField = document.getElementById("password").value;
     var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    setCorrectAction();
 
     if (regex.test(x) == false) {
-        document.loginForm.action = "javascript: void(0);"
         $.growl.error({
             message: "Email Adresse ist nicht valide"
         });
 
     }
-    if(!passField || passField.length == 0) {
-       document.loginForm.action = "javascript: void(0);"
+    else if(!passField || passField.length == 0) {
         $.growl.error({
             message: "Bitte ein Passwort eingeben"
         }); 
     }
+    
+    /* Registrieren -> Email schon vorhanden ? */
+    
+    else if(document.getElementById("loginId").value == "Registrieren") {
+    	var req = new XMLHttpRequest();
+    	req.open("GET", "/jsp/userTaken.jsp?uname="+document.getElementById("login").value, true);
+    	req.onreadystatechange = function receive() {
+    		if (req.readyState==4) {
+    			 if(req.responseText.trim() == "User already taken") {
+    	            $.growl.error({
+    	                message: "Email ist bereits registriert"
+    	            });
+    	            
+    		}
+    		else {
+ 	            	setCorrectAction();
+ 	            }
+    		}
+    	 
+    	  };
+     
+    	  req.send();
+      }
+    else {
+        setCorrectAction();
+    }
+ 
+	
+    
+    /* Login war nicht korrekt, kein Eintrag dazu gefunden */
+    
 }

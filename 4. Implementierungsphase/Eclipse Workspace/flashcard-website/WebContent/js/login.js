@@ -49,7 +49,7 @@ function checkForm() {
     	            
     			 }
     			 else {
-    				 window.location.href = "/jsp/registerDB.jsp?uname="+x+"password="+document.getElementById("password");
+    				 window.location.href = "/jsp/registerDB.jsp?uname="+x+"password="+document.getElementById("password").value;
     			 }
     		}
     	 
@@ -59,7 +59,7 @@ function checkForm() {
       }
     
     else {
-		 window.location.href = "/jsp/loginDB.jsp?uname="+x+"password="+document.getElementById("password");
+		 window.location.href = "/jsp/loginDB.jsp?uname="+x+"password="+document.getElementById("password").value;
 
     }
     

@@ -6,8 +6,6 @@ function toRegister() {
         document.getElementById("register").innerHTML = "Zurueck zum Login...";
         document.getElementById("formHeadline").innerHTML = "Signupscreen";
 
-        document.loginForm.action = "jsp/registerDB.jsp";
-
     } else {
 
         login.value = "Login";
@@ -15,27 +13,10 @@ function toRegister() {
         document.getElementById("register").innerHTML = "Noch keinen Account ?";
         document.getElementById("formHeadline").innerHTML = "Loginscreen";
 
-        document.loginForm.action = "jsp/loginDB.jsp";
-
     }
 }
-
-function setCorrectAction() {
-    var login = document.getElementById("loginId");
-    if (login.value === "Login") {
-
-        document.loginForm.action = "jsp/loginDB.jsp";
-
-    } else {
-
-        document.loginForm.action = "jsp/registerDB.jsp";
-
-    }
-}
-
 
 function checkForm() {
-    document.loginForm.action = "javascript: void(0);";
 
     var x = document.getElementById("login").value;
     var passField = document.getElementById("password").value;
@@ -61,23 +42,27 @@ function checkForm() {
     	req.onreadystatechange = function receive() {
     		if (req.readyState==4) {
     			 if(req.responseText.trim() == "User already taken") {
+
     	            $.growl.error({
     	                message: "Email ist bereits registriert"
     	            });
     	            
-    		}
-    		else {
- 	            	setCorrectAction();
- 	            }
+    			 }
+    			 else {
+    				 window.location.href = "/jsp/registerDB.jsp?uname="+x+"password="+document.getElementById("password");
+    			 }
     		}
     	 
     	  };
      
     	  req.send();
       }
+    
     else {
-        setCorrectAction();
+		 window.location.href = "/jsp/loginDB.jsp?uname="+x+"password="+document.getElementById("password");
+
     }
+    
  
 	
     

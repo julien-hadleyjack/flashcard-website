@@ -49,7 +49,9 @@ function checkForm() {
     	            
     			 }
     			 else {
-    				 window.location.href = "/jsp/registerDB.jsp?uname="+x+"&password="+document.getElementById("password").value;
+    				 //window.location.href = "/jsp/registerDB.jsp?uname="+x+"&password="+document.getElementById("password").value;
+    				 document.loginForm.action="../jsp/registerDB.jsp";
+    				 document.loginForm.submit();
     			 }
     		}
     	 
@@ -59,8 +61,9 @@ function checkForm() {
       }
     
     else {
-		 window.location.href = "/jsp/loginDB.jsp?uname="+x+"&password="+document.getElementById("password").value;
-
+		 //window.location.href = "/jsp/loginDB.jsp?uname="+x+"&password="+document.getElementById("password").value;
+    	 document.loginForm.action="../jsp/loginDB.jsp";
+		 document.loginForm.submit();
     }
     
  

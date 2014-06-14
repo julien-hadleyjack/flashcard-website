@@ -15,7 +15,7 @@
 <body>
 	<div class="login-holder">
 	    <h1>StudyFlash</h1>
-	    <form id="loginForm" name="loginForm" class="loginForm" method=post action="javascript:void(0);" onsubmit="return checkForm()">
+	    <form id="loginForm" name="loginForm" class="loginForm" method="post" action="javascript:void(0);" onsubmit="return checkForm()">
 	        <label id="formHeadline" class="loginLabel">Loginscreen</label>
 	            <input type="text" id="login" name="uname" placeholder="Username" spellcheck="false">
 	            <input type="password" name="password" id="password" placeholder="Password" spellcheck="false">

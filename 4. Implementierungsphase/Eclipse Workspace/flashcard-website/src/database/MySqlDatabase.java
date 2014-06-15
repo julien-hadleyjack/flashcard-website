@@ -15,7 +15,7 @@ public class MySqlDatabase implements FlashcardDatabase {
 	}
 
 	@Override
-	public UserBean getUser(String username, String email) {
+	public UserBean getUser(UserBean user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -27,7 +27,13 @@ public class MySqlDatabase implements FlashcardDatabase {
 	}
 
 	@Override
-	public void addModifyFlashcardSet(UserBean user) {
+	public void addFlashcardSet(UserBean user, String title) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void modifyFlashcardSet(FlashcardSetBean flashcardSet) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -68,5 +74,7 @@ public class MySqlDatabase implements FlashcardDatabase {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }

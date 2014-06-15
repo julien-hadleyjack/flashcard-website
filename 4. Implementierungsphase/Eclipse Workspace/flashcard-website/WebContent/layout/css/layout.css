@@ -430,3 +430,27 @@ header {
 	float: right;
 	margin: 60px 30px 0;
 }
+
+/* Redirect Page */
+.redirectHolder {
+	margin: 100px auto 0;
+	height:600px;
+	width: 600px;
+}
+
+.redirectMsg {
+    display:inline-block;
+	color:white;
+    width:100%;
+    margin: 300px auto 0;
+    text-align: center;
+}
+
+.dots {
+	color:white;
+	font-size:64px;
+    text-align: center;
+	margin: 200px auto 0;
+	height:50px;
+	width: 300px;
+}

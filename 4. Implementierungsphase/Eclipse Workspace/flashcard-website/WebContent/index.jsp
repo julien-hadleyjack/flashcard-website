@@ -1,4 +1,7 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
+
 
 <head>
     <meta charset="UTF-8">
@@ -13,6 +16,10 @@
 </head>
 
 <body>
+<c:if test="${not empty userid}">
+<% response.sendRedirect("dashboard.html");
+%>
+</c:if>
 	<div class="login-holder">
 	    <h1>StudyFlash</h1>
 	    <form id="loginForm" name="loginForm" class="loginForm" method="post" action="javascript:void(0);" onsubmit="return checkForm()">

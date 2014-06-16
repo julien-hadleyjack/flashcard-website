@@ -13,7 +13,7 @@
 
 <body>
 	<c:choose>
-		<c:when test="${param.uname == null}">
+		<c:when test="${empty userid}">
 			<div class="redirectHolder">
 				<h1>Nicht eingeloggt !</h1>
 				<%

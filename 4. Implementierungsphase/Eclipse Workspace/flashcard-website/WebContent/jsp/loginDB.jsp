@@ -11,7 +11,7 @@
 	<c:when test="${loginBean.isLoggedIn()}">
 		<%
 			session.setAttribute("userid", userid);
-					response.sendRedirect("success.jsp");
+			response.sendRedirect("success.jsp");
 		%>
 		<c:out value="correct"></c:out>
 	</c:when>

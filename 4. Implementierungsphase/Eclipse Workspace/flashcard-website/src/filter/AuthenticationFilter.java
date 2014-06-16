@@ -22,11 +22,13 @@ public class AuthenticationFilter implements Filter {
 		  public void doFilter(ServletRequest request, ServletResponse response, FilterChain fc) throws IOException, ServletException {
 		    HttpServletRequest req = (HttpServletRequest) request;
 		    HttpServletResponse res = (HttpServletResponse) response;  
-
 		    if (req.getSession().getAttribute("userid") == null) {
 		        res.sendRedirect("/index.jsp");
-		    } else {		     
-		      fc.doFilter(request, response);
+		    } else {	
+		    	
+		    	fc.doFilter(request, response);
+		    	
+		    	
 		    }
 		  }
 

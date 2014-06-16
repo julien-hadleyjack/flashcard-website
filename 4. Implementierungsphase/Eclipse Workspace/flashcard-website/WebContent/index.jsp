@@ -17,7 +17,7 @@
 
 <body>
 <c:if test="${not empty userid}">
-<% response.sendRedirect("dashboard.html");
+<% response.sendRedirect("dashboard.jsp");
 %>
 </c:if>
 	<div class="login-holder">

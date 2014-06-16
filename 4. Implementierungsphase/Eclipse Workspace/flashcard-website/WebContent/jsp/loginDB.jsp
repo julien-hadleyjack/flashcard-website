@@ -1,7 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%
-	String userid = request.getParameter("uname");
-%>
+
 <jsp:useBean id="loginBean" class="user.UserBean" scope="session"></jsp:useBean>
 
 <c:set target="${loginBean}" property="username" value="${param.uname}" />
@@ -9,10 +7,9 @@
 
 <c:choose>
 	<c:when test="${loginBean.isLoggedIn()}">
-		<%
-			session.setAttribute("userid", userid);
-			response.sendRedirect("success.jsp");
-		%>
+	    <c:set var="userid" value="${param.uname}" scope="session"  />
+		<c:redirect url="success.jsp"></c:redirect>
+		
 		<c:out value="correct"></c:out>
 	</c:when>
 	<c:otherwise>

@@ -1,4 +1,4 @@
-﻿<html>
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -73,7 +73,7 @@
 				e.preventDefault();
 				var element = $(this).parents().eq(1);
 							
-				if(confirm('Sollen die Karteikarten wirklich gelöscht werden?')){
+				if(confirm('Sollen die Karteikarten wirklich gel�scht werden?')){
 					//TODO: send Ajax Request to remove cards
 					$(element).remove();
 				}
@@ -106,12 +106,10 @@
 		<div class="menubar">
 			<div class="menubar-container">
 				<ul class="menubar-nav">
-					<li class="active"><a href="/">Home</a></li>
-					<li><a href="punkt1.html">Punkt 1</a></li>
-					<li><a href="punkt2.html">Punkt 2</a></li>
-					<li><a href="punkt3.html">Punkt 3</a></li>
-					<li><a href="punkt4.html">Punkt 4</a></li>
-					<li><a href="punkt5.html">Punkt 5</a></li>
+					<li class="active"><a href="javaScript:void(0);">Home</a></li>
+					<li><a href="javaScript:void(0);">Einstellungen</a></li>
+					<li><a href="jsp/logout.jsp">Ausloggen</a></li>
+				
 				</ul>
 			</div>
 		</div>    

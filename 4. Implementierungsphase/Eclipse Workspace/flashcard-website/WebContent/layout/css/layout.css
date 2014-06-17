@@ -267,6 +267,10 @@ header {
     content: '';
 }
 
+.paper a {
+	color: #000000;
+}
+
 /* Paper Flip Animation */
 .paper-animate .paper2 {
     -moz-transform: rotate(0deg);

@@ -49,8 +49,9 @@ public class UserBean {
 	}
 
 	public boolean isLoggedIn() {
-		Connection con;
-
+		Connection con = null;
+		PreparedStatement prepStatement = null;
+		ResultSet rs = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
@@ -58,23 +59,30 @@ public class UserBean {
 					.getConnection(
 							"jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
 							"david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
-			PreparedStatement prepStatement = con
+			prepStatement = con
 					.prepareStatement("select * from Users where email= (?)");
 			prepStatement.setString(1, username);
-			ResultSet rs = prepStatement.executeQuery();
+			rs = prepStatement.executeQuery();
 			while (rs.next()) {
 				String pwHash = rs.getString("pwhash");
 				if (pwHash.equals(this.pass)) {
+
 					return true;
 				}
 			}
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		finally {
+		    if (rs != null) try { rs.close(); } catch (SQLException ignore) {}  
+		    if (prepStatement != null) try { prepStatement.close(); } catch (SQLException ignore) {}  
+		    if (con != null) try { con.close(); } catch (SQLException ignore) {}  
 		}
 
 		return false;
@@ -84,7 +92,9 @@ public class UserBean {
 	public String existingSalt() {
 		String dbSalt = null;
 
-		Connection con;
+		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement prepStatement = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
@@ -92,12 +102,9 @@ public class UserBean {
 					.getConnection(
 							"jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
 							"david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
-			PreparedStatement prepStatement = null;
 			prepStatement = con
 					.prepareStatement("select * from Users where email= (?)");
 			prepStatement.setString(1, username);
-			ResultSet rs = null;
-
 			rs = prepStatement.executeQuery();
 			while (rs.next()) {
 				dbSalt = rs.getString("salt");
@@ -111,13 +118,20 @@ public class UserBean {
 			e.printStackTrace();
 
 		}
+		
+		finally {
+		    if (rs != null) try { rs.close(); } catch (SQLException ignore) {}  
+		    if (prepStatement != null) try { prepStatement.close(); } catch (SQLException ignore) {}  
+		    if (con != null) try { con.close(); } catch (SQLException ignore) {}  
+		}
 		return dbSalt;
 
 	}
 	
 	public boolean userTaken() {
-		Connection con;
-
+		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement prepStatement = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
@@ -125,10 +139,10 @@ public class UserBean {
 					.getConnection(
 							"jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
 							"david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
-			PreparedStatement prepStatement = con
+			 prepStatement = con
 					.prepareStatement("select * from Users where email= (?)");
 			prepStatement.setString(1, username);
-			ResultSet rs = prepStatement.executeQuery();
+			rs = prepStatement.executeQuery();
 			while (rs.next()) {
 					return true;
 				
@@ -141,12 +155,18 @@ public class UserBean {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		finally {
+		    if (rs != null) try { rs.close(); } catch (SQLException ignore) {}  
+		    if (prepStatement != null) try { prepStatement.close(); } catch (SQLException ignore) {}  
+		    if (con != null) try { con.close(); } catch (SQLException ignore) {}  
+		}
 
 		return false;
 	}
 
 	public boolean registerUser() {
-		Connection con;
+		Connection con = null;
+		PreparedStatement prepStatement = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 
@@ -156,14 +176,13 @@ public class UserBean {
 							"david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
 
 			String queryString = "INSERT INTO Users(email,salt,pwhash) VALUES (?, ?, ?)";
-			PreparedStatement pstatement = null;
 			int updateQuery = 0;
 
-			pstatement = con.prepareStatement(queryString);
-			pstatement.setString(1, this.username);
-			pstatement.setString(2, this.salt);
-			pstatement.setString(3, this.pass);
-			updateQuery = pstatement.executeUpdate();
+			prepStatement = con.prepareStatement(queryString);
+			prepStatement.setString(1, this.username);
+			prepStatement.setString(2, this.salt);
+			prepStatement.setString(3, this.pass);
+			updateQuery = prepStatement.executeUpdate();
 			if (updateQuery != 0) {
 				return true;
 			}
@@ -173,6 +192,10 @@ public class UserBean {
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally {
+		    if (prepStatement != null) try { prepStatement.close(); } catch (SQLException ignore) {}  
+		    if (con != null) try { con.close(); } catch (SQLException ignore) {}  
 		}
 		return false;
 	}

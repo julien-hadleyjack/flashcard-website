@@ -1,4 +1,4 @@
-* {
+﻿* {
     margin: 0;
     padding: 0;
     @include box-sizing(border-box);
@@ -305,6 +305,9 @@ header {
    -o-backface-visibility: hidden;
    backface-visibility: hidden;
    overflow: hidden;
+}
+.redBorder .front {
+	z-index: 2;
 }
 .redBorder .back {
 	transform: rotateY(180deg);

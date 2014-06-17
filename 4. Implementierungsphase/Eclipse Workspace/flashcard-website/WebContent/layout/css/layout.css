@@ -1,4 +1,4 @@
-﻿* {
+* {
     margin: 0;
     padding: 0;
     @include box-sizing(border-box);
@@ -237,6 +237,8 @@ header {
     padding-top: 40px;
     width: 105%;
     box-shadow: 4px 5px 8px rgba(75, 75, 75, 0.78);
+   	-webkit-box-shadow: 4px 5px 8px rgba(75, 75, 75, 0.78);
+    
     height: 105%;
     -moz-transform: rotate(3deg);
 	-webkit-transform: rotate(3deg);
@@ -280,7 +282,16 @@ header {
 	transform: rotate(0deg);
 
 	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
+   	-ms-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+
   	transition: transform 0.5s;
+  	-webkit-transition: 0.5s;
+    -moz-transition: transform 0.5s;
+    -ms-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
   	position: absolute;
 }
 .redBorder figure {
@@ -288,9 +299,12 @@ header {
 	position: absolute;
 	width: 100%;
 	height: 85%;
-	backface-visibility: hidden;
-	-webkit-backface-visibility:hidden;
-	overflow: hidden;
+   -webkit-backface-visibility: hidden;
+   -moz-backface-visibility: hidden;
+   -ms-backface-visibility: hidden;
+   -o-backface-visibility: hidden;
+   backface-visibility: hidden;
+   overflow: hidden;
 }
 .redBorder .back {
 	transform: rotateY(180deg);
@@ -299,6 +313,7 @@ header {
 	-o-transform: rotateY(180deg);
 	-ms-transform: rotateY(180deg);
 	padding-left: 20px;
+	
 }
 .paper-animate .paper2.flipped {
 	transform: rotateY(180deg);
@@ -319,6 +334,10 @@ header {
 	
 	perspective: 800px;
 	-webkit-perspective: 800px;
+    -moz-perspective: 800px;
+	-ms-perspective: 800px;
+	-o-perspective: 800px;
+
 }
 
 /* paper editor */

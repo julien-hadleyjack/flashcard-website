@@ -6,11 +6,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import database.DatabaseSelector;
+import database.FlashcardDatabase;
+
 public class UserBean {
 
 	private String username;
 	private String pass;
 	private String salt;
+	
+	public UserBean() {}
+
+	public UserBean(String username, String pass, String salt) {
+		this.username = username;
+		this.pass = pass;
+		this.salt = salt;
+	}
 
 	public String getSalt() {
 		return salt;
@@ -198,6 +209,32 @@ public class UserBean {
 		    if (con != null) try { con.close(); } catch (SQLException ignore) {}  
 		}
 		return false;
+	}
+	
+	public void add() {
+		FlashcardDatabase database = DatabaseSelector.getCurrentDatabase();
+		if (username != null && database.getUser(this) == null) {
+			database.addUser(this);
+		}
+	}
+	
+	public void modify() {
+		FlashcardDatabase database = DatabaseSelector.getCurrentDatabase();
+		if (username != null) {
+			database.modifyUser(this);
+		}
+	}
+	
+	public void setExistingUser(String username) {
+		FlashcardDatabase database = DatabaseSelector.getCurrentDatabase();
+		if (username != null) {
+			UserBean user = database.getUser(this);
+			if (user != null) {
+				this.username = user.username;
+				this.salt = user.salt;
+				this.pass = user.pass;
+			}
+		}
 	}
 
 }

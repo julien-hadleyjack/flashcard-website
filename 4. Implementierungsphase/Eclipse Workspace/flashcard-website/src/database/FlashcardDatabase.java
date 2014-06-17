@@ -14,7 +14,9 @@ public interface FlashcardDatabase {
 	 * 
 	 * @param user the user that is created or modified
 	 */
-	public void addModifyUser(UserBean user);
+	public void addUser(UserBean user);
+	
+	public void modifyUser(UserBean user);
 	
 	/**
 	 * Returns the user if a user with that email address exists in the database.
@@ -82,7 +84,9 @@ public interface FlashcardDatabase {
 	 * @param flashcardset the flash card set to which the flash card will either be added to or modified in
 	 * @param flashcard the new or modified flash card
 	 */
-	public void addModifyFlashcard(FlashcardSetBean flashcardset, FlashcardBean flashcard);
+	public void addFlashcard(FlashcardSetBean flashcardset, FlashcardBean flashcard);
+	
+	public void modifyFlashcard(FlashcardBean flashcard);
 	
 	/**
 	 * Returns a flash card. Because the flashcardId is unique the flash card can only be owned by one flash card set.

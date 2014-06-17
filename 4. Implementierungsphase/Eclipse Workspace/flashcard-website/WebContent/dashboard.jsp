@@ -127,9 +127,11 @@
         	</div>
             <div class="paper2">
                 <div class="redBorder">
-					Biologie Kurs Mustermann 2014   
+					<a href="learningscreen.html">
+						Biologie     
+					</a>  
 				</div> 
-				<textarea id="editor-0" class="paper-textarea">Biologie Kurs Mustermann 2014</textarea>         
+				<textarea id="editor-0" class="paper-textarea">Biologie</textarea>         
 			</div>
         </div>
         <div class="paper paper-small paper-dashboard">
@@ -143,9 +145,11 @@
         	</div>
             <div class="paper2">
                 <div class="redBorder">
-					Biologie      
+					<a href="learningscreen.html">
+						Chinesisch     
+					</a>
 				</div>     
-				<textarea id="editor-1" class="paper-textarea">Biologie</textarea>         
+				<textarea id="editor-1" class="paper-textarea">Chinesisch</textarea>         
 			</div>
         </div>
         <div class="paper paper-small paper-dashboard">
@@ -159,9 +163,11 @@
         	</div>
             <div class="paper2">
                 <div class="redBorder">
-					Biologie      
+					<a href="learningscreen.html">
+						Deutschland     
+					</a>      
 				</div>     
-				<textarea id="editor-2" class="paper-textarea">Biologie</textarea>         
+				<textarea id="editor-2" class="paper-textarea">Deutschland</textarea>         
 			</div>
         </div>
         <div class="paper paper-small paper-dashboard">
@@ -175,41 +181,11 @@
         	</div>
             <div class="paper2">
                 <div class="redBorder">
-					Biologie      
+					<a href="learningscreen.html">
+						English     
+					</a>      
 				</div>     
-				<textarea id="editor-3" class="paper-textarea">Biologie</textarea>         
-			</div>
-        </div>
-        <div class="paper paper-small paper-dashboard">
-        	<div class="paper-buttons">
-        		<a href="#" class="icon remove">
-        			<i class="fa fa-minus fa-fw"></i>
-        		</a>
-        		<a href="#" class="icon edit">
-        			<i class="fa fa-pencil fa-fw"></i>
-        		</a>
-        	</div>
-            <div class="paper2">
-                <div class="redBorder">
-					Biologie      
-				</div>     
-				<textarea id="editor-4" class="paper-textarea">Biologie</textarea>         
-			</div>
-        </div>
-        <div class="paper paper-small paper-dashboard">
-        	<div class="paper-buttons">
-        		<a href="#" class="icon remove">
-        			<i class="fa fa-minus fa-fw"></i>
-        		</a>
-        		<a href="#" class="icon edit">
-        			<i class="fa fa-pencil fa-fw"></i>
-        		</a>
-        	</div>
-            <div class="paper2">
-                <div class="redBorder">
-					Biologie      
-				</div>     
-				<textarea id="editor-5" class="paper-textarea">Biologie</textarea>         
+				<textarea id="editor-3" class="paper-textarea">English</textarea>         
 			</div>
         </div>
         

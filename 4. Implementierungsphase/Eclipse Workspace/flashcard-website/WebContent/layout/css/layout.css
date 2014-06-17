@@ -285,14 +285,23 @@ header {
 	width: 100%;
 	height: 85%;
 	backface-visibility: hidden;
+	-webkit-backface-visibility:hidden;
 	overflow: hidden;
 }
 .redBorder .back {
-	transform: rotateY( 180deg );
+	transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	-ms-transform: rotateY(180deg);
 	padding-left: 20px;
 }
 .paper-animate .paper2.flipped {
 	transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	-ms-transform: rotateY(180deg);
 }
 .paper-animate .paper-holder {
 	height: 100%;
@@ -305,6 +314,7 @@ header {
 	transform: rotate(3deg);
 	
 	perspective: 800px;
+	-webkit-perspective: 800px;
 }
 
 /* paper editor */

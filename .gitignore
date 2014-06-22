@@ -12,8 +12,6 @@
 hs_err_pid*
 
 
-
-
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
@@ -135,6 +133,16 @@ local.properties
 
 # Locally stored "Eclipse launch configurations"
 *.launch
+
+#IntelliJ
+.idea/
+*.ipr
+*.iml
+*.iws
+out/
+.idea_modules/
+atlassian-ide-plugin.xml
+com_crashlytics_export_strings.xml
 
 #modified
 *.tks

@@ -6,21 +6,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import database.DatabaseSelector;
-import database.FlashcardDatabase;
 
 public class UserBean {
 
 	private String username;
 	private String pass;
 	private String salt;
+	private int id;
 	
 	public UserBean() {}
 
-	public UserBean(String username, String pass, String salt) {
+	public UserBean(String username, String pass, String salt, int id) {
 		this.username = username;
 		this.pass = pass;
 		this.salt = salt;
+		this.id = id;
 	}
 
 	public String getSalt() {
@@ -29,6 +29,14 @@ public class UserBean {
 
 	public void setSalt(String salt) {
 		this.salt = salt;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -57,47 +65,6 @@ public class UserBean {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public boolean isLoggedIn() {
-		Connection con = null;
-		PreparedStatement prepStatement = null;
-		ResultSet rs = null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-
-			con = DriverManager
-					.getConnection(
-							"jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
-							"david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
-			prepStatement = con
-					.prepareStatement("select * from Users where email= (?)");
-			prepStatement.setString(1, username);
-			rs = prepStatement.executeQuery();
-			while (rs.next()) {
-				String pwHash = rs.getString("pwhash");
-				if (pwHash.equals(this.pass)) {
-
-					return true;
-				}
-			}
-
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		finally {
-		    if (rs != null) try { rs.close(); } catch (SQLException ignore) {}  
-		    if (prepStatement != null) try { prepStatement.close(); } catch (SQLException ignore) {}  
-		    if (con != null) try { con.close(); } catch (SQLException ignore) {}  
-		}
-
-		return false;
-
 	}
 
 	public String existingSalt() {
@@ -139,102 +106,7 @@ public class UserBean {
 
 	}
 	
-	public boolean userTaken() {
-		Connection con = null;
-		ResultSet rs = null;
-		PreparedStatement prepStatement = null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-
-			con = DriverManager
-					.getConnection(
-							"jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
-							"david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
-			 prepStatement = con
-					.prepareStatement("select * from Users where email= (?)");
-			prepStatement.setString(1, username);
-			rs = prepStatement.executeQuery();
-			while (rs.next()) {
-					return true;
-				
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		finally {
-		    if (rs != null) try { rs.close(); } catch (SQLException ignore) {}  
-		    if (prepStatement != null) try { prepStatement.close(); } catch (SQLException ignore) {}  
-		    if (con != null) try { con.close(); } catch (SQLException ignore) {}  
-		}
-
-		return false;
+	public UserBean getThis() {
+		return this;
 	}
-
-	public boolean registerUser() {
-		Connection con = null;
-		PreparedStatement prepStatement = null;
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-
-			con = DriverManager
-					.getConnection(
-							"jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
-							"david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
-
-			String queryString = "INSERT INTO Users(email,salt,pwhash) VALUES (?, ?, ?)";
-			int updateQuery = 0;
-
-			prepStatement = con.prepareStatement(queryString);
-			prepStatement.setString(1, this.username);
-			prepStatement.setString(2, this.salt);
-			prepStatement.setString(3, this.pass);
-			updateQuery = prepStatement.executeUpdate();
-			if (updateQuery != 0) {
-				return true;
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		finally {
-		    if (prepStatement != null) try { prepStatement.close(); } catch (SQLException ignore) {}  
-		    if (con != null) try { con.close(); } catch (SQLException ignore) {}  
-		}
-		return false;
-	}
-	
-	public void add() {
-		FlashcardDatabase database = DatabaseSelector.getCurrentDatabase();
-		if (username != null && database.getUser(this) == null) {
-			database.addUser(this);
-		}
-	}
-	
-	public void modify() {
-		FlashcardDatabase database = DatabaseSelector.getCurrentDatabase();
-		if (username != null) {
-			database.modifyUser(this);
-		}
-	}
-	
-	public void setExistingUser(String username) {
-		FlashcardDatabase database = DatabaseSelector.getCurrentDatabase();
-		if (username != null) {
-			UserBean user = database.getUser(this);
-			if (user != null) {
-				this.username = user.username;
-				this.salt = user.salt;
-				this.pass = user.pass;
-			}
-		}
-	}
-
 }

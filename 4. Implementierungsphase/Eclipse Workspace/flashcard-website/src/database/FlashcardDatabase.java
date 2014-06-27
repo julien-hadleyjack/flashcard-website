@@ -14,7 +14,7 @@ public interface FlashcardDatabase {
 	 * 
 	 * @param user the user that is created or modified
 	 */
-	public void addUser(UserBean user);
+	public boolean addUser(UserBean user);
 	
 	public void modifyUser(UserBean user);
 	
@@ -26,6 +26,7 @@ public interface FlashcardDatabase {
 	 * <code>null</code> otherwise (also when no email address was provided)
 	 */
 	public UserBean getUser(UserBean user);
+	
 	
 	/**
 	 * Removes the user with the corresponding email address from the database. If no user exists nothing will be done.
@@ -66,7 +67,7 @@ public interface FlashcardDatabase {
 	 * @param flashcardSetId the id of the flash card set
 	 * @return the flash card set containing the flash cards; <code>null</code> if no corresponding flash card set exists
 	 */
-	public FlashcardSetBean getFlashcardSet(String flashcardSetId);
+	public FlashcardSetBean getFlashcardSet(int flashcardSetId, UserBean user);
 	
 	/**
 	 * Deletes the flash card set. If the set doesn't exist in the database then nothing will be done.
@@ -94,11 +95,15 @@ public interface FlashcardDatabase {
 	 * @param flashcardId the id of the flash card
 	 * @return the flash card if flashcardId exists in the database; <code>null</code> otherwise
 	 */
-	public FlashcardBean getFlashcard(String flashcardId);
+	public FlashcardBean getFlashcard(int flashcardId);
 	
 	/**
 	 * Deletes the flash card. If no flash card with the flashcardId exists in the database then nothing will be done.
 	 * @param flashcard the flash card that should be deleted
 	 */
 	public void deleteFlashcard(FlashcardBean flashcard);
+	
+	public Collection<FlashcardBean> getFlashcardForSetWithId(int setId);
+	
+	public boolean checkPW(UserBean user);
 }

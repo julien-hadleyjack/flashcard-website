@@ -12,10 +12,36 @@ public class FlashcardBean {
 
 	private Date correctAnswerTime;
 	
+	
+
 	private int correctAnswerTimes;
 	
 	private int falseAnswerTimes;
 	
+	public int getFlashcardId() {
+		return flashcardId;
+	}
+	public void setFlashcardId(int flashcardId) {
+		this.flashcardId = flashcardId;
+	}
+	public Date getCorrectAnswerTime() {
+		return correctAnswerTime;
+	}
+	public void setCorrectAnswerTime(Date correctAnswerTime) {
+		this.correctAnswerTime = correctAnswerTime;
+	}
+	public int getCorrectAnswerTimes() {
+		return correctAnswerTimes;
+	}
+	public void setCorrectAnswerTimes(int correctAnswerTimes) {
+		this.correctAnswerTimes = correctAnswerTimes;
+	}
+	public int getFalseAnswerTimes() {
+		return falseAnswerTimes;
+	}
+	public void setFalseAnswerTimes(int falseAnswerTimes) {
+		this.falseAnswerTimes = falseAnswerTimes;
+	}
 	
 	public String getQuestion() {
 		return question;

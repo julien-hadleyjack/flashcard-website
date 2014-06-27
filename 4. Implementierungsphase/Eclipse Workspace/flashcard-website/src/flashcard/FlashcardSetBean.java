@@ -24,8 +24,14 @@ public class FlashcardSetBean {
 	public UserBean getOwner() {
 		return owner;
 	}
+	public void setOwner(UserBean user) {
+		this.owner = user;
+	}
 	public Collection<FlashcardBean> getFlashcards() {
 		return flashcards;
+	}
+	public void setFlashcards(Collection<FlashcardBean> flashcards) {
+		this.flashcards = flashcards;
 	}
 	public void setSetId(int setId) {
 		this.setId = setId;

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
@@ -54,15 +55,63 @@ private static DataSource dataSource = null;
 	}
 
 	@Override
-	public void addUser(UserBean user) {
-		// TODO Auto-generated method stub
+	public boolean addUser(UserBean user) {
+		PreparedStatement prepStatement;
+		Connection connection = null;
+		
+		try {
+			connection = getConnection(); 
+		String queryString = "INSERT INTO Users(email,salt,pwhash) VALUES (?, ?, ?)";
+		int updateQuery = 0;
 
+		prepStatement = connection.prepareStatement(queryString);
+		prepStatement.setString(1, user.getUsername());
+		prepStatement.setString(2, user.getSalt());
+		prepStatement.setString(3, user.getPass());
+		updateQuery = prepStatement.executeUpdate();
+		if (updateQuery != 0) {
+			return true;
+		}
+		
+	}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		finally {
+			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
+		}
+			System.out.println("Hinzufügen nicht erfolgreich");
+			return false;
 	}
 	
 	@Override
 	public void modifyUser(UserBean user) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public boolean checkPW(UserBean user) {
+		PreparedStatement prepStatement;
+		Connection connection = null;
+		
+		try {
+			connection = getConnection(); 
+			prepStatement = connection.prepareStatement("select * from Users where email= (?)");
+			prepStatement.setString(1,user.getUsername());
+			ResultSet rs = prepStatement.executeQuery();
+			if (rs.next()) {
+				if(user.getPass().equals(rs.getString("pwhash"))) {
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
+		}
+		return false;
+		
 	}
 
 	@Override
@@ -72,10 +121,11 @@ private static DataSource dataSource = null;
 		
 		try {
 			connection = getConnection(); 
-			prepStatement = connection.prepareStatement("select * from Users");
+			prepStatement = connection.prepareStatement("select * from Users where email= (?)");
+			prepStatement.setString(1,user.getUsername());
 			ResultSet rs = prepStatement.executeQuery();
 			if (rs.next()) {
-				return new UserBean("", rs.getString("pwhash"), "");
+				return new UserBean(rs.getString("username"), rs.getString("pwhash"), rs.getString("salt"),rs.getInt("userId"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -86,17 +136,65 @@ private static DataSource dataSource = null;
 		return null;
 
 	}
+	
 
 	@Override
 	public void deleteUser(UserBean user) {
-		// TODO Auto-generated method stub
+		PreparedStatement prepStatement;
+		Connection connection = null;
+		
+		try {
+			connection = getConnection(); 
+		String queryString = "DELETE FROM Users WHERE email= (?)";
+		int updateQuery = 0;
 
+		prepStatement = connection.prepareStatement(queryString);
+		prepStatement.setString(1, user.getUsername());
+		updateQuery = prepStatement.executeUpdate();
+		if (updateQuery != 0) {
+			return;
+		}
+		else {
+			System.out.println("Löschen nicht erfolgreich");
+			return;
+		}
+	}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		finally {
+			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
+		}
 	}
 
 	@Override
 	public void addFlashcardSet(UserBean user, String title) {
-		// TODO Auto-generated method stub
+		PreparedStatement prepStatement;
+		Connection connection = null;
+		
+		try {
+			connection = getConnection(); 
+		String queryString = "INSERT INTO FlashcardSets(ownerId,title) VALUES (?, ?)";
+		int updateQuery = 0;
 
+		prepStatement = connection.prepareStatement(queryString);
+		prepStatement.setInt(1, user.getId());
+		prepStatement.setString(2, title);
+		updateQuery = prepStatement.executeUpdate();
+		if (updateQuery != 0) {
+			return;
+		}
+		else {
+			System.out.println("Hinzufügen nicht erfolgreich");
+			return;
+		}
+	}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		finally {
+			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
+		}
 	}
 
 	@Override
@@ -107,26 +205,158 @@ private static DataSource dataSource = null;
 
 	@Override
 	public Collection<FlashcardSetBean> getFlashcardSetsForUser(UserBean user) {
-		// TODO Auto-generated method stub
+		PreparedStatement prepStatement;
+		Connection connection = null;
+		Collection<FlashcardSetBean> sets = new ArrayList<FlashcardSetBean>();
+
+		
+		try {
+			connection = getConnection(); 
+			prepStatement = connection.prepareStatement("select * from FlashcardSets where ownerId= (?)");
+			prepStatement.setInt(1,user.getId());
+			ResultSet rs = prepStatement.executeQuery();
+			if (rs.next()) {
+				FlashcardSetBean set = new FlashcardSetBean();
+				set.setTitle(rs.getString("title"));
+				set.setSetId(rs.getInt("flashcardSetId"));
+				set.setOwner(user);
+				set.setFlashcards(this.getFlashcardForSetWithId(rs.getInt("flashcardSetId")));
+				sets.add(set);
+			}
+			return sets;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
+		}
 		return null;
 	}
 
 	@Override
-	public FlashcardSetBean getFlashcardSet(String flashcardSetId) {
-		// TODO Auto-generated method stub
+	public Collection<FlashcardBean> getFlashcardForSetWithId(int setId) {
+		PreparedStatement prepStatement;
+		Connection connection = null;
+		Collection<FlashcardBean> flashcards = new ArrayList<FlashcardBean>();
+
+		
+		try {
+			connection = getConnection(); 
+			prepStatement = connection.prepareStatement("select * from Flashcards where flashcardSetId= (?)");
+			prepStatement.setInt(1,setId);
+			ResultSet rs = prepStatement.executeQuery();
+			if (rs.next()) {
+				FlashcardBean flashcard = new FlashcardBean();
+				flashcard.setAnswer(rs.getString("answer"));
+				flashcard.setQuestion(rs.getString("question"));
+				flashcard.setFlashcardId(rs.getInt("flashcardId"));
+				flashcard.setCorrectAnswerTime(rs.getTimestamp("correctAnswerDate"));
+				flashcard.setCorrectAnswerTimes(rs.getInt("correctAnswerTimes"));
+				flashcard.setFalseAnswerTimes(rs.getInt("falseAnswerTimes"));
+				flashcards.add(flashcard);
+			}
+			return flashcards;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
+		}
+		return null;
+	}
+	
+	@Override
+	public FlashcardSetBean getFlashcardSet(int flashcardSetId, UserBean user) {
+		PreparedStatement prepStatement;
+		Connection connection = null;
+		try {
+			connection = getConnection(); 
+			prepStatement = connection.prepareStatement("select * from FlashcardSets where flashcardSetId= (?) and ownerId= (?)");
+			prepStatement.setInt(1,flashcardSetId);
+			prepStatement.setInt(2,user.getId());
+			ResultSet rs = prepStatement.executeQuery();
+			if (rs.next()) {
+				FlashcardSetBean set = new FlashcardSetBean();
+				set.setTitle(rs.getString("title"));
+				set.setSetId(rs.getInt("flashcardSetId"));
+				set.setOwner(user);
+				set.setFlashcards(this.getFlashcardForSetWithId(rs.getInt("flashcardSetId")));
+				return set;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
+		}
 		return null;
 	}
 
 	@Override
 	public void deleteFlashcardSet(FlashcardSetBean flashcardSet) {
-		// TODO Auto-generated method stub
+		PreparedStatement prepStatement;
+		Connection connection = null;
+		
+		try {
+			connection = getConnection(); 
+		String queryString = "DELETE FROM FlashcardSets WHERE flashcardSetId= (?)";
+		int updateQuery = 0;
+
+		prepStatement = connection.prepareStatement(queryString);
+		prepStatement.setInt(1, flashcardSet.getSetId());
+		updateQuery = prepStatement.executeUpdate();
+		if (updateQuery != 0) {
+			return;
+		}
+		else {
+			System.out.println("Löschen nicht erfolgreich");
+			return;
+		}
+	}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		finally {
+			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
+		}
 
 	}
 
 	@Override
 	public void addFlashcard(FlashcardSetBean flashcardset,
 			FlashcardBean flashcard) {
-		// TODO Auto-generated method stub
+		PreparedStatement prepStatement;
+		Connection connection = null;
+		
+		try {
+			connection = getConnection(); 
+		String queryString = "INSERT INTO Flashcard(flashcardSetId,question,answer,correctAnswerDate, correctAnswerTimes,falseAnswerTimes) VALUES (?, ?, ?, ?, ?, ?)";
+		int updateQuery = 0;
+
+		prepStatement = connection.prepareStatement(queryString);
+		prepStatement.setInt(1, flashcardset.getSetId());
+		prepStatement.setString(2, flashcard.getQuestion());
+		prepStatement.setString(3, flashcard.getAnswer());
+	    java.sql.Date sqlDate = new java.sql.Date(flashcard.getCorrectAnswerTime().getTime());
+		prepStatement.setDate(4, sqlDate);
+		prepStatement.setInt(5, flashcard.getCorrectAnswerTimes());
+		prepStatement.setInt(6, flashcard.getFalseAnswerTimes());
+
+		updateQuery = prepStatement.executeUpdate();
+		if (updateQuery != 0) {
+			return;
+		}
+		else {
+			System.out.println("Hinzufügen nicht erfolgreich");
+			return;
+		}
+	}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		finally {
+			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
+		}
 
 	}
 	
@@ -137,14 +367,60 @@ private static DataSource dataSource = null;
 		
 
 	@Override
-	public FlashcardBean getFlashcard(String flashcardId) {
-		// TODO Auto-generated method stub
+	public FlashcardBean getFlashcard(int flashcardId) {
+		PreparedStatement prepStatement;
+		Connection connection = null;		
+		try {
+			connection = getConnection(); 
+			prepStatement = connection.prepareStatement("select * from Flashcards where flashcardId= (?)");
+			prepStatement.setInt(1,flashcardId);
+			ResultSet rs = prepStatement.executeQuery();
+			if (rs.next()) {
+				FlashcardBean flashcard = new FlashcardBean();
+				flashcard.setAnswer(rs.getString("answer"));
+				flashcard.setQuestion(rs.getString("question"));
+				flashcard.setFlashcardId(rs.getInt("flashcardId"));
+				flashcard.setCorrectAnswerTime(rs.getTimestamp("correctAnswerDate"));
+				flashcard.setCorrectAnswerTimes(rs.getInt("correctAnswerTimes"));
+				flashcard.setFalseAnswerTimes(rs.getInt("falseAnswerTimes"));
+				return flashcard;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
+		}
 		return null;
 	}
 
 	@Override
 	public void deleteFlashcard(FlashcardBean flashcard) {
-		// TODO Auto-generated method stub
+		PreparedStatement prepStatement;
+		Connection connection = null;
+		
+		try {
+			connection = getConnection(); 
+		String queryString = "DELETE FROM Flashcards WHERE flashcardId= (?)";
+		int updateQuery = 0;
+
+		prepStatement = connection.prepareStatement(queryString);
+		prepStatement.setInt(1, flashcard.getFlashcardId());
+		updateQuery = prepStatement.executeUpdate();
+		if (updateQuery != 0) {
+			return;
+		}
+		else {
+			System.out.println("Löschen nicht erfolgreich");
+			return;
+		}
+	}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		finally {
+			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
+		}
 
 	}
 

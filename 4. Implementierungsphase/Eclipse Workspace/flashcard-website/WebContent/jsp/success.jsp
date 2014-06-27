@@ -17,7 +17,7 @@
 			<div class="redirectHolder">
 				<h1>Nicht eingeloggt !</h1>
 				<%
-					response.setHeader("Refresh", "5;url=../index.jsp");
+					response.setHeader("Refresh", "3;url=../index.jsp");
 				%>
 
 				<div class="dots">
@@ -34,7 +34,7 @@
 			<div class="redirectHolder">
 				<h1>Login erfolgreich</h1>
 				<%
-					response.setHeader("Refresh", "5;url=../dashboard.jsp");
+					response.setHeader("Refresh", "3;url=../dashboard.jsp");
 				%>
 				<div class="dots">
 					<i class="fa fa-spinner fa-spin"></i>

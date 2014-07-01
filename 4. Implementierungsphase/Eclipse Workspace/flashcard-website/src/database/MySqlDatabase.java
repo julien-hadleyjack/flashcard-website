@@ -18,7 +18,7 @@ public class MySqlDatabase implements FlashcardDatabase {
 
 private static DataSource dataSource = null;
 	
-	private String databaseUrl = "jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering";
+	private String databaseUrl = "jdbc:mysql://aagid2mfgguv80.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering";
 	private String localDatabaseUrl = "jdbc:mysql://localhost:3306/web_engineering";
 	
 	private boolean useLocalhost = true;
@@ -26,6 +26,7 @@ private static DataSource dataSource = null;
 	private Connection getConnection() throws SQLException {
 		if (dataSource == null) {
 			PoolProperties p = new PoolProperties();
+//			p.setUrl(useLocalhost ? localDatabaseUrl : System.getProperty("JDBC_CONNECTION_STRING"));
 			p.setUrl(useLocalhost ? localDatabaseUrl : databaseUrl);
 			p.setDriverClassName("com.mysql.jdbc.Driver");
 			p.setUsername("david");

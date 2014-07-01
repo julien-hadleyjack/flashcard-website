@@ -1,11 +1,13 @@
 package database;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.logging.Logger;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.apache.tomcat.jdbc.pool.PoolProperties;
@@ -18,19 +20,17 @@ public class MySqlDatabase implements FlashcardDatabase {
 
 private static DataSource dataSource = null;
 	
-	private String databaseUrl = "jdbc:mysql://aagid2mfgguv80.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering";
-	private String localDatabaseUrl = "jdbc:mysql://localhost:3306/web_engineering";
+	private static String LOCAL_DATABASE_URL = "jdbc:mysql://localhost:3306/web_engineering";
 	
-	private boolean useLocalhost = true;
+	private final static Logger LOGGER = Logger.getLogger(MySqlDatabase.class.getName());
+	
+	private static boolean USE_LOCALHOST = false;
 
 	private Connection getConnection() throws SQLException {
 		if (dataSource == null) {
 			PoolProperties p = new PoolProperties();
-//			p.setUrl(useLocalhost ? localDatabaseUrl : System.getProperty("JDBC_CONNECTION_STRING"));
-			p.setUrl(useLocalhost ? localDatabaseUrl : databaseUrl);
+			p.setUrl(USE_LOCALHOST ? LOCAL_DATABASE_URL : System.getProperty("JDBC_CONNECTION_STRING"));
 			p.setDriverClassName("com.mysql.jdbc.Driver");
-			p.setUsername("david");
-			p.setPassword("7t*Tf##q#dgCT4^07i*#mwb52261snK@");
 			p.setJmxEnabled(true);
 			p.setTestWhileIdle(false);
 			p.setTestOnBorrow(true);
@@ -48,6 +48,7 @@ private static DataSource dataSource = null;
 			p.setRemoveAbandoned(true);
 			p.setJdbcInterceptors("org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;"+
 					"org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer");
+			
 			dataSource = new DataSource();
 			dataSource.setPoolProperties(p); 
 		}

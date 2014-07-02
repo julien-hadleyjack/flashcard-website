@@ -127,7 +127,7 @@ private static DataSource dataSource = null;
 			prepStatement.setString(1,user.getUsername());
 			ResultSet rs = prepStatement.executeQuery();
 			if (rs.next()) {
-				return new UserBean(rs.getString("username"), rs.getString("pwhash"), rs.getString("salt"),rs.getInt("userId"));
+				return new UserBean(rs.getString("email"), rs.getString("pwhash"), rs.getString("salt"),rs.getInt("userId"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

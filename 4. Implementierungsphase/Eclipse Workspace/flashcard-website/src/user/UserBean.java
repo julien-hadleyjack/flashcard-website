@@ -78,8 +78,7 @@ public class UserBean {
 
 			con = DriverManager
 					.getConnection(
-							"jdbc:mysql://aa14f3lqw8l60up.cp8slgariplu.eu-west-1.rds.amazonaws.com:3306/web_engineering",
-							"david", "7t*Tf##q#dgCT4^07i*#mwb52261snK@");
+							System.getProperty("JDBC_CONNECTION_STRING"));
 			prepStatement = con
 					.prepareStatement("select * from Users where email= (?)");
 			prepStatement.setString(1, username);

@@ -7,7 +7,7 @@
 <c:set target="${loginBean}" property="pass" value="${param.password}" />
 
 <c:choose>
-	<c:when test="${database.addUser(loginBean.getThis()}">
+	<c:when test="${database.addUser(loginBean.getThis())}">
 	<c:set var="userid" value="${param.uname}" scope="session"  />
 	<c:redirect url="success.jsp"></c:redirect>
 	</c:when>

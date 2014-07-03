@@ -1,4 +1,4 @@
-package database;
+Ôªøpackage database;
 
 import java.sql.Connection;
 
@@ -29,8 +29,8 @@ private static DataSource dataSource = null;
 	private Connection getConnection() throws SQLException {
 		if (dataSource == null) {
 			PoolProperties p = new PoolProperties();
-			p.setUrl(USE_LOCALHOST ? LOCAL_DATABASE_URL : System.getProperty("JDBC_CONNECTION_STRING"));
 			p.setDriverClassName("com.mysql.jdbc.Driver");
+			p.setUrl(USE_LOCALHOST ? LOCAL_DATABASE_URL : System.getProperty("JDBC_CONNECTION_STRING"));
 			p.setJmxEnabled(true);
 			p.setTestWhileIdle(false);
 			p.setTestOnBorrow(true);
@@ -82,7 +82,7 @@ private static DataSource dataSource = null;
 		finally {
 			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
 		}
-			System.out.println("Hinzufügen nicht erfolgreich");
+			System.out.println("Hinzuf√ºgen nicht erfolgreich");
 			return false;
 	}
 	
@@ -157,7 +157,7 @@ private static DataSource dataSource = null;
 			return;
 		}
 		else {
-			System.out.println("Löschen nicht erfolgreich");
+			System.out.println("L≈°schen nicht erfolgreich");
 			return;
 		}
 	}
@@ -187,7 +187,7 @@ private static DataSource dataSource = null;
 			return;
 		}
 		else {
-			System.out.println("Hinzufügen nicht erfolgreich");
+			System.out.println("Hinzuf≈∏gen nicht erfolgreich");
 			return;
 		}
 	}
@@ -311,7 +311,7 @@ private static DataSource dataSource = null;
 			return;
 		}
 		else {
-			System.out.println("Löschen nicht erfolgreich");
+			System.out.println("L≈°schen nicht erfolgreich");
 			return;
 		}
 	}
@@ -349,7 +349,7 @@ private static DataSource dataSource = null;
 			return;
 		}
 		else {
-			System.out.println("Hinzufügen nicht erfolgreich");
+			System.out.println("Hinzuf≈∏gen nicht erfolgreich");
 			return;
 		}
 	}
@@ -413,7 +413,7 @@ private static DataSource dataSource = null;
 			return;
 		}
 		else {
-			System.out.println("Löschen nicht erfolgreich");
+			System.out.println("L≈°schen nicht erfolgreich");
 			return;
 		}
 	}

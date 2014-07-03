@@ -281,7 +281,7 @@ header {
 	-ms-transform: rotate(0deg);
 	transform: rotate(0deg);
 
-	transform-style: preserve-3d;
+	/*transform-style: preserve-3d;
 	-webkit-transform-style: preserve-3d;
    	-ms-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
@@ -291,10 +291,10 @@ header {
   	-webkit-transition: 0.5s;
     -moz-transition: transform 0.5s;
     -ms-transition: transform 0.5s;
-    -o-transition: transform 0.5s;
+    -o-transition: transform 0.5s;*/
   	position: absolute;
 }
-.redBorder figure {
+/*.redBorder figure {
 	display: block;
 	position: absolute;
 	width: 100%;
@@ -306,25 +306,34 @@ header {
    backface-visibility: hidden;
    overflow: hidden;
 }
-.redBorder .front {
-	z-index: 2;
-}
 .redBorder .back {
 	transform: rotateY(180deg);
 	-moz-transform: rotateY(180deg);
 	-webkit-transform: rotateY(180deg);
 	-o-transform: rotateY(180deg);
 	-ms-transform: rotateY(180deg);
-	padding-left: 20px;
-	
+	margin-left: -20px;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
 }
-.paper-animate .paper2.flipped {
+.redBorder .back:after, .redBorder .back:before  {
 	transform: rotateY(180deg);
 	-moz-transform: rotateY(180deg);
 	-webkit-transform: rotateY(180deg);
 	-o-transform: rotateY(180deg);
 	-ms-transform: rotateY(180deg);
-}
+	margin-left: -20px;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+}*/
+
+/*.paper-animate .paper2.flipped {
+	transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	-ms-transform: rotateY(180deg);
+}*/
 .paper-animate .paper-holder {
 	height: 100%;
   	width: 100%;
@@ -335,20 +344,32 @@ header {
 	-ms-transform: rotate(3deg);
 	transform: rotate(3deg);
 	
-	perspective: 800px;
+	/*perspective: 800px;
 	-webkit-perspective: 800px;
     -moz-perspective: 800px;
 	-ms-perspective: 800px;
-	-o-perspective: 800px;
+	-o-perspective: 800px;*/
 
 }
 
 /* paper editor */
+.paper-textarea-big {
+	width: 655px; 
+	height: 175px;
+	display: none;
+}
 .paper-textarea {
 	width: 309px; 
 	height: 134px;
 	display: none;
 }
+/*.learning .mce-tinymce {
+	transform: rotateY(-180deg);
+	-moz-transform: rotateY(-180deg);
+	-webkit-transform: rotateY(-180deg);
+	-o-transform: rotateY(-180deg);
+	-ms-transform: rotateY(-180deg);
+}*/
 .mce-tinymce {
 	border: none!important;
 	border-top: 1px #FF0000 solid!important;
@@ -371,6 +392,12 @@ header {
 }
 .learning .paper-buttons {
 	margin: -48px -10px 0 0;
+	-moz-transform: rotate(0deg);
+	-webkit-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	transform: rotate(0deg);
+
 }
 .learning .icon {
 	padding-left: 8px;

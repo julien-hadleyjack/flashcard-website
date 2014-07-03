@@ -7,156 +7,92 @@
     <link rel="stylesheet" href="layout/css/ui-lightness/jquery-ui-1.10.4.min.css">
     
     <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="js/tinymce/jquery.tinymce.min.js"></script>
+    <script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.10.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.knob.js"></script>
+    <script type="text/javascript" src="learningscreen.js"></script>
     
     <script type="text/javascript">
-    	$(document).ready(function() {
-    	
-    		// init classes
-    		$("#wrapper").find(".paper-big").eq(0).addClass("activeSlide").addClass("firstSlide").show();
-    		$(".paper-big").last().addClass("lastSlide");
-    		var rightAnswers = 0,
-    			cardCount = 4;
+        var rightAnswers = 0,
+    		cardCount = 4,
+    		highestId = 4;
     		
-    		// prev/next
-    		$(document).on("click", "#left-button", function(e){
-				e.preventDefault(); 
-				if(!$(".firstSlide").hasClass("activeSlide")){
-
-					reset();				
-					
-					var prevElement = $(".activeSlide").prev();
-	   				$(".activeSlide").toggle("slide", { direction: 'right' }, 700);	
-	   				$(".activeSlide").removeClass("activeSlide");
+    	function initEditors(){
+			tinymce.init({
+			    selector: "textarea",
+			    theme: "modern",
+			    menubar: false,
+			    statusbar: false,
+			    language : 'de',
+			    plugins: [
+			        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+			        "searchreplace wordcount visualblocks visualchars code fullscreen",
+			        "insertdatetime media nonbreaking save table contextmenu directionality",
+			        "emoticons template paste textcolor eqneditor"
+			    ],
+			    toolbar1: "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image eqneditor",
+			    image_advtab: true,
+			    setup: function(ed) {
+	        		ed.on('init', function(e) {
+	            		e.target.hide();
+	        		});
+	    		},
+	    		height: 145,
+	    		width: 655,
+	       		force_p_newlines : false,
+	       		content_css : "layout/css/tinymce.css"
+			});
+		}
+		
+		$(document).ready(function() {
+			$(document).on("click", ".edit", function(e){
+				e.preventDefault();
+				var element = $(this).parents().eq(1).children(".paper2");
 	
-	   				$(prevElement).toggle("slide", { direction: 'left' }, 700);	
-					$(prevElement).addClass("activeSlide");
-					
-					if(!$(prevElement).hasClass("stats")){
-						$(".answerButton").show().animate({opacity: 0.4}, 700);
-					}
-					
-					// answer button check
-					if(!$(".activeSlide .paper2").hasClass("flipped")){
-						//$(".answerButton").html("Antwort anzeigen");
-					} else {
-						//$(".answerButton").html("Frage anzeigen");
-					}
-				}
+				$(element).children(".redBorder").hide();
+				$(element).children(".mce-container").show();
+													
+				$(this).html('<i class="fa fa-save fa-2x"></i>');
+				$(this).removeClass("edit");
+				$(this).addClass("save");
 			});
-			
-			$(document).on("click", "#right-button", function(e){
-				e.preventDefault(); 
-				if(!$(".lastSlide").hasClass("activeSlide")){
-
-					reset();
-										
-					var nextElement = $(".activeSlide").next();
-	   				$(".activeSlide").toggle("slide", { direction: 'left' }, 700);	
-	   				$(".activeSlide").removeClass("activeSlide");
-	
-	   				$(nextElement).toggle("slide", { direction: 'right' }, 700);	
-					$(nextElement).addClass("activeSlide");
-					
-					if($(nextElement).hasClass("stats")){
-						$(".answerButton").animate({opacity: 0}, 700, function() {
-							$(".answerButton").hide();
-						});
-						
-						var procent = (rightAnswers/cardCount) * 100;
-						
-						$({value: 0}).delay(200).animate({value: procent}, {
-						    duration: 1000,
-						    easing:'swing',
-						    step: function() 
-						    {
-						        $(".cs_knob").val(Math.ceil(this.value)).trigger('change');
-						    }
-						});
-						
-						$(".stats .bigText").html(rightAnswers + "/" + cardCount + " Richtig");
-					}
-				}
 				
-				// answer button check
-				if(!$(".activeSlide .paper2").hasClass("flipped")){
-					//$(".answerButton").html("Antwort anzeigen");
-				} else {
-					//$(".answerButton").html("Frage anzeigen");
-				}
-			});
-
-			$(document).on("click", ".answerButton", function(e){
-				e.preventDefault(); 
-				if(!$(".activeSlide .paper2").hasClass("flipped")){
-					$(".activeSlide .paper-buttons").delay(500).fadeIn();
-					$(this).html("Frage anzeigen");
-				} else {
-					$(".activeSlide .paper-buttons").fadeOut(100);
-					$(this).html("Antwort anzeigen");
-				}
+			$(document).on("click", ".save", function(e) {
+				e.preventDefault();
+				var element = $(this).parents().eq(1).children(".paper2"),
+					id = $(this).parents().eq(2).attr("data-id");
 				
-				$(".activeSlide .paper2").toggleClass("flipped");
-			});
-			
-			function reset(){
-				if($(".activeSlide .paper2").hasClass("flipped")){
-					$(".activeSlide .paper2").toggleClass("flipped");
-				} 
-				$(".answerButton").html("Antwort anzeigen");
-				$(".activeSlide .paper-buttons").hide();
-			}
-			
-			// answer handling
-			$(document).on("click", ".right", function(e){
-				e.preventDefault(); 
-				if(!$(this).hasClass("checked")){
-					$(this).addClass("checked");
-					var wrongElem = $(".activeSlide").find(".wrong");
-					if($(wrongElem).hasClass("checked")){
-						$(wrongElem).removeClass("checked");
-					}
+				var question = $(element).find("#editor-f-" + id + "_ifr").contents().find("body").html(),
+					answer = $(element).find("#editor-a-" + id + "_ifr").contents().find("body").html();
 
-					rightAnswers++;
+				if((!question || 0 === question.length) | (!answer || 0 === answer.length)) {
+					alert("Bitte gebe eine Frage und eine Antwort ein!");
+				} else {
+					$(element).children(".mce-container").hide();
+					$(element).children(".redBorder").show();
+						
+					$(element).find(".front").html(question);
+					$(element).find(".back").html(answer);
+					//TODO: send Ajax Request with new title (get id of database entry via data-id attribute)
+					//TODO: if no id set -> add instead of edit 
+						
+					$(this).html('<i class="fa fa-pencil fa-2x"></i>');
+					$(this).removeClass("save");
+					$(this).addClass("edit");
 				}
-			});
+			});		
 			
-			$(document).on("click", ".wrong", function(e){
-				e.preventDefault(); 
-				if(!$(this).hasClass("checked")){
-					$(this).addClass("checked");
-					var rightElem = $(".activeSlide").find(".right");
-					if($(rightElem).hasClass("checked")){
-						$(rightElem).removeClass("checked");
-						rightAnswers--;
-					}
+			$(document).on("click", ".remove", function(e) {
+				e.preventDefault();
+				var element = $(this).parents().eq(1);
+								
+				if(confirm('Sollen die Karteikarten wirklich gelöscht werden?')){
+					//TODO: send Ajax Request to remove cards
+					$(element).remove();
 				}
-			});
-
-
-
-			$(".cs_knob").knob({
-				min : 0, 
-				max : 100, 
-				step : 1, 
-				angleOffset : 0, 
-				angleArc : 360, 
-				stopper : true, 
-				readOnly : true, 
-				cursor : false,  
-				lineCap : 'butt', 
-				thickness : '0.3', 
-				width : 200, 
-				displayInput : true, 
-				displayPrevious : true, 
-				fgColor : '#7AF576', 
-				inputColor : '#000000', 
-				font : 'Arial', 
-				fontWeight : 'normal', 
-				bgColor : '#F75457'
-			});
+			});	
+		
+			initEditors()
 		});
     </script>
 </head>
@@ -177,7 +113,7 @@
     <a href="#" id="left-button" class="circle-button"></a>
     <a href="#" id="right-button" class="circle-button"></a>
     <div id="wrapper">
-        <div class="paper paper-big center paper-animate hidden">
+        <div class="paper paper-big center paper-animate hidden" data-id="0">
         	<div class="paper-holder">
 	        	<div class="paper-buttons hidden">
 					<a href="#" class="icon edit">
@@ -195,11 +131,13 @@
 	                	<figure class="front">
 		                    Was heißt 分（成）auf Deutsch?
 	                    </figure>
-	                    <figure class="back">
+	                    <figure class="back hidden">
 	                    	einteilen (in)
 	                    </figure>
 	                </div>
-	            </div>
+	                <textarea id="editor-f-0" class="paper-textarea-big">Was heißt 分（成）auf Deutsch?</textarea>
+	                <textarea id="editor-a-0" class="paper-textarea-big">einteilen (in)</textarea>
+ 	            </div>
             </div>
         </div>
         <div class="paper paper-big center paper-animate hidden">

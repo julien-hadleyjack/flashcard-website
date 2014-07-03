@@ -4,5 +4,5 @@
 <jsp:useBean id="loginBean" class="user.UserBean" scope="session"></jsp:useBean>
 <jsp:useBean id="jsonHelper" class="helper.JSONHelper" scope="session"></jsp:useBean>
 
-<c:set target="${loginBean}" property="username" value="${param.uname}" />
+<c:set target="${loginBean}" property="username" value="${param.userid}" />
 <c:out value="${jsonHelper.getJsonFromCollection(database.getFlashcardSetsForUser(database.getUser(loginBean)))}"></c:out>

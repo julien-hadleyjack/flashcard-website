@@ -200,8 +200,33 @@ private static DataSource dataSource = null;
 	}
 
 	@Override
-	public void modifyFlashcardSet(FlashcardSetBean flashcardSet) {
-		// TODO Auto-generated method stub
+	public void modifyFlashcardSet(FlashcardSetBean flashcardSet,String title) {
+		PreparedStatement prepStatement;
+		Connection connection = null;
+		
+		try {
+			connection = getConnection(); 
+		String queryString = "UPDATE FlashcardSets SET title= (?) WHERE flashcardSetId= (?)";
+		int updateQuery = 0;
+
+		prepStatement = connection.prepareStatement(queryString);
+		prepStatement.setString(1,title);
+		prepStatement.setInt(2, flashcardSet.getSetId());
+		updateQuery = prepStatement.executeUpdate();
+		if (updateQuery != 0) {
+			return;
+		}
+		else {
+			System.out.println("Titeländerungen nicht erfolgreich");
+			return;
+		}
+	}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		finally {
+			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
+		}
 
 	}
 

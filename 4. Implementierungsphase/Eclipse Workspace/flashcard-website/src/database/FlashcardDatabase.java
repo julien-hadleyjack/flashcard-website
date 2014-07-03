@@ -51,7 +51,7 @@ public interface FlashcardDatabase {
 	 * 
 	 * @param flashcardSet the flash card set that should be modified
 	 */
-	public void modifyFlashcardSet(FlashcardSetBean flashcardSet);
+	public void modifyFlashcardSet(FlashcardSetBean flashcardSet, String title);
 	
 	/**
 	 * Returns all flash card sets for the user but without the flash cards.

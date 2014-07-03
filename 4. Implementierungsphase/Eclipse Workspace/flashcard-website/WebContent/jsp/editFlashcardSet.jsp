@@ -4,7 +4,7 @@
 <jsp:useBean id="loginBean" class="user.UserBean" scope="session"></jsp:useBean>
 <jsp:useBean id="helper" class="helper.FlashcardHelper" scope="session"></jsp:useBean>
 
-<c:set target="${loginBean}" property="username" value="${param.userid}" />
+<c:set target="${loginBean}" property="username" value="${sessionScope.userid}" />
 <c:set target="${helper}" property="setId" value="${param.setId}" />
 <c:set target="${helper}" property="title" value="${param.title}" />
 

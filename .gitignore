@@ -153,9 +153,5 @@ AwsCredentials.properties
 MANIFEST.MF
 pom.properties
 *.~vsdx
-Servers/Tomcat v7.0 Server at localhost (2)-config/catalina.policy
-Servers/Tomcat v7.0 Server at localhost (2)-config/catalina.properties
-Servers/Tomcat v7.0 Server at localhost (2)-config/context.xml
-Servers/Tomcat v7.0 Server at localhost (2)-config/server.xml
-Servers/Tomcat v7.0 Server at localhost (2)-config/tomcat-users.xml
-Servers/Tomcat v7.0 Server at localhost (2)-config/web.xml
+Servers/
+target/

@@ -60,8 +60,15 @@
 					$(element).children(".redBorder").show();
 					
 					$(element).children(".redBorder").html(value);
-					//TODO: send Ajax Request with new title (get id of database entry via data-id attribute)
-					//TODO: if no id set -> add instead of edit 
+
+					if($(this).parents().eq(1).attr("data-id") != undefined){
+						$.post( "/jsp/editFlashcardSet.jsp", { setId: $(this).parents().eq(1).attr("data-id"), title: value } );
+					} else {
+						$.post( "/jsp/editFlashcardSet.jsp", { title: value } , function( data ) {
+							
+							$(this).parents().eq(1).attr("data-id", data.replace("\n", ""));
+						});
+					}
 					
 					$(this).html('<i class="fa fa-pencil fa-fw"></i>');
 					$(this).removeClass("save");
@@ -73,9 +80,10 @@
 				e.preventDefault();
 				var element = $(this).parents().eq(1);
 							
-				if(confirm('Sollen die Karteikarten wirklich gelöscht werden?')){
-					//TODO: send Ajax Request to remove cards
-					$(element).remove();
+				if(confirm('Sollen die Karteikarten wirklich gel&ouml;scht werden?')){
+					$.post( "/jsp/editFlashcardSet.jsp", { setId: $(element).attr("data-id") } , function( data ) {
+						$(element).remove();
+					});
 				}
 			});	
 			
@@ -95,6 +103,13 @@
 				$(element).children(".mce-container").show();
 								
 				$(container).find(".icon").removeClass("hidden");
+			});
+			
+			/* Init FlashCards */
+			$.getJSON("/jsp/getSetsFromUser.jsp", function(data){
+				$.each(data, function (index, value) {
+					$("#paper-wrapper").prepend('<div class="paper paper-small paper-dashboard" data-id="' + value.setId + '"><div class="paper-buttons"><a href="#" class="icon remove"><i class="fa fa-minus fa-fw"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-fw"></i></a></div><div class="paper2"><div class="redBorder"><a href="learningscreen.html">' + value.title + '</a></div> <textarea id="editor-0" class="paper-textarea">' + value.title + '</textarea></div></div>');
+				});
 			});
 	
 		});
@@ -116,79 +131,27 @@
 	</header>
 
     <div id="wrapper">
-        <div class="paper paper-small paper-dashboard">
-        	<div class="paper-buttons">
-        		<a href="#" class="icon remove">
-        			<i class="fa fa-minus fa-fw"></i>
-        		</a>
-        		<a href="#" class="icon edit">
-        			<i class="fa fa-pencil fa-fw"></i>
-        		</a>
-        	</div>
-            <div class="paper2">
-                <div class="redBorder">
-					<a href="learningscreen.html">
-						Biologie     
-					</a>  
-				</div> 
-				<textarea id="editor-0" class="paper-textarea">Biologie</textarea>         
-			</div>
-        </div>
-        <div class="paper paper-small paper-dashboard">
-        	<div class="paper-buttons">
-        		<a href="#" class="icon remove">
-        			<i class="fa fa-minus fa-fw"></i>
-        		</a>
-        		<a href="#" class="icon edit">
-        			<i class="fa fa-pencil fa-fw"></i>
-        		</a>
-        	</div>
-            <div class="paper2">
-                <div class="redBorder">
-					<a href="learningscreen.html">
-						Chinesisch     
+		<div id="paper-wrapper">
+			<div class="paper paper-small paper-dashboard">
+				<div class="paper-buttons">
+					<a href="#" class="icon remove">
+						<i class="fa fa-minus fa-fw"></i>
 					</a>
-				</div>     
-				<textarea id="editor-1" class="paper-textarea">Chinesisch</textarea>         
+					<a href="#" class="icon edit">
+						<i class="fa fa-pencil fa-fw"></i>
+					</a>
+				</div>
+				<div class="paper2">
+					<div class="redBorder">
+						<a href="learningscreen.html">
+							Biologie     
+						</a>  
+					</div> 
+					<textarea id="editor-0" class="paper-textarea">Biologie</textarea>         
+				</div>
 			</div>
-        </div>
-        <div class="paper paper-small paper-dashboard">
-        	<div class="paper-buttons">
-        		<a href="#" class="icon remove">
-        			<i class="fa fa-minus fa-fw"></i>
-        		</a>
-        		<a href="#" class="icon edit">
-        			<i class="fa fa-pencil fa-fw"></i>
-        		</a>
-        	</div>
-            <div class="paper2">
-                <div class="redBorder">
-					<a href="learningscreen.html">
-						Deutschland     
-					</a>      
-				</div>     
-				<textarea id="editor-2" class="paper-textarea">Deutschland</textarea>         
-			</div>
-        </div>
-        <div class="paper paper-small paper-dashboard">
-        	<div class="paper-buttons">
-        		<a href="#" class="icon remove">
-        			<i class="fa fa-minus fa-fw"></i>
-        		</a>
-        		<a href="#" class="icon edit">
-        			<i class="fa fa-pencil fa-fw"></i>
-        		</a>
-        	</div>
-            <div class="paper2">
-                <div class="redBorder">
-					<a href="learningscreen.html">
-						English     
-					</a>      
-				</div>     
-				<textarea id="editor-3" class="paper-textarea">English</textarea>         
-			</div>
-        </div>
-        
+		</div>
+		
         <!-- Add -->
         <div class="paper paper-small paper-dashboard">
         	<div class="paper-buttons">

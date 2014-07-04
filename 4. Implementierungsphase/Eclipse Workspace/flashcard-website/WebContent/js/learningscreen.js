@@ -49,6 +49,7 @@ $(document).ready(function() {
 	    // f key
 	  	} else if (event.keyCode == 70) {
 			wrongAnswer();
+		// e key
 	  	} else if (event.keyCode == 69) {
 			$(".activeSlide").find(".edit").click();
 			$(".activeSlide").find(".paper-buttons").show();
@@ -164,6 +165,21 @@ $(document).ready(function() {
 		} 
 		$(".answerButton").html("Antwort anzeigen");
 		$(".activeSlide .paper-buttons").hide();
+		
+		// Close Editor
+		cancelEdit();
+	}
+	
+	function cancelEdit() {
+		var element = $(".activeSlide").find(".paper2"),
+			button = $(element).find(".save");
+		
+		$(element).children(".mce-container").hide();
+		$(element).children(".redBorder").show();
+																	
+		$(button).html('<i class="fa fa-pencil fa-2x"></i>');
+		$(button).removeClass("save");
+		$(button).addClass("edit");
 	}
 	
 	// Statistics Plugin

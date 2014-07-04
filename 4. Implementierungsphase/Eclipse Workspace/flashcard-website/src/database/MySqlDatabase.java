@@ -1,10 +1,10 @@
 ﻿package database;
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
@@ -170,7 +170,7 @@ private static DataSource dataSource = null;
 	}
 
 	@Override
-	public void addFlashcardSet(UserBean user, String title) {
+	public int addFlashcardSet(UserBean user, String title) {
 		PreparedStatement prepStatement;
 		Connection connection = null;
 		
@@ -179,17 +179,17 @@ private static DataSource dataSource = null;
 		String queryString = "INSERT INTO FlashcardSets(ownerId,title) VALUES (?, ?)";
 		int updateQuery = 0;
 
-		prepStatement = connection.prepareStatement(queryString);
+		prepStatement = connection.prepareStatement(queryString,Statement.RETURN_GENERATED_KEYS);
 		prepStatement.setInt(1, user.getId());
 		prepStatement.setString(2, title);
 		updateQuery = prepStatement.executeUpdate();
-		if (updateQuery != 0) {
-			return;
-		}
-		else {
-			System.out.println("HinzufŸgen nicht erfolgreich");
-			return;
-		}
+		 ResultSet keyResultSet = prepStatement.getGeneratedKeys();
+	        int newCustomerId = 0;
+	        if (keyResultSet.next()) {
+	            newCustomerId = (int) keyResultSet.getInt(1);
+	        }
+         
+		return newCustomerId;
 	}
 		catch(SQLException ex) {
 			ex.printStackTrace();
@@ -197,6 +197,7 @@ private static DataSource dataSource = null;
 		finally {
 			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
 		}
+		return 0;
 	}
 
 	@Override

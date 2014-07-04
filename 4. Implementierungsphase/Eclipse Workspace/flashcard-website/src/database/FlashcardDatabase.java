@@ -44,7 +44,7 @@ public interface FlashcardDatabase {
 	 * @param user the user for which the set will be created
 	 * @param title the title of the newly created flash card set
 	 */
-	public void addFlashcardSet(UserBean user, String title);
+	public int addFlashcardSet(UserBean user, String title);
 	
 	/**
 	 * Modifies an existing flash card set using the flashcardsSetId.

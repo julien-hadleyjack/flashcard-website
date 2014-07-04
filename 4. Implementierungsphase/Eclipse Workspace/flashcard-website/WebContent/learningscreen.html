@@ -10,7 +10,7 @@
     <script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.10.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.knob.js"></script>
-    <script type="text/javascript" src="learningscreen.js"></script>
+    <script type="text/javascript" src="js/learningscreen.js"></script>
     
     <script type="text/javascript">
         var rightAnswers = 0,
@@ -51,12 +51,29 @@
 	
 				$(element).children(".redBorder").hide();
 				$(element).children(".mce-container").show();
+				console.log(element);
+				$(this).parents().eq(1).find(".undo").removeClass("hidden");
 													
 				$(this).html('<i class="fa fa-save fa-2x"></i>');
 				$(this).removeClass("edit");
 				$(this).addClass("save");
 			});
 				
+			$(document).on("click", ".add", function(e) {
+				e.preventDefault();
+				
+				var container = $(this).parents().eq(2);
+				console.log(container);
+				highestId++;
+				$(container).after('<div class="paper paper-big center paper-animate hidden" data-id="1"><div class="paper-holder"><div class="paper-buttons hidden"><a href="#" class="icon add"><i class="fa fa-plus fa-2x"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-2x"></i></a><a href="#" class="icon remove"><i class="fa fa-minus fa-2x"></i></a><a href="#" class="icon undo hidden"><i class="fa fa-undo fa-2x"></i></a><a href="#" class="icon wrong"><i class="fa fa-minus-circle fa-2x"></i></a><a href="#" class="icon right"><i class="fa fa-check fa-2x"></i></a></div><div class="paper2"><div class="redBorder"><figure class="front">Frage eingeben</figure><figure class="back hidden">Antwort eingeben</figure></div><textarea id="editor-f-' + highestId + '" class="paper-textarea-big">Frage eingeben</textarea><textarea id="editor-a-' + highestId + '" class="paper-textarea-big">Antwort eingeben</textarea></div></div></div>');
+				
+				initEditors();		
+				slideRight();		
+				
+				//$(".activeSlide .edit").click();
+				//$(".activeSlide").find(".paper-buttons").show();
+			});
+
 			$(document).on("click", ".save", function(e) {
 				e.preventDefault();
 				var element = $(this).parents().eq(1).children(".paper2"),
@@ -79,20 +96,45 @@
 					$(this).html('<i class="fa fa-pencil fa-2x"></i>');
 					$(this).removeClass("save");
 					$(this).addClass("edit");
+					$(this).parents().eq(1).find(".undo").addClass("hidden");
+					
+					if(!$(".activeSlide .paper2").hasClass("flipped")){
+						$(".activeSlide .paper-buttons").fadeOut(100);
+					}
 				}
-			});		
+			});	
+			
+			$(document).on("click", ".undo", function(e){
+				e.preventDefault();
+				cancelEdit();
+				$(this).addClass("hidden");
+				var saveButton = $(this).parents().eq(1).find(".save");
+				$(saveButton).html('<i class="fa fa-pencil fa-2x"></i>');
+				$(saveButton).removeClass("save");
+				$(saveButton).addClass("edit");
+				
+				if(!$(".activeSlide .paper2").hasClass("flipped")){
+					$(".activeSlide .paper-buttons").fadeOut(100);
+				}
+
+			});
+	
 			
 			$(document).on("click", ".remove", function(e) {
 				e.preventDefault();
-				var element = $(this).parents().eq(1);
-								
+				var element = $(this).parents().eq(2);
+				
 				if(confirm('Sollen die Karteikarten wirklich gelöscht werden?')){
 					//TODO: send Ajax Request to remove cards
+					$("#right-button").click();
 					$(element).remove();
+					
+					// first or last slide deletion 
+					init();
 				}
 			});	
 		
-			initEditors()
+			initEditors();
 		});
     </script>
 </head>
@@ -116,8 +158,17 @@
         <div class="paper paper-big center paper-animate hidden" data-id="0">
         	<div class="paper-holder">
 	        	<div class="paper-buttons hidden">
+					<a href="#" class="icon add">
+	        			<i class="fa fa-plus fa-2x"></i>
+	        		</a>
 					<a href="#" class="icon edit">
 	        			<i class="fa fa-pencil fa-2x"></i>
+	        		</a>
+					<a href="#" class="icon remove">
+	        			<i class="fa fa-minus fa-2x"></i>
+	        		</a>
+					<a href="#" class="icon undo hidden">
+	        			<i class="fa fa-undo fa-2x"></i>
 	        		</a>
 	        		<a href="#" class="icon wrong">
 	        			<i class="fa fa-minus-circle fa-2x"></i>
@@ -137,6 +188,42 @@
 	                </div>
 	                <textarea id="editor-f-0" class="paper-textarea-big">Was heißt 分（成）auf Deutsch?</textarea>
 	                <textarea id="editor-a-0" class="paper-textarea-big">einteilen (in)</textarea>
+ 	            </div>
+            </div>
+        </div>
+        <div class="paper paper-big center paper-animate hidden" data-id="1">
+        	<div class="paper-holder">
+	        	<div class="paper-buttons hidden">
+					<a href="#" class="icon add">
+	        			<i class="fa fa-plus fa-2x"></i>
+	        		</a>
+					<a href="#" class="icon edit">
+	        			<i class="fa fa-pencil fa-2x"></i>
+	        		</a>
+					<a href="#" class="icon remove">
+	        			<i class="fa fa-minus fa-2x"></i>
+	        		</a>
+					<a href="#" class="icon undo hidden">
+	        			<i class="fa fa-undo fa-2x"></i>
+	        		</a>
+	        		<a href="#" class="icon wrong">
+	        			<i class="fa fa-minus-circle fa-2x"></i>
+	        		</a>
+	        		<a href="#" class="icon right">
+	        			<i class="fa fa-check fa-2x"></i>
+	        		</a>
+	        	</div>	            
+	        	<div class="paper2">
+	                <div class="redBorder">
+	                	<figure class="front">
+		                    Was heißt 分（成）auf Deutsch?
+	                    </figure>
+	                    <figure class="back hidden">
+	                    	einteilen (in)
+	                    </figure>
+	                </div>
+	                <textarea id="editor-f-1" class="paper-textarea-big">Was heißt 分（成）auf Deutsch?</textarea>
+	                <textarea id="editor-a-1" class="paper-textarea-big">einteilen (in)</textarea>
  	            </div>
             </div>
         </div>
@@ -206,19 +293,6 @@
 	            </div>
             </div>
         </div>
-        <div class="paper paper-big center paper-animate hidden stats">
-        	<div class="paper-holder">
-	            <div class="paper2">
-	                <div class="redBorder">
-	                	<div class="bigText centerText" style="margin-top: 10px;">5/8 Richtig</div><br/>
-						<div class="centerText">
-							<input class="cs_knob" value="25">
-						</div>
-	                </div>
-	            </div>
-            </div>
-        </div>
-
 
 		<!-- Stats -->
         <div class="paper paper-big center paper-animate hidden stats">
@@ -230,7 +304,7 @@
 							<input class="cs_knob" value="25">
 						</div>
 	                </div>
-	            </div>
+	            </div>d
             </div>
         </div>
     </div>

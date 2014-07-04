@@ -33,7 +33,7 @@
     <script type="text/javascript">
     
     	$(document).ready(function() {    		
-    		var highestId = 5; // TODO: get ID from database!
+    		var highestId = 0;
     		initEditors();
     		
 			$(document).on("click", ".edit", function(e){
@@ -60,8 +60,15 @@
 					$(element).children(".redBorder").show();
 					
 					$(element).children(".redBorder").html(value);
-					//TODO: send Ajax Request with new title (get id of database entry via data-id attribute)
-					//TODO: if no id set -> add instead of edit 
+
+					if($(this).parents().eq(1).attr("data-id") != undefined){
+						$.post( "/jsp/editFlashcardSet.jsp", { setId: $(this).parents().eq(1).attr("data-id"), title: value } );
+					} else {
+						$.post( "/jsp/addFlashcardSet.jsp", { title: value } , function( data ) {
+							
+							$(this).parents().eq(1).attr("data-id", data.replace("\n", ""));
+						});
+					}
 					
 					$(this).html('<i class="fa fa-pencil fa-fw"></i>');
 					$(this).removeClass("save");
@@ -74,8 +81,13 @@
 				var element = $(this).parents().eq(1);
 							
 				if(confirm('Sollen die Karteikarten wirklich gelöscht werden?')){
-					//TODO: send Ajax Request to remove cards
-					$(element).remove();
+					if($(element).find("add") != undefined){
+						$.post( "/jsp/deleteFlashcardSet.jsp", { setId: $(element).attr("data-id") } , function( data ) {
+							$(element).remove();
+						});
+					} else {
+						$(element).remove();
+					}
 				}
 			});	
 			
@@ -84,17 +96,26 @@
 				e.preventDefault();
 				var element = $(this).parents().eq(2).children(".paper2"),
 					container = $(element).parent();
-				console.log($(container));
+				console.log(container);
 				$(container).after($(container).clone());
 				
-				highestId++;
+				highestId+=5;
 				$(element).append('<textarea id="editor-' + highestId + '" class="paper-textarea"></textarea>');
-				initEditors();
 
 				$(element).children(".redBorder").hide();
 				$(element).children(".mce-container").show();
 								
 				$(container).find(".icon").removeClass("hidden");
+				initEditors();
+			});
+			
+			/* Init FlashCards */
+			$.getJSON("/jsp/getSetsFromUser.jsp", function(data){
+				$.each(data, function (index, value) {
+					$("#wrapper").prepend('<div class="paper paper-small paper-dashboard" data-id="' + value.setId + '"><div class="paper-buttons"><a href="#" class="icon remove"><i class="fa fa-minus fa-fw"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-fw"></i></a></div><div class="paper2"><div class="redBorder"><a href="learningscreen.html">' + value.title + '</a></div> <textarea id="editor-' + value.setId + '" class="paper-textarea">' + value.title + '</textarea></div></div>');
+				});
+				initEditors();
+				highestId = $(".paper-dashboard").eq(-2).attr("data-id");
 			});
 	
 		});
@@ -116,79 +137,7 @@
 	</header>
 
     <div id="wrapper">
-        <div class="paper paper-small paper-dashboard">
-        	<div class="paper-buttons">
-        		<a href="#" class="icon remove">
-        			<i class="fa fa-minus fa-fw"></i>
-        		</a>
-        		<a href="#" class="icon edit">
-        			<i class="fa fa-pencil fa-fw"></i>
-        		</a>
-        	</div>
-            <div class="paper2">
-                <div class="redBorder">
-					<a href="learningscreen.html">
-						Biologie     
-					</a>  
-				</div> 
-				<textarea id="editor-0" class="paper-textarea">Biologie</textarea>         
-			</div>
-        </div>
-        <div class="paper paper-small paper-dashboard">
-        	<div class="paper-buttons">
-        		<a href="#" class="icon remove">
-        			<i class="fa fa-minus fa-fw"></i>
-        		</a>
-        		<a href="#" class="icon edit">
-        			<i class="fa fa-pencil fa-fw"></i>
-        		</a>
-        	</div>
-            <div class="paper2">
-                <div class="redBorder">
-					<a href="learningscreen.html">
-						Chinesisch     
-					</a>
-				</div>     
-				<textarea id="editor-1" class="paper-textarea">Chinesisch</textarea>         
-			</div>
-        </div>
-        <div class="paper paper-small paper-dashboard">
-        	<div class="paper-buttons">
-        		<a href="#" class="icon remove">
-        			<i class="fa fa-minus fa-fw"></i>
-        		</a>
-        		<a href="#" class="icon edit">
-        			<i class="fa fa-pencil fa-fw"></i>
-        		</a>
-        	</div>
-            <div class="paper2">
-                <div class="redBorder">
-					<a href="learningscreen.html">
-						Deutschland     
-					</a>      
-				</div>     
-				<textarea id="editor-2" class="paper-textarea">Deutschland</textarea>         
-			</div>
-        </div>
-        <div class="paper paper-small paper-dashboard">
-        	<div class="paper-buttons">
-        		<a href="#" class="icon remove">
-        			<i class="fa fa-minus fa-fw"></i>
-        		</a>
-        		<a href="#" class="icon edit">
-        			<i class="fa fa-pencil fa-fw"></i>
-        		</a>
-        	</div>
-            <div class="paper2">
-                <div class="redBorder">
-					<a href="learningscreen.html">
-						English     
-					</a>      
-				</div>     
-				<textarea id="editor-3" class="paper-textarea">English</textarea>         
-			</div>
-        </div>
-        
+		
         <!-- Add -->
         <div class="paper paper-small paper-dashboard">
         	<div class="paper-buttons">

@@ -158,6 +158,7 @@ $(document).ready(function() {
 		$(".activeSlide .paper2").toggleClass("flipped");
 	});
 	
+	
 	// reset view
 	function reset(){
 		if($(".activeSlide .paper2").hasClass("flipped")){

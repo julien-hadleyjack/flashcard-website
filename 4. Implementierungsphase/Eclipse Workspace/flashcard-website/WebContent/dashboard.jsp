@@ -96,11 +96,11 @@
 				e.preventDefault();
 				var element = $(this).parents().eq(2).children(".paper2"),
 					container = $(element).parent();
-				console.log($(container));
+				console.log(container);
 				$(container).after($(container).clone());
 				
-				highestId++;
-				$(element).append('<textarea id="editor-' + highestId + '" class="paper-textarea"></textarea>');
+				//highestId++;
+				$(element).append('<textarea id="editor-500" class="paper-textarea"></textarea>');
 				initEditors();
 
 				$(element).children(".redBorder").hide();

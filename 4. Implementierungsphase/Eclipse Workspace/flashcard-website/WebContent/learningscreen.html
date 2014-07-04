@@ -84,11 +84,17 @@
 			
 			$(document).on("click", ".remove", function(e) {
 				e.preventDefault();
-				var element = $(this).parents().eq(1);
-								
+				var element = $(this).parents().eq(2);
+				console.log(element);
+				
 				if(confirm('Sollen die Karteikarten wirklich gelöscht werden?')){
 					//TODO: send Ajax Request to remove cards
+					$("#right-button").click();
 					$(element).remove();
+					
+					// first or last slide deletion 
+					$("#wrapper").find(".paper-big").eq(0).addClass("activeSlide").addClass("firstSlide").show();
+    				$(".paper-big").last().addClass("lastSlide");
 				}
 			});	
 		
@@ -118,6 +124,9 @@
 	        	<div class="paper-buttons hidden">
 					<a href="#" class="icon edit">
 	        			<i class="fa fa-pencil fa-2x"></i>
+	        		</a>
+					<a href="#" class="icon remove">
+	        			<i class="fa fa-minus fa-2x"></i>
 	        		</a>
 	        		<a href="#" class="icon wrong">
 	        			<i class="fa fa-minus-circle fa-2x"></i>
@@ -230,7 +239,7 @@
 							<input class="cs_knob" value="25">
 						</div>
 	                </div>
-	            </div>
+	            </div>d
             </div>
         </div>
     </div>

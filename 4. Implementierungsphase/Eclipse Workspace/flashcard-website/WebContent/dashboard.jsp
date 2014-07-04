@@ -81,7 +81,7 @@
 				var element = $(this).parents().eq(1);
 							
 				if(confirm('Sollen die Karteikarten wirklich gel&ouml;scht werden?')){
-					$.post( "/jsp/editFlashcardSet.jsp", { setId: $(element).attr("data-id") } , function( data ) {
+					$.post( "/jsp/deleteFlashcardSet.jsp", { setId: $(element).attr("data-id") } , function( data ) {
 						$(element).remove();
 					});
 				}

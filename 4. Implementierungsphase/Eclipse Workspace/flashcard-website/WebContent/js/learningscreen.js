@@ -49,7 +49,7 @@ $(document).ready(function() {
 			wrongAnswer();
 		// e key
 	  	} else if (event.keyCode == 69) {
-			$(".activeSlide").find(".edit").click();
+			$(".activeSlide .edit").click();
 			$(".activeSlide").find(".paper-buttons").show();
 	  	}
 

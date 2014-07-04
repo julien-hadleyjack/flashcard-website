@@ -99,14 +99,14 @@
 				console.log(container);
 				$(container).after($(container).clone());
 				
-				highestId++;
+				highestId+=5;
 				$(element).append('<textarea id="editor-' + highestId + '" class="paper-textarea"></textarea>');
-				initEditors();
 
 				$(element).children(".redBorder").hide();
 				$(element).children(".mce-container").show();
 								
 				$(container).find(".icon").removeClass("hidden");
+				initEditors();
 			});
 			
 			/* Init FlashCards */

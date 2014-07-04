@@ -1,23 +1,31 @@
-\section{Termine}
+\section{Projektplanung}
+\subsection{Gantt-Chart}
 \begin{ganttchart}[link/.style={-latex, draw=blue}]{1}{20}
 \gantttitle{Arbeitstage}{20} \\
 \gantttitlelist{1,...,20}{1} \\
-\ganttgroup{Definitionsphase}{1}{4} \\
-\ganttbar{Pflichtenheft}{1}{4} \\
+\ganttgroup[name=def_phase]{Definitionsphase}{1}{4} \\
+\ganttbar[name=pflicht]{Pflichtenheft}{1}{4} \\
 %\ganttbar{Task 2}{3}{7} \\
-\ganttmilestone{Finales Pflichtenheft}{4} \\
+\ganttmilestone[name=final_pflicht]{Finales Pflichtenheft}{4} \\
 
-\ganttgroup{Entwurfsphase}{5}{10} \\
-\ganttbar{Entwurf Systemmodell}{5}{6} \\
-\ganttbar{Entwurf Benutzeroberfläche}{5}{6} \\
+\ganttgroup[name=ent_phase]{Entwurfsphase}{5}{7} \\
+\ganttbar[name=ent_sys]{Entwurf Systemmodell}{5}{7} \\
+\ganttbar[name=ent_ben]{Entwurf Benutzeroberfläche}{5}{7} \\
+\ganttmilestone[name=final_ent]{Finaler Entwurf}{7} \\
 
-\ganttgroup{Implementierungsphase}{8}{10} \\
+\ganttgroup[name=impl_phase]{Implementierungsphase}{7}{10} \\
+\ganttbar[name=static]{Statische Webseite}{7}{10} \\
+\ganttmilestone[name=run]{Erste lauffähige Webseite}{10} \\
 
-\ganttgroup{Testphase}{11}{15} \\
+\ganttgroup[name=test_phase]{Testphase}{11}{15} \\
 
 
-\ganttlink{elem1}{elem2}
-\ganttlink{elem2}{elem3}
-\ganttlink[link type=s-s]{elem3}{elem4}
-\ganttlink[link type=s-s]{elem4}{elem5}
+\ganttlink{pflicht}{final_pflicht}
+\ganttlink{final_pflicht}{ent_phase}
+\ganttlink[link type=s-s]{ent_phase}{ent_sys}
+\ganttlink[link type=s-s]{ent_sys}{ent_ben}
+\ganttlink{ent_sys}{final_ent}
+\ganttlink{ent_ben}{final_ent}
 \end{ganttchart}
+
+\subsection{Meilensteine}

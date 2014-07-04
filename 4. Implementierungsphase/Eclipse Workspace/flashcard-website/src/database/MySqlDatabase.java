@@ -242,7 +242,7 @@ private static DataSource dataSource = null;
 			prepStatement = connection.prepareStatement("select * from FlashcardSets where ownerId= (?)");
 			prepStatement.setInt(1,user.getId());
 			ResultSet rs = prepStatement.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				FlashcardSetBean set = new FlashcardSetBean();
 				set.setTitle(rs.getString("title"));
 				set.setSetId(rs.getInt("flashcardSetId"));
@@ -251,6 +251,7 @@ private static DataSource dataSource = null;
 				sets.add(set);
 			}
 			return sets;
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

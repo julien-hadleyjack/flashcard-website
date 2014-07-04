@@ -33,7 +33,7 @@
     <script type="text/javascript">
     
     	$(document).ready(function() {    		
-    		var highestId = 5; // TODO: get ID from database!
+    		var highestId = 0;
     		initEditors();
     		
 			$(document).on("click", ".edit", function(e){
@@ -111,6 +111,7 @@
 					$("#paper-wrapper").prepend('<div class="paper paper-small paper-dashboard" data-id="' + value.setId + '"><div class="paper-buttons"><a href="#" class="icon remove"><i class="fa fa-minus fa-fw"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-fw"></i></a></div><div class="paper2"><div class="redBorder"><a href="learningscreen.html">' + value.title + '</a></div> <textarea id="editor-' + value.setId + '" class="paper-textarea">' + value.title + '</textarea></div></div>');
 				});
 				initEditors();
+				highestId = $(".paper-dashboard").eq(-2).attr("data-id");
 			});
 	
 		});
@@ -133,24 +134,7 @@
 
     <div id="wrapper">
 		<div id="paper-wrapper">
-			<div class="paper paper-small paper-dashboard">
-				<div class="paper-buttons">
-					<a href="#" class="icon remove">
-						<i class="fa fa-minus fa-fw"></i>
-					</a>
-					<a href="#" class="icon edit">
-						<i class="fa fa-pencil fa-fw"></i>
-					</a>
-				</div>
-				<div class="paper2">
-					<div class="redBorder">
-						<a href="learningscreen.html">
-							Biologie     
-						</a>  
-					</div> 
-					<textarea id="editor-0" class="paper-textarea">Biologie</textarea>         
-				</div>
-			</div>
+
 		</div>
 		
         <!-- Add -->

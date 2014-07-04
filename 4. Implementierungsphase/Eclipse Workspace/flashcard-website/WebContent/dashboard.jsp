@@ -64,7 +64,7 @@
 					if($(this).parents().eq(1).attr("data-id") != undefined){
 						$.post( "/jsp/editFlashcardSet.jsp", { setId: $(this).parents().eq(1).attr("data-id"), title: value } );
 					} else {
-						$.post( "/jsp/editFlashcardSet.jsp", { title: value } , function( data ) {
+						$.post( "/jsp/addFlashcardSet.jsp", { title: value } , function( data ) {
 							
 							$(this).parents().eq(1).attr("data-id", data.replace("\n", ""));
 						});
@@ -99,8 +99,8 @@
 				console.log(container);
 				$(container).after($(container).clone());
 				
-				//highestId++;
-				$(element).append('<textarea id="editor-500" class="paper-textarea"></textarea>');
+				highestId++;
+				$(element).append('<textarea id="editor-' + highestId + '" class="paper-textarea"></textarea>');
 				initEditors();
 
 				$(element).children(".redBorder").hide();

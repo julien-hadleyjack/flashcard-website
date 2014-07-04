@@ -5,9 +5,7 @@
 
 $(document).ready(function() {
     		
-    // init classes
-    $("#wrapper").find(".paper-big").eq(0).addClass("activeSlide").addClass("firstSlide").show();
-    $(".paper-big").last().addClass("lastSlide");
+	init();
     
     // prev/next
     $(document).on("click", "#left-button", function(e){
@@ -56,6 +54,64 @@ $(document).ready(function() {
 	  	}
 
 	});
+
+	$(document).on("click", ".answerButton", function(e){
+		e.preventDefault(); 
+		if(!$(".activeSlide .paper2").hasClass("flipped")){
+			$(".activeSlide .paper-buttons").delay(500).fadeIn();
+			$(".activeSlide .back").delay(500).fadeIn();
+			$(".activeSlide .front").fadeOut();
+			$(this).html("Frage anzeigen");
+		} else {
+			$(".activeSlide .paper-buttons").fadeOut(100);
+			$(".activeSlide .front").delay(500).fadeIn();
+			$(".activeSlide .back").fadeOut();
+			$(this).html("Antwort anzeigen");
+		}
+		
+		$(".activeSlide .paper2").toggleClass("flipped");
+	});
+		
+	// Statistics Plugin
+	$(".cs_knob").knob({
+		min : 0, 
+		max : 100, 
+		step : 1, 
+		angleOffset : 0, 
+		angleArc : 360, 
+		stopper : true, 
+		readOnly : true, 
+		cursor : false,  
+		lineCap : 'butt', 
+		thickness : '0.3', 
+		width : 200, 
+		displayInput : true, 
+		displayPrevious : true, 
+		fgColor : '#7AF576', 
+		inputColor : '#000000', 
+		font : 'Arial', 
+		fontWeight : 'normal', 
+		bgColor : '#F75457'
+	});
+});
+
+	function init(){
+	    // init classes
+	    $("#wrapper").find(".paper-big").eq(0).addClass("activeSlide").addClass("firstSlide").show();
+	    $(".paper-big").last().addClass("lastSlide");
+	}
+	
+	// reset view
+	function reset(){
+		if($(".activeSlide .paper2").hasClass("flipped")){
+			$(".activeSlide .paper2").toggleClass("flipped");
+		} 
+		$(".answerButton").html("Antwort anzeigen");
+		$(".activeSlide .paper-buttons").hide();
+		
+		// Close Editor
+		cancelEdit();
+	}
 
 	function wrongAnswer() {
 		var wrongElem = $(".activeSlide").find(".wrong");
@@ -145,32 +201,7 @@ $(document).ready(function() {
 			//$(".answerButton").html("Frage anzeigen");
 		}
 	}
-	$(document).on("click", ".answerButton", function(e){
-		e.preventDefault(); 
-		if(!$(".activeSlide .paper2").hasClass("flipped")){
-			$(".activeSlide .paper-buttons").delay(500).fadeIn();
-			$(this).html("Frage anzeigen");
-		} else {
-			$(".activeSlide .paper-buttons").fadeOut(100);
-			$(this).html("Antwort anzeigen");
-		}
-		
-		$(".activeSlide .paper2").toggleClass("flipped");
-	});
-	
-	
-	// reset view
-	function reset(){
-		if($(".activeSlide .paper2").hasClass("flipped")){
-			$(".activeSlide .paper2").toggleClass("flipped");
-		} 
-		$(".answerButton").html("Antwort anzeigen");
-		$(".activeSlide .paper-buttons").hide();
-		
-		// Close Editor
-		cancelEdit();
-	}
-	
+
 	function cancelEdit() {
 		var element = $(".activeSlide").find(".paper2"),
 			button = $(element).find(".save");
@@ -181,27 +212,6 @@ $(document).ready(function() {
 		$(button).html('<i class="fa fa-pencil fa-2x"></i>');
 		$(button).removeClass("save");
 		$(button).addClass("edit");
+		$(element).find(".undo").addClass("hidden");
 	}
-	
-	// Statistics Plugin
-	$(".cs_knob").knob({
-		min : 0, 
-		max : 100, 
-		step : 1, 
-		angleOffset : 0, 
-		angleArc : 360, 
-		stopper : true, 
-		readOnly : true, 
-		cursor : false,  
-		lineCap : 'butt', 
-		thickness : '0.3', 
-		width : 200, 
-		displayInput : true, 
-		displayPrevious : true, 
-		fgColor : '#7AF576', 
-		inputColor : '#000000', 
-		font : 'Arial', 
-		fontWeight : 'normal', 
-		bgColor : '#F75457'
-	});
-});
+

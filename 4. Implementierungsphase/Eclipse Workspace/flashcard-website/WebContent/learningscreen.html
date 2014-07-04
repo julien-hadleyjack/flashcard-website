@@ -51,6 +51,7 @@
 	
 				$(element).children(".redBorder").hide();
 				$(element).children(".mce-container").show();
+				$(this).parents().eq(1).find(".undo").removeClass("hidden");
 													
 				$(this).html('<i class="fa fa-save fa-2x"></i>');
 				$(this).removeClass("edit");
@@ -79,8 +80,20 @@
 					$(this).html('<i class="fa fa-pencil fa-2x"></i>');
 					$(this).removeClass("save");
 					$(this).addClass("edit");
+					$(this).parents().eq(1).find(".undo").addClass("hidden");
 				}
-			});		
+			});	
+			
+			$(document).on("click", ".undo", function(e){
+				e.preventDefault();
+				cancelEdit();
+				$(this).addClass("hidden");
+				var saveButton = $(this).parents().eq(1).find(".save");
+				$(saveButton).html('<i class="fa fa-pencil fa-2x"></i>');
+				$(saveButton).removeClass("save");
+				$(saveButton).addClass("edit");
+			});
+	
 			
 			$(document).on("click", ".remove", function(e) {
 				e.preventDefault();
@@ -93,8 +106,7 @@
 					$(element).remove();
 					
 					// first or last slide deletion 
-					$("#wrapper").find(".paper-big").eq(0).addClass("activeSlide").addClass("firstSlide").show();
-    				$(".paper-big").last().addClass("lastSlide");
+					init();
 				}
 			});	
 		
@@ -127,6 +139,9 @@
 	        		</a>
 					<a href="#" class="icon remove">
 	        			<i class="fa fa-minus fa-2x"></i>
+	        		</a>
+					<a href="#" class="icon undo hidden">
+	        			<i class="fa fa-undo fa-2x"></i>
 	        		</a>
 	        		<a href="#" class="icon wrong">
 	        			<i class="fa fa-minus-circle fa-2x"></i>

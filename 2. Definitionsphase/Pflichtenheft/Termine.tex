@@ -1,8 +1,12 @@
 \section{Projektplanung}
 \subsection{Gantt-Chart}
-\begin{ganttchart}[link/.style={-latex, draw=blue}]{1}{20}
-\gantttitle{Arbeitstage}{20} \\
-\gantttitlelist{1,...,20}{1} \\
+% disable the label text
+\setganttlinklabel{s-s}{\ }
+\begin{ganttchart}[link/.style={-latex}, y unit chart=0.8cm]{1}{25}
+
+\gantttitle{Arbeitstage}{25} \\
+\gantttitlelist{1,...,25}{1} \\
+
 \ganttgroup[name=def_phase]{Definitionsphase}{1}{4} \\
 \ganttbar[name=pflicht]{Pflichtenheft}{1}{4} \\
 %\ganttbar{Task 2}{3}{7} \\
@@ -13,19 +17,60 @@
 \ganttbar[name=ent_ben]{Entwurf Benutzeroberfläche}{5}{7} \\
 \ganttmilestone[name=final_ent]{Finaler Entwurf}{7} \\
 
-\ganttgroup[name=impl_phase]{Implementierungsphase}{7}{10} \\
-\ganttbar[name=static]{Statische Webseite}{7}{10} \\
-\ganttmilestone[name=run]{Erste lauffähige Webseite}{10} \\
+\ganttgroup[name=impl_phase]{Implementierungsphase}{8}{17} \\
+\ganttbar[name=static]{Statische Webseite}{8}{11} \\
+\ganttmilestone[name=site]{Erste lauffähige Webseite}{11} \\
+\ganttbar[name=db]{Datenbankadapter}{12}{13} \\
+\ganttbar[name=login]{Login}{14}{15} \\
+\ganttmilestone[name=present]{Präsentation Webengineering}{15} \\
+\ganttbar[name=overview]{Übersichtsseite}{16}{17} \\
+\ganttbar[name=learnedit]{Lern-/Edit-Seite}{16}{17} \\
+\ganttmilestone[name=run]{Finale Webseite}{17} \\
 
-\ganttgroup[name=test_phase]{Testphase}{11}{15} \\
+\ganttgroup[name=test_phase]{Test-/Abnahmephase}{18}{23} \\
+\ganttbar[name=test]{Testfälle überprüfen}{18}{21} \\
+\ganttbar[name=analysis]{SOLL-/IST-Analyse}{22}{23} \\
 
 
 \ganttlink{pflicht}{final_pflicht}
-\ganttlink{final_pflicht}{ent_phase}
-\ganttlink[link type=s-s]{ent_phase}{ent_sys}
+
+\ganttlink[link mid=0.25]{final_pflicht}{ent_sys}
 \ganttlink[link type=s-s]{ent_sys}{ent_ben}
-\ganttlink{ent_sys}{final_ent}
+\ganttlink[link mid=0.75]{ent_sys}{final_ent}
 \ganttlink{ent_ben}{final_ent}
+
+\ganttlink[link mid=0.25]{final_ent}{static}
+\ganttlink{static}{site}
+\ganttlink{site}{db}
+\ganttlink{db}{login}
+\ganttlink{login}{overview}
+\ganttlink[link type=s-s]{overview}{learnedit}
+\ganttlink[link mid=0.75]{overview}{run}
+\ganttlink{learnedit}{run}
+
+\ganttlink[link mid=0.25]{run}{test}
+\ganttlink{test}{analysis}
+
 \end{ganttchart}
 
+\newpage
 \subsection{Meilensteine}
+\begin{description}
+	\item[Projektstart] 123.4.324
+	\item[1. Meilenstein:] 123.34.345\\
+	Finales Pflichtenheft
+	\item[2. Meilenstein:] 1321.1651.\\
+	Finaler Entwurf
+	\item[3. Meilenstein:] 1321.1651.\\
+	Erste lauffähige Webseite
+	\item[4. Meilenstein:] 1321.1651.\\
+	Präsentation Webengineering
+	\item[5. Meilenstein:] 1321.1651.\\
+	Finale Webseite
+	\item[6. Meilenstein:] 1321.1651.\\
+	Finaler Entwurf
+	\item[Projektende] 123.4.324
+\end{description}
+
+\subsection{Fazit}
+Bei einer durchschnittlichen Arbeitszeit von 1 Stunde pro Tag für jeden Entwickler (auch an Wochenenden und Feiertagen) läuft die geschätzte Gesamtdauer des Projektes auf 21 Tage.

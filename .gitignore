@@ -155,3 +155,4 @@ pom.properties
 *.~vsdx
 Servers/
 target/
+*.out.ps

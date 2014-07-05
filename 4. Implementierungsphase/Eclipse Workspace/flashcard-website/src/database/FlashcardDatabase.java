@@ -36,7 +36,7 @@ public interface FlashcardDatabase {
 	 *  
 	 * @param user the user that should be deleted
 	 */
-	public void deleteUser(UserBean user);
+	public boolean deleteUser(UserBean user);
 	
 	/**
 	 * Adds an empty flash card set with the specified title to the user.

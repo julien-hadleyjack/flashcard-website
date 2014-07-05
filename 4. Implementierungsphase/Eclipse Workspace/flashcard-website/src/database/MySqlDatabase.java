@@ -141,7 +141,7 @@ private static DataSource dataSource = null;
 	
 
 	@Override
-	public void deleteUser(UserBean user) {
+	public boolean deleteUser(UserBean user) {
 		PreparedStatement prepStatement;
 		Connection connection = null;
 		
@@ -154,12 +154,12 @@ private static DataSource dataSource = null;
 		prepStatement.setString(1, user.getUsername());
 		updateQuery = prepStatement.executeUpdate();
 		if (updateQuery != 0) {
-			return;
+			return true;
 		}
 		else {
 			System.out.println("Lšschen nicht erfolgreich");
-			return;
-		}
+			return false;
+		} 
 	}
 		catch(SQLException ex) {
 			ex.printStackTrace();
@@ -167,6 +167,7 @@ private static DataSource dataSource = null;
 		finally {
 			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
 		}
+		return false;
 	}
 
 	@Override

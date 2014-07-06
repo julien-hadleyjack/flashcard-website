@@ -85,9 +85,9 @@ public interface FlashcardDatabase {
 	 * @param flashcardset the flash card set to which the flash card will either be added to or modified in
 	 * @param flashcard the new or modified flash card
 	 */
-	public void addFlashcard(FlashcardSetBean flashcardset, FlashcardBean flashcard);
+	public void addFlashcard(FlashcardSetBean flashcardset, String question, String answer);
 	
-	public void modifyFlashcard(FlashcardBean flashcard);
+	public void modifyFlashcard(String question, String answer, int flashcardId);
 	
 	/**
 	 * Returns a flash card. Because the flashcardId is unique the flash card can only be owned by one flash card set.
@@ -101,7 +101,7 @@ public interface FlashcardDatabase {
 	 * Deletes the flash card. If no flash card with the flashcardId exists in the database then nothing will be done.
 	 * @param flashcard the flash card that should be deleted
 	 */
-	public void deleteFlashcard(FlashcardBean flashcard);
+	public void deleteFlashcard(int flashcardId);
 	
 	public Collection<FlashcardBean> getFlashcardForSetWithId(int setId);
 	

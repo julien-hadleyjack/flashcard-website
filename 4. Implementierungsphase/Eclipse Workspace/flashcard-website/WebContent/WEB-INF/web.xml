@@ -18,9 +18,4 @@
     <filter-name>AuthenticationFilter</filter-name>
     <url-pattern>*.html</url-pattern>
 </filter-mapping>
-<filter-mapping>
-    <filter-name>AuthenticationFilter</filter-name>
-    <url-pattern>/dashboard.jsp</url-pattern>
-</filter-mapping>
-
 </web-app>

@@ -10,6 +10,7 @@
     <script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.10.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.knob.js"></script>
+    <script type="text/javascript" src="js/getParameters.js"></script>
     <script type="text/javascript" src="js/learningscreen.js"></script>
     
     <script type="text/javascript">
@@ -34,7 +35,7 @@
 			    image_advtab: true,
 			    setup: function(ed) {
 	        		ed.on('init', function(e) {
-	            		e.target.hide();
+	            		//e.target.hide();
 	        		});
 	    		},
 	    		height: 145,
@@ -43,7 +44,7 @@
 	       		content_css : "layout/css/tinymce.css"
 			});
 		}
-		
+
 		$(document).ready(function() {
 			$(document).on("click", ".edit", function(e){
 				e.preventDefault();
@@ -78,7 +79,7 @@
 				e.preventDefault();
 				var element = $(this).parents().eq(1).children(".paper2"),
 					id = $(this).parents().eq(2).attr("data-id");
-				
+
 				var question = $(element).find("#editor-f-" + id + "_ifr").contents().find("body").html(),
 					answer = $(element).find("#editor-a-" + id + "_ifr").contents().find("body").html();
 
@@ -124,8 +125,15 @@
 				e.preventDefault();
 				var element = $(this).parents().eq(2);
 				
-				if(confirm('Sollen die Karteikarten wirklich gelöscht werden?')){
-					//TODO: send Ajax Request to remove cards
+				if(confirm('Soll die Karteikarte wirklich gelöscht werden?')){
+					if($(element).find("add") != undefined){
+						$.post( "/jsp/removeFlashcardWithId.jsp", { flashcardId: $(element).attr("data-id") } , function( data ) {
+							$(element).remove();
+						});
+					} else {
+						$(element).remove();
+					}
+					
 					$("#right-button").click();
 					$(element).remove();
 					
@@ -134,7 +142,15 @@
 				}
 			});	
 		
-			initEditors();
+			/* Init FlashCard Sets */
+			$.getJSON("/jsp/getFlashcardsForSetWithId.jsp", {setId: $.getUrlVar("setId")}, function(data){
+				console.log(data);
+				$.each(data, function (index, value) {
+					$("#wrapper").prepend('<div class="paper paper-big center paper-animate hidden" data-id="' + value.flashcardId + '"><div class="paper-holder"><div class="paper-buttons hidden"><a href="#" class="icon add"><i class="fa fa-plus fa-2x"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-2x"></i></a><a href="#" class="icon remove"><i class="fa fa-minus fa-2x"></i></a><a href="#" class="icon undo hidden"><i class="fa fa-undo fa-2x"></i></a><a href="#" class="icon wrong"><i class="fa fa-minus-circle fa-2x"></i></a><a href="#" class="icon right"><i class="fa fa-check fa-2x"></i></a></div><div class="paper2"><div class="redBorder"><figure class="front">' + value.question + '</figure><figure class="back hidden">' + value.answer + '</figure></div><textarea id="editor-f-' + value.flashcardId + '" class="paper-textarea-big">' + value.question + '</textarea><textarea id="editor-a-' + value.flashcardId + '" class="paper-textarea-big">' + value.answer + '</textarea></div></div></div>');
+				});
+				initEditors();
+				highestId = $(".paper-big").eq(-2).attr("data-id");
+			});
 		});
     </script>
 </head>
@@ -144,8 +160,8 @@
 		<div class="menubar">
 			<div class="menubar-container">
 				<ul class="menubar-nav">
-					<li class="active"><a href="dashboard.jsp">Home</a></li>
-					<li><a href="preferences.html">Einstellungen</a></li>
+					<li class="active"><a href="javaScript:void(0);">Home</a></li>
+					<li><a href="javaScript:void(0);">Einstellungen</a></li>
 					<li><a href="jsp/logout.jsp">Ausloggen</a></li>
 				</ul>
 			</div>
@@ -155,7 +171,7 @@
     <a href="#" id="left-button" class="circle-button"></a>
     <a href="#" id="right-button" class="circle-button"></a>
     <div id="wrapper">
-        <div class="paper paper-big center paper-animate hidden" data-id="0">
+        <!--<div class="paper paper-big center paper-animate hidden" data-id="0">
         	<div class="paper-holder">
 	        	<div class="paper-buttons hidden">
 					<a href="#" class="icon add">
@@ -222,8 +238,8 @@
 	                    	einteilen (in)
 	                    </figure>
 	                </div>
-	                <textarea id="editor-f-1" class="paper-textarea-big">Was heißt 分（成）auf Deutsch?</textarea>
-	                <textarea id="editor-a-1" class="paper-textarea-big">einteilen (in)</textarea>
+	                <textarea id="editor-f-1" class="paper-textarea-big">Was heißt auf Deutsch?</textarea>
+	               	<textarea id="editor-a-1" class="paper-textarea-big">einteilen (in)</textarea>
  	            </div>
             </div>
         </div>
@@ -292,7 +308,7 @@
 	                </div>
 	            </div>
             </div>
-        </div>
+        </div>-->
 
 		<!-- Stats -->
         <div class="paper paper-big center paper-animate hidden stats">

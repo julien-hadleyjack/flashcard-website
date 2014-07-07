@@ -33,11 +33,11 @@
 			    ],
 			    toolbar1: "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image eqneditor",
 			    image_advtab: true,
-			    setup: function(ed) {
+			    /*setup: function(ed) {
 	        		ed.on('init', function(e) {
 	            		e.target.hide();
 	        		});
-	    		},
+	    		},*/
 	    		height: 145,
 	    		width: 655,
 	       		force_p_newlines : false,
@@ -52,7 +52,9 @@
 					id = $(this).parents().eq(2).attr("data-id");
 	
 				$(element).children(".redBorder").hide();
-				$(element).children(".mce-container").show();
+				tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-f-" + id);
+				tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-a-" + id);
+
 								
 				$(this).parents().eq(1).find(".undo").removeClass("hidden");
 													
@@ -90,6 +92,9 @@
 				if((!question || 0 === question.length) | (!answer || 0 === answer.length)) {
 					alert("Bitte gebe eine Frage und eine Antwort ein!");
 				} else {
+					tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-f-" + id);
+					tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-a-" + id);
+
 					$(element).children(".mce-container").hide();
 					$(element).children(".redBorder").show();
 						
@@ -129,20 +134,24 @@
 				e.preventDefault();
 				var element = $(this).parents().eq(2);
 				
-				if(confirm('Soll die Karteikarte wirklich gelöscht werden?')){
-					if($(element).find("add") != undefined){
-						$.post( "/jsp/removeFlashcardWithId.jsp", { flashcardId: $(element).attr("data-id") } , function( data ) {
+				if($(".paper-big").length < 3){
+					alert("Es ist nur noch eine Karteikarte vorhanden, bitte lösche das Set im Dashboard!");
+				} else {
+					if(confirm('Soll die Karteikarte wirklich gelöscht werden?')){
+						if($(element).find("add") != undefined){
+							$.post( "/jsp/removeFlashcardWithId.jsp", { flashcardId: $(element).attr("data-id") } , function( data ) {
+								$(element).remove();
+							});
+						} else {
 							$(element).remove();
-						});
-					} else {
+						}
+						
+						$("#right-button").click();
 						$(element).remove();
+						
+						// first or last slide deletion 
+						init();
 					}
-					
-					$("#right-button").click();
-					$(element).remove();
-					
-					// first or last slide deletion 
-					init();
 				}
 			});	
 		
@@ -152,8 +161,6 @@
 				initEditors();
 				$.each(data, function (index, value) {
 					$("#wrapper").prepend('<div class="paper paper-big center paper-animate hidden" data-id="' + value.flashcardId + '"><div class="paper-holder"><div class="paper-buttons hidden"><a href="#" class="icon add"><i class="fa fa-plus fa-2x"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-2x"></i></a><a href="#" class="icon remove"><i class="fa fa-minus fa-2x"></i></a><a href="#" class="icon undo hidden"><i class="fa fa-undo fa-2x"></i></a><a href="#" class="icon wrong"><i class="fa fa-minus-circle fa-2x"></i></a><a href="#" class="icon right"><i class="fa fa-check fa-2x"></i></a></div><div class="paper2"><div class="redBorder"><figure class="front">' + value.question + '</figure><figure class="back hidden">' + value.answer + '</figure></div><textarea id="editor-f-' + value.flashcardId + '" class="paper-textarea-big">' + value.question + '</textarea><textarea id="editor-a-' + value.flashcardId + '" class="paper-textarea-big">' + value.answer + '</textarea></div></div></div>');
-					tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-f-" + value.flashcardId);
-					tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-a-" + value.flashcardId);
 				});
 				init();
 				highestId = $(".paper-big").eq(-2).attr("data-id");

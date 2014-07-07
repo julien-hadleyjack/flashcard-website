@@ -101,6 +101,8 @@ $(document).ready(function() {
 	    	$("#wrapper").find(".paper-big").eq(0).addClass("activeSlide").addClass("firstSlide").show();
 	    }
 	    $(".paper-big").last().addClass("lastSlide");
+	    
+	    cardCount = $(".paper-big").length - 1;
 	}
 	
 	// reset view

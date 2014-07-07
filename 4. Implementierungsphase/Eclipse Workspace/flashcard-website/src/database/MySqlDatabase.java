@@ -353,7 +353,7 @@ private static DataSource dataSource = null;
 	}
 
 	@Override
-	public void addFlashcard(FlashcardSetBean flashcardset,
+	public int addFlashcard(FlashcardSetBean flashcardset,
 			String question, String answer) {
 		PreparedStatement prepStatement;
 		Connection connection = null;
@@ -363,18 +363,24 @@ private static DataSource dataSource = null;
 		String queryString = "INSERT INTO Flashcards(flashcardSetId,question,answer) VALUES (?, ?, ?)";
 		int updateQuery = 0;
 
-		prepStatement = connection.prepareStatement(queryString);
+		prepStatement = connection.prepareStatement(queryString,Statement.RETURN_GENERATED_KEYS);
 		prepStatement.setInt(1, flashcardset.getSetId());
 		prepStatement.setString(2, question);
 		prepStatement.setString(3,answer);
 	   
 		updateQuery = prepStatement.executeUpdate();
 		if (updateQuery != 0) {
-			return;
+			 ResultSet keyResultSet = prepStatement.getGeneratedKeys();
+		        int newCustomerId = 0;
+		        if (keyResultSet.next()) {
+		            newCustomerId = (int) keyResultSet.getInt(1);
+		        }
+	         
+			return newCustomerId;
 		}
 		else {
 			System.out.println("HinzufŸgen nicht erfolgreich");
-			return;
+			return -1;
 		}
 	}
 		catch(SQLException ex) {
@@ -383,6 +389,8 @@ private static DataSource dataSource = null;
 		finally {
 			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
 		}
+		
+		return -1;
 
 	}
 	

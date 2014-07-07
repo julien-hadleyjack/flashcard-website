@@ -85,7 +85,7 @@ public interface FlashcardDatabase {
 	 * @param flashcardset the flash card set to which the flash card will either be added to or modified in
 	 * @param flashcard the new or modified flash card
 	 */
-	public void addFlashcard(FlashcardSetBean flashcardset, String question, String answer);
+	public int addFlashcard(FlashcardSetBean flashcardset, String question, String answer);
 	
 	public void modifyFlashcard(String question, String answer, int flashcardId);
 	

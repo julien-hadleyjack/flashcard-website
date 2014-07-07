@@ -9,4 +9,5 @@
 <c:set target="${helper}" property="question" value="${param.question}"/>
 <c:set target="${helper}" property="answer" value="${param.answer}"/>
 
-${database.addFlashcard(database.getFlashcardSet(helper.getSetId(),database.getUser(loginBean)),helper.getQuestion(), helper.getAnswer())}
+${helper.setFlashcardId(database.addFlashcard(database.getFlashcardSet(helper.getSetId(),database.getUser(loginBean)),helper.getQuestion(), helper.getAnswer()))}
+<c:out value="${helper.getFlashcardId()}"></c:out>

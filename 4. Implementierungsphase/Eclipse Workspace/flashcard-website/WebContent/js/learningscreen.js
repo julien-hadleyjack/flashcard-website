@@ -57,6 +57,7 @@ $(document).ready(function() {
 
 	$(document).on("click", ".answerButton", function(e){
 		e.preventDefault(); 
+		cancelEdit();
 		if(!$(".activeSlide .paper2").hasClass("flipped")){
 			$(".activeSlide .paper-buttons").delay(500).fadeIn();
 			$(".activeSlide .back").delay(500).fadeIn();
@@ -215,6 +216,9 @@ $(document).ready(function() {
 		var element = $(".activeSlide").find(".paper2"),
 			button = $(element).find(".save");
 		
+		tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-f-" + $(".activeSlide").attr("data-id"));
+		tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-a-" + $(".activeSlide").attr("data-id"));
+
 		//$(element).children(".mce-container").hide();
 		$(element).children(".redBorder").show();
 		if(button.length > 0){

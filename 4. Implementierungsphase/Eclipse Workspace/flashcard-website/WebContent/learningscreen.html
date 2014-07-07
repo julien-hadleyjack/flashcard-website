@@ -62,7 +62,7 @@
 				e.preventDefault();
 				
 				var container = $(this).parents().eq(2);
-				highestId++;
+				highestId+=5;
 				$(container).after('<div class="paper paper-big center paper-animate hidden" data-id="' + highestId + '"><div class="paper-holder"><div class="paper-buttons hidden"><a href="#" class="icon add"><i class="fa fa-plus fa-2x"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-2x"></i></a><a href="#" class="icon remove"><i class="fa fa-minus fa-2x"></i></a><a href="#" class="icon undo hidden"><i class="fa fa-undo fa-2x"></i></a><a href="#" class="icon wrong"><i class="fa fa-minus-circle fa-2x"></i></a><a href="#" class="icon right"><i class="fa fa-check fa-2x"></i></a></div><div class="paper2"><div class="redBorder"><figure class="front">Frage eingeben</figure><figure class="back hidden">Antwort eingeben</figure></div><textarea id="editor-f-' + highestId + '" class="paper-textarea-big">Frage eingeben</textarea><textarea id="editor-a-' + highestId + '" class="paper-textarea-big">Antwort eingeben</textarea></div></div></div>');
 				
 				//tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-f-" + highestId);
@@ -100,8 +100,6 @@
 						$.post( "/jsp/addFlashcardToSetWithId.jsp", { question: question, answer: answer, setId: $.getUrlVar("setId") } , function( data ) {
 							
 							$(this).parents().eq(1).attr("data-id", data.replace("\n", ""));
-							// add link
-							$(element).children(".redBorder").html('<a href="/learningscreen.html?setId=' + data.replace("\n", "") + '">' + value + '</a>');
 						});
 					}
 											
@@ -134,8 +132,8 @@
 				tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-f-" + id);
 				tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-a-" + id);
 
-				$(element).find("#editor-f-" + id).value($(element).find(".front").html());
-				$(element).find("#editor-a-" + id).value($(element).find(".back").html());
+				$(element).find("#editor-f-" + id).val($(element).find(".front").html());
+				$(element).find("#editor-a-" + id).val($(element).find(".back").html());
 
 				if(!$(".activeSlide .paper2").hasClass("flipped")){
 					$(".activeSlide .paper-buttons").fadeOut(100);

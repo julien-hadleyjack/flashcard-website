@@ -63,7 +63,7 @@
 				
 				var container = $(this).parents().eq(2);
 				highestId+=5;
-				$(container).after('<div class="paper paper-big center paper-animate hidden" data-id="' + highestId + '"><div class="paper-holder"><div class="paper-buttons hidden"><a href="#" class="icon add"><i class="fa fa-plus fa-2x"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-2x"></i></a><a href="#" class="icon remove"><i class="fa fa-minus fa-2x"></i></a><a href="#" class="icon undo hidden"><i class="fa fa-undo fa-2x"></i></a><a href="#" class="icon wrong"><i class="fa fa-minus-circle fa-2x"></i></a><a href="#" class="icon right"><i class="fa fa-check fa-2x"></i></a></div><div class="paper2"><div class="redBorder"><figure class="front">Frage eingeben</figure><figure class="back hidden">Antwort eingeben</figure></div><textarea id="editor-f-' + highestId + '" class="paper-textarea-big">Frage eingeben</textarea><textarea id="editor-a-' + highestId + '" class="paper-textarea-big">Antwort eingeben</textarea></div></div></div>');
+				$(container).after('<div class="paper paper-big center paper-animate hidden add" data-id="' + highestId + '"><div class="paper-holder"><div class="paper-buttons hidden"><a href="#" class="icon add"><i class="fa fa-plus fa-2x"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-2x"></i></a><a href="#" class="icon remove"><i class="fa fa-minus fa-2x"></i></a><a href="#" class="icon undo hidden"><i class="fa fa-undo fa-2x"></i></a><a href="#" class="icon wrong"><i class="fa fa-minus-circle fa-2x"></i></a><a href="#" class="icon right"><i class="fa fa-check fa-2x"></i></a></div><div class="paper2"><div class="redBorder"><figure class="front">Frage eingeben</figure><figure class="back hidden">Antwort eingeben</figure></div><textarea id="editor-f-' + highestId + '" class="paper-textarea-big">Frage eingeben</textarea><textarea id="editor-a-' + highestId + '" class="paper-textarea-big">Antwort eingeben</textarea></div></div></div>');
 				
 				//tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-f-" + highestId);
 				//tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-a-" + highestId);
@@ -94,12 +94,13 @@
 					$(element).find(".back").html(answer);
 
 
-					if($(this).parents().eq(2).attr("data-id") != undefined){
+					if(!$(this).parents().eq(2).hasClass("add")){
 						$.post( "/jsp/editFlashcardWithId.jsp", { flashcardId: $(this).parents().eq(2).attr("data-id"), question: question, answer: answer } );
 					} else {
 						$.post( "/jsp/addFlashcardToSetWithId.jsp", { question: question, answer: answer, setId: $.getUrlVar("setId") } , function( data ) {
 							
 							$(this).parents().eq(1).attr("data-id", data.replace("\n", ""));
+							$(this).parents().eq(1).removeClass("add");
 						});
 					}
 											
@@ -150,7 +151,7 @@
 					alert("Es ist nur noch eine Karteikarte vorhanden, bitte lösche das Set im Dashboard!");
 				} else {
 					if(confirm('Soll die Karteikarte wirklich gelöscht werden?')){
-						if($(element).find("add") != undefined){
+						if(!$(element).hasClass("add")){
 							$.post( "/jsp/removeFlashcardWithId.jsp", { flashcardId: $(element).attr("data-id") } , function( data ) {
 								$(element).remove();
 							});
@@ -159,7 +160,6 @@
 						}
 						
 						$("#right-button").click();
-						$(element).remove();
 						
 						// first or last slide deletion 
 						init();

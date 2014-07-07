@@ -555,12 +555,10 @@ header {
 }
 
 #deleteAccBtn {
-	position: absolute;
     width: 400px;
-    top: 25%;
     left: calc((100% - 400px)/2);
     display: block;
-    margin: 0 auto;
+    margin: 40px auto 0;
     padding: 1.6em 1em;
     max-width: 80%;
     color: #fff;

@@ -62,6 +62,7 @@
 				e.preventDefault();
 				
 				var container = $(this).parents().eq(2);
+				console.log(container);
 				highestId+=5;
 				$(container).after('<div class="paper paper-big center paper-animate hidden add" data-id="' + highestId + '"><div class="paper-holder"><div class="paper-buttons hidden"><a href="#" class="icon add"><i class="fa fa-plus fa-2x"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-2x"></i></a><a href="#" class="icon remove"><i class="fa fa-minus fa-2x"></i></a><a href="#" class="icon undo hidden"><i class="fa fa-undo fa-2x"></i></a><a href="#" class="icon wrong"><i class="fa fa-minus-circle fa-2x"></i></a><a href="#" class="icon right"><i class="fa fa-check fa-2x"></i></a></div><div class="paper2"><div class="redBorder"><figure class="front">Frage eingeben</figure><figure class="back hidden">Antwort eingeben</figure></div><textarea id="editor-f-' + highestId + '" class="paper-textarea-big">Frage eingeben</textarea><textarea id="editor-a-' + highestId + '" class="paper-textarea-big">Antwort eingeben</textarea></div></div></div>');
 				
@@ -111,6 +112,8 @@
 					$(this).removeClass("save");
 					$(this).addClass("edit");
 					$(this).parents().eq(1).find(".undo").addClass("hidden");
+					
+					init();
 					
 					if(!$(".activeSlide .paper2").hasClass("flipped")){
 						$(".activeSlide .paper-buttons").fadeOut(100);
@@ -174,6 +177,7 @@
 					$("#wrapper").prepend('<div class="paper paper-big center paper-animate hidden" data-id="' + value.flashcardId + '"><div class="paper-holder"><div class="paper-buttons hidden"><a href="#" class="icon add"><i class="fa fa-plus fa-2x"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-2x"></i></a><a href="#" class="icon remove"><i class="fa fa-minus fa-2x"></i></a><a href="#" class="icon undo hidden"><i class="fa fa-undo fa-2x"></i></a><a href="#" class="icon wrong"><i class="fa fa-minus-circle fa-2x"></i></a><a href="#" class="icon right"><i class="fa fa-check fa-2x"></i></a></div><div class="paper2"><div class="redBorder"><figure class="front">' + value.question + '</figure><figure class="back hidden">' + value.answer + '</figure></div><textarea id="editor-f-' + value.flashcardId + '" class="paper-textarea-big">' + value.question + '</textarea><textarea id="editor-a-' + value.flashcardId + '" class="paper-textarea-big">' + value.answer + '</textarea></div></div></div>');
 				});
 				init();
+				$("#wrapper").find(".paper-big").eq(0).addClass("activeSlide");
 				highestId = $(".paper-big").eq(-2).attr("data-id");
 			});
 		});

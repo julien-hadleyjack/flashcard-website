@@ -97,7 +97,9 @@ $(document).ready(function() {
 
 	function init(){
 	    // init classes
-	    $("#wrapper").find(".paper-big").eq(0).addClass("activeSlide").addClass("firstSlide").show();
+	    if(!$("#wrapper").find(".paper-big").eq(0).hasClass("stats")){
+	    	$("#wrapper").find(".paper-big").eq(0).addClass("activeSlide").addClass("firstSlide").show();
+	    }
 	    $(".paper-big").last().addClass("lastSlide");
 	}
 	

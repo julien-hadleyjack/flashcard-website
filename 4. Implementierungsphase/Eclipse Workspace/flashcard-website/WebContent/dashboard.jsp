@@ -103,10 +103,10 @@
 				$(element).append('<textarea id="editor-' + highestId + '" class="paper-textarea"></textarea>');
 
 				$(element).children(".redBorder").hide();
-				$(element).children(".mce-container").show();
 								
 				$(container).find(".icon").removeClass("hidden");
 				initEditors();
+				$(element).children(".mce-container").show();
 			});
 			
 			/* Init FlashCards */

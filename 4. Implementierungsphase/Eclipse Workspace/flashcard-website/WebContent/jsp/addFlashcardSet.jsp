@@ -6,7 +6,7 @@
 
 <c:set target="${loginBean}" property="username" value="${sessionScope.userid}"/>
 <c:set target="${helper}" property="title" value="${param.title}"/>
-${helper.setSetId(database.addFlashcardSet(database.getUser(loginBean),helper.getTitle()))}"
+${helper.setSetId(database.addFlashcardSet(database.getUser(loginBean),helper.getTitle()))}
 <c:out value="${helper.getSetId()}"></c:out>
 <c:set target="${helper}" property="question" value="Klicke auf Antwort anzeigen und anschließend auf den Stift oder drücke E um die Karte zu editieren."/>
 <c:set target="${helper}" property="answer" value="Klicke auf den Stift rechts oben um die Karte zu bearbeiten."/>

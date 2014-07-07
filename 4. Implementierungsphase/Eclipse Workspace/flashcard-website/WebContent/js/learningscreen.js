@@ -215,8 +215,11 @@ $(document).ready(function() {
 		var element = $(".activeSlide").find(".paper2"),
 			button = $(element).find(".save");
 		
-		$(element).children(".mce-container").hide();
+		//$(element).children(".mce-container").hide();
 		$(element).children(".redBorder").show();
+		if(button.length > 0){
+			$(element).find(".undo").click();
+		}
 																	
 		$(button).html('<i class="fa fa-pencil fa-2x"></i>');
 		$(button).removeClass("save");

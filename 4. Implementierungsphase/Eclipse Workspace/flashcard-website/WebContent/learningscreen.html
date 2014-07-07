@@ -62,15 +62,15 @@
 				e.preventDefault();
 				
 				var container = $(this).parents().eq(2);
-				console.log(container);
 				highestId++;
-				$(container).after('<div class="paper paper-big center paper-animate hidden" data-id="1"><div class="paper-holder"><div class="paper-buttons hidden"><a href="#" class="icon add"><i class="fa fa-plus fa-2x"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-2x"></i></a><a href="#" class="icon remove"><i class="fa fa-minus fa-2x"></i></a><a href="#" class="icon undo hidden"><i class="fa fa-undo fa-2x"></i></a><a href="#" class="icon wrong"><i class="fa fa-minus-circle fa-2x"></i></a><a href="#" class="icon right"><i class="fa fa-check fa-2x"></i></a></div><div class="paper2"><div class="redBorder"><figure class="front">Frage eingeben</figure><figure class="back hidden">Antwort eingeben</figure></div><textarea id="editor-f-' + highestId + '" class="paper-textarea-big">Frage eingeben</textarea><textarea id="editor-a-' + highestId + '" class="paper-textarea-big">Antwort eingeben</textarea></div></div></div>');
+				$(container).after('<div class="paper paper-big center paper-animate hidden" data-id="' + highestId + '"><div class="paper-holder"><div class="paper-buttons hidden"><a href="#" class="icon add"><i class="fa fa-plus fa-2x"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-2x"></i></a><a href="#" class="icon remove"><i class="fa fa-minus fa-2x"></i></a><a href="#" class="icon undo hidden"><i class="fa fa-undo fa-2x"></i></a><a href="#" class="icon wrong"><i class="fa fa-minus-circle fa-2x"></i></a><a href="#" class="icon right"><i class="fa fa-check fa-2x"></i></a></div><div class="paper2"><div class="redBorder"><figure class="front">Frage eingeben</figure><figure class="back hidden">Antwort eingeben</figure></div><textarea id="editor-f-' + highestId + '" class="paper-textarea-big">Frage eingeben</textarea><textarea id="editor-a-' + highestId + '" class="paper-textarea-big">Antwort eingeben</textarea></div></div></div>');
 				
-				tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-f-" + highestId);
-				tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-a-" + highestId);
+				//tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-f-" + highestId);
+				//tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-a-" + highestId);
 
-				initEditors();		
-				slideRight();		
+				slideRight();	
+				$(".answerButton").click();
+				$(".activeSlide .edit").click();	
 				
 				//$(".activeSlide .edit").click();
 				//$(".activeSlide").find(".paper-buttons").show();
@@ -121,7 +121,8 @@
 			
 			$(document).on("click", ".undo", function(e){
 				e.preventDefault();
-				var element = $(this).parents().eq(2);
+				var element = $(this).parents().eq(2),
+					id = $(this).parents().eq(2).attr("data-id");
 
 				cancelEdit();
 				$(this).addClass("hidden");
@@ -170,7 +171,6 @@
 		
 			/* Init FlashCard Sets */
 			$.getJSON("/jsp/getFlashcardsForSetWithId.jsp", {setId: $.getUrlVar("setId")}, function(data){
-				console.log(data);
 				initEditors();
 				$.each(data, function (index, value) {
 					$("#wrapper").prepend('<div class="paper paper-big center paper-animate hidden" data-id="' + value.flashcardId + '"><div class="paper-holder"><div class="paper-buttons hidden"><a href="#" class="icon add"><i class="fa fa-plus fa-2x"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-2x"></i></a><a href="#" class="icon remove"><i class="fa fa-minus fa-2x"></i></a><a href="#" class="icon undo hidden"><i class="fa fa-undo fa-2x"></i></a><a href="#" class="icon wrong"><i class="fa fa-minus-circle fa-2x"></i></a><a href="#" class="icon right"><i class="fa fa-check fa-2x"></i></a></div><div class="paper2"><div class="redBorder"><figure class="front">' + value.question + '</figure><figure class="back hidden">' + value.answer + '</figure></div><textarea id="editor-f-' + value.flashcardId + '" class="paper-textarea-big">' + value.question + '</textarea><textarea id="editor-a-' + value.flashcardId + '" class="paper-textarea-big">' + value.answer + '</textarea></div></div></div>');

@@ -67,6 +67,8 @@
 						$.post( "/jsp/addFlashcardSet.jsp", { title: value } , function( data ) {
 							
 							$(this).parents().eq(1).attr("data-id", data.replace("\n", ""));
+							// add link
+							$(element).children(".redBorder").html('<a href="/learningscreen.html?setId=' + data.replace("\n", "") + '">' + value + '</a>');
 						});
 					}
 					

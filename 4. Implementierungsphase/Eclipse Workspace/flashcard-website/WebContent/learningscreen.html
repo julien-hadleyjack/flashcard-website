@@ -33,11 +33,6 @@
 			    ],
 			    toolbar1: "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image eqneditor",
 			    image_advtab: true,
-			    /*setup: function(ed) {
-	        		ed.on('init', function(e) {
-	            		e.target.hide();
-	        		});
-	    		},*/
 	    		height: 145,
 	    		width: 655,
 	       		force_p_newlines : false,
@@ -85,24 +80,34 @@
 				e.preventDefault();
 				var element = $(this).parents().eq(1).children(".paper2"),
 					id = $(this).parents().eq(2).attr("data-id");
-
+				
 				var question = $(element).find("#editor-f-" + id + "_ifr").contents().find("body").html(),
 					answer = $(element).find("#editor-a-" + id + "_ifr").contents().find("body").html();
 
 				if((!question || 0 === question.length) | (!answer || 0 === answer.length)) {
 					alert("Bitte gebe eine Frage und eine Antwort ein!");
 				} else {
-					tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-f-" + id);
-					tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-a-" + id);
-
-					$(element).children(".mce-container").hide();
+					//$(element).children(".mce-container").hide();
 					$(element).children(".redBorder").show();
 						
 					$(element).find(".front").html(question);
 					$(element).find(".back").html(answer);
-					//TODO: send Ajax Request with new title (get id of database entry via data-id attribute)
-					//TODO: if no id set -> add instead of edit 
-						
+
+
+					if($(this).parents().eq(2).attr("data-id") != undefined){
+						$.post( "/jsp/editFlashcardWithId.jsp", { flashcardId: $(this).parents().eq(2).attr("data-id"), question: question, answer: answer } );
+					} else {
+						$.post( "/jsp/addFlashcardToSetWithId.jsp", { question: question, answer: answer, setId: $.getUrlVar("setId") } , function( data ) {
+							
+							$(this).parents().eq(1).attr("data-id", data.replace("\n", ""));
+							// add link
+							$(element).children(".redBorder").html('<a href="/learningscreen.html?setId=' + data.replace("\n", "") + '">' + value + '</a>');
+						});
+					}
+											
+					tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-f-" + id);
+					tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-a-" + id);
+
 					$(this).html('<i class="fa fa-pencil fa-2x"></i>');
 					$(this).removeClass("save");
 					$(this).addClass("edit");
@@ -116,6 +121,8 @@
 			
 			$(document).on("click", ".undo", function(e){
 				e.preventDefault();
+				var element = $(this).parents().eq(2);
+
 				cancelEdit();
 				$(this).addClass("hidden");
 				var saveButton = $(this).parents().eq(1).find(".save");
@@ -123,6 +130,12 @@
 				$(saveButton).removeClass("save");
 				$(saveButton).addClass("edit");
 				
+				tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-f-" + id);
+				tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-a-" + id);
+
+				$(element).find("#editor-f-" + id).value($(element).find(".front").html());
+				$(element).find("#editor-a-" + id).value($(element).find(".back").html());
+
 				if(!$(".activeSlide .paper2").hasClass("flipped")){
 					$(".activeSlide .paper-buttons").fadeOut(100);
 				}
@@ -185,144 +198,6 @@
     <a href="#" id="left-button" class="circle-button"></a>
     <a href="#" id="right-button" class="circle-button"></a>
     <div id="wrapper">
-        <!--<div class="paper paper-big center paper-animate hidden" data-id="0">
-        	<div class="paper-holder">
-	        	<div class="paper-buttons hidden">
-					<a href="#" class="icon add">
-	        			<i class="fa fa-plus fa-2x"></i>
-	        		</a>
-					<a href="#" class="icon edit">
-	        			<i class="fa fa-pencil fa-2x"></i>
-	        		</a>
-					<a href="#" class="icon remove">
-	        			<i class="fa fa-minus fa-2x"></i>
-	        		</a>
-					<a href="#" class="icon undo hidden">
-	        			<i class="fa fa-undo fa-2x"></i>
-	        		</a>
-	        		<a href="#" class="icon wrong">
-	        			<i class="fa fa-minus-circle fa-2x"></i>
-	        		</a>
-	        		<a href="#" class="icon right">
-	        			<i class="fa fa-check fa-2x"></i>
-	        		</a>
-	        	</div>	            
-	        	<div class="paper2">
-	                <div class="redBorder">
-	                	<figure class="front">
-		                    Was heißt 分（成）auf Deutsch?
-	                    </figure>
-	                    <figure class="back hidden">
-	                    	einteilen (in)
-	                    </figure>
-	                </div>
-	                <textarea id="editor-f-0" class="paper-textarea-big">Was heißt 分（成）auf Deutsch?</textarea>
-	                <textarea id="editor-a-0" class="paper-textarea-big">einteilen (in)</textarea>
- 	            </div>
-            </div>
-        </div>
-        <div class="paper paper-big center paper-animate hidden" data-id="1">
-        	<div class="paper-holder">
-	        	<div class="paper-buttons hidden">
-					<a href="#" class="icon add">
-	        			<i class="fa fa-plus fa-2x"></i>
-	        		</a>
-					<a href="#" class="icon edit">
-	        			<i class="fa fa-pencil fa-2x"></i>
-	        		</a>
-					<a href="#" class="icon remove">
-	        			<i class="fa fa-minus fa-2x"></i>
-	        		</a>
-					<a href="#" class="icon undo hidden">
-	        			<i class="fa fa-undo fa-2x"></i>
-	        		</a>
-	        		<a href="#" class="icon wrong">
-	        			<i class="fa fa-minus-circle fa-2x"></i>
-	        		</a>
-	        		<a href="#" class="icon right">
-	        			<i class="fa fa-check fa-2x"></i>
-	        		</a>
-	        	</div>	            
-	        	<div class="paper2">
-	                <div class="redBorder">
-	                	<figure class="front">
-		                    Was heißt 分（成）auf Deutsch?
-	                    </figure>
-	                    <figure class="back hidden">
-	                    	einteilen (in)
-	                    </figure>
-	                </div>
-	                <textarea id="editor-f-1" class="paper-textarea-big">Was heißt auf Deutsch?</textarea>
-	               	<textarea id="editor-a-1" class="paper-textarea-big">einteilen (in)</textarea>
- 	            </div>
-            </div>
-        </div>
-        <div class="paper paper-big center paper-animate hidden">
-        	<div class="paper-holder">
-	        	<div class="paper-buttons hidden">
-	        		<a href="#" class="icon wrong">
-	        			<i class="fa fa-minus-circle fa-2x"></i>
-	        		</a>
-	        		<a href="#" class="icon right">
-	        			<i class="fa fa-check fa-2x"></i>
-	        		</a>
-	        	</div>	            
-	            <div class="paper2">
-	                <div class="redBorder">
-	                	<figure class="front">
-		                	Was bedeutet 限制 auf Deutsch?
-	                    </figure>
-	                    <figure class="back">
-	                    	jmd. einschränken
-	                    </figure>
-	                </div>
-	            </div>
-            </div>
-        </div>
-        <div class="paper paper-big center paper-animate hidden">
-        	<div class="paper-holder">
-	        	<div class="paper-buttons hidden">
-	        		<a href="#" class="icon wrong">
-	        			<i class="fa fa-minus-circle fa-2x"></i>
-	        		</a>
-	        		<a href="#" class="icon right">
-	        			<i class="fa fa-check fa-2x"></i>
-	        		</a>
-	        	</div>	            
-	            <div class="paper2">
-	                <div class="redBorder">
-	                	<figure class="front">
-		                    Was bedeudet 惜?
-	                    </figure>
-	                    <figure class="back">
-	                    	jmd./etw. wertschätzen
-	                    </figure>
-	                </div>
-	            </div>
-            </div>
-        </div>
-        <div class="paper paper-big center paper-animate hidden">
-        	<div class="paper-holder">
-	        	<div class="paper-buttons hidden">
-	        		<a href="#" class="icon wrong">
-	        			<i class="fa fa-minus-circle fa-2x"></i>
-	        		</a>
-	        		<a href="#" class="icon right">
-	        			<i class="fa fa-check fa-2x"></i>
-	        		</a>
-	        	</div>	            
-	            <div class="paper2">
-	                <div class="redBorder">
-	                	<figure class="front">
-		                    Was bedeudet 气?
-	                    </figure>
-	                    <figure class="back">
-	                    	Luft, Dampf
-	                    </figure>
-	                </div>
-	            </div>
-            </div>
-        </div>-->
 
 		<!-- Stats -->
         <div class="paper paper-big center paper-animate hidden stats">

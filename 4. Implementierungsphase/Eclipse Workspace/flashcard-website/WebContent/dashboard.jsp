@@ -59,10 +59,13 @@
 					$(element).children(".mce-container").hide();
 					$(element).children(".redBorder").show();
 					
+					// change before request ended
 					$(element).children(".redBorder").html(value);
 
 					if($(this).parents().eq(1).attr("data-id") != undefined){
-						$.post( "/jsp/editFlashcardSet.jsp", { setId: $(this).parents().eq(1).attr("data-id"), title: value } );
+						$.post( "/jsp/editFlashcardSet.jsp", { setId: $(this).parents().eq(1).attr("data-id"), title: value }, function( data ) {
+							$(element).children(".redBorder").html('<a href="/learningscreen.html?setId=' + $(this).parents().eq(1).attr("data-id") + '">' + value + '</a>');
+						});
 					} else {
 						$.post( "/jsp/addFlashcardSet.jsp", { title: value } , function( data ) {
 							

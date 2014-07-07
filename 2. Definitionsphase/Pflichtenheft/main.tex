@@ -20,11 +20,17 @@
 % gantt charts: http://ctan.mirrorcatalogs.com/graphics/pgf/contrib/pgfgantt/pgfgantt.pdf
 \usepackage{pgfgantt}
 
-% change margins to 2.5 cm
+% change margins to 2.5 cm and enable landscape
 \usepackage[margin=3cm]{geometry}
+\usepackage{pdflscape}
+
+\usepackage{tabulary}
 
 % place figures at exactly the position given in the code
 \usepackage{float}
+
+% custom counters for lists
+\usepackage{enumitem}
 
 \newcommand{\appname}{Flashcard-Website}
 
@@ -45,7 +51,9 @@
         \Huge Projektplanung\\
         \Large \appname \\
         \vspace{1cm}
-        \normalsize David Ehlen, \\Julien Hadley Jack, \\Sebastian Dernbach, \\
+        \normalsize David Ehlen (5460297),\\
+        Julien Hadley Jack (4739854), \\
+        Sebastian Dernbach (9586963), \\
         \vspace\medskipamount
         \vspace\medskipamount
         Karlsruhe, 04.07.2014
@@ -73,7 +81,7 @@
 % normal page numbering for the rest of the document
 \setcounter{page}{1}
 \pagestyle{plain}
-\setcounter{page}{1}
+%\setcounter{page}{1}
 
 
 \include{Einleitung}

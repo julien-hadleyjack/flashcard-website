@@ -4,53 +4,63 @@
 \subsubsection{Musskriterien}
 Diese Kriterien müssen bis zum Projektende implementiert werden, damit das Projekt erfolgreich abgeschlossen ist.
 
-\begin{description}
-	\item[/MK10/] Die zu lernenden Karten werden durch einen Algorithmus ausgewählt (z.B. Leitner System)
-	\item[/MK20/] Unicode-Zeichen werden als Eingabe in den Karteikarten unterstützt.
-	\item[/MK30/] Bilder können eingefügt werden.
-	\item[/MK40/] Ein Karteikartenset kann vom Benutzer exportiert werden.
-	\item[/MK50/] Ein (anderer) Benutzer kann das vom \textbf{/MK40/} exportierte Karteikartenset für seinen Account importieren.
-	\item[/MK60/] Die Seite stellt ein Katalog von vorgefertigten Karteikartensets zur Verfügung.
-	\item[/MK70/] Der Benutzer hat Option ein Karteikartenset mit einer anderen Person zu teilen.
-	\item[/MK80/] Beim Lernen mit den Karteikarten kann auch nur mit der Tastatur navigiert werden.
-\end{description}
+\begin{enumerate}[leftmargin=2cm, label=\bfseries /MK\arabic*0/]
+	\item Der Benutzer kann Karteikartensets erstellen, die Themen für eine Sammlung von Karteikarten darstellt.
+	\item Der Benutzer kann Karteikarten zu einem Karteikartenset hinzufügen und löschen.
+	\item\label{unicode} Unicode-Zeichen werden als Eingabe in den Karteikarten unterstützt.
+	\item\label{export} Ein Karteikartenset kann vom Benutzer exportiert werden.
+	%\item\label{katalog} Die Seite stellt ein Katalog von vorgefertigten Karteikartensets zur Verfügung.
+	
+	\item\label{keyboard} Beim Lernen mit den Karteikarten kann auch nur mit der Tastatur navigiert werden.
+\end{enumerate}
+
 
 \subsubsection{Wunschkriterien}
 Diese Kriterien werden für das Projekt gewünscht, sind aber nicht zwingend erforderlich für ein erfolgreiches Projektende. Je nach Zeit und technisches Schwierigkeitsgrad wird versucht möglichst viele/wichtige Kriterien zu implementieren.
 
-\begin{description}
-	\item[/WK10/] Die Webseite wird zusätzlich auch für Mobilgeräte optimiert.
-	\item[/WK20/] Für jedes Karteikartenset werden Statistiken angezeigt (Erfolgsquote,...).
-	\item[/MK30/] Mathematische Ausdrücke werden dargestellt in natürlicher Form (z.b. \( e^{\frac{3}{4}\pi i}\))
-	\item[/MK40/] Die Antwortkarte kann in Form von Multiple Choice sein.
-\end{description}
+\begin{enumerate}[leftmargin=2cm, label=\bfseries /WK\arabic*0/]
+\item Ein (anderer) Benutzer kann das vom \ref{export} exportierte Karteikartenset für seinen Account importieren.
+	\item Die Webseite wird zusätzlich auch für Mobilgeräte optimiert.
+	\item Für jedes Karteikartenset werden Statistiken angezeigt (Erfolgsquote,...).
+	\item Mathematische Ausdrücke werden dargestellt in natürlicher Form (z.b. \( e^{\frac{3}{4}\pi i}\))
+	\item Die Antwortkarte kann in Form von Multiple Choice sein.
+	\item Die zu lernenden Karten werden durch einen Algorithmus ausgewählt (z.B. Leitner System)
+	\item Bilder können eingefügt werden.
+	\item\label{share} Der Benutzer hat Option ein Karteikartenset mit einer anderen Person zu teilen.
+\end{enumerate}
 
 \subsubsection{Abgrenzkriterien}
 Diese Kriterien beschreiben die Grenzen des Projektes und sollen auf jeden Fall nicht implementiert werden.
-\begin{description}
-	\item[/AK10/] Videos müssen nicht in die Karten eingebettet sein. (Sie können trotzdem einfach als Hyperlink eingefügt werden.)
-	\item[/AK20/] Die Webseite muss nicht offline funktionieren.
-	\item[/AK30/] Bei Verbindungsverlust muss der aktuelle Stand nicht zwischengespeichert werden.
-\end{description}
 
+\begin{enumerate}[leftmargin=2cm, label=\bfseries /AK\arabic*0/]
+	\item Videos müssen nicht in die Karten eingebettet sein. (Sie können trotzdem einfach als Hyperlink eingefügt werden.)
+	\item Die Webseite muss nicht offline funktionieren.
+	\item Bei Verbindungsverlust muss der aktuelle Stand nicht zwischengespeichert werden.
+\end{enumerate}
+
+
+
+\newpage
 \subsection{Produkteinsatz}
 % in diesem Kapitel kann der Einsatz auch eingegrenzt werden
 
 \subsubsection{Anwendungsbereiche}
+Die Webseite richtet sich an Einzelpersonen, die Informationen lernen müssen, dass in das Schema "Frage" und "Antwort" eingeteilt werden kann.
 
 \subsubsection{Zielgruppen}
-\begin{description}
-	\item[/A10/] Die Webseite richtet sich an Personen, die eine neue Fremdsprache lernen wollen.
-	\item[/A20/] Eine weitere Zielgruppe sind Schüler, die die Webseite begleitend zum Unterricht benutzen.
-	\item[/A30/] Die letzte Gruppe sind Studenten, die die Webseite begleitend zum Studium benutzen.
-\end{description}
+\begin{enumerate}[leftmargin=2cm, label=\bfseries /ZG\arabic*0/]
+	\item Die Webseite richtet sich an Personen, die eine neue Fremdsprache lernen wollen.
+	\item Eine weitere Zielgruppe sind Schüler, die die Webseite begleitend zum Unterricht benutzen.
+	\item Die letzte Gruppe sind Studenten, die die Webseite begleitend zum Studium benutzen.
+\end{enumerate}
+
 
 \subsubsection{Betriebsbedingungen}
-Die Betriebsbedingungen beschreiben die physikalische Umgebung und tägliche Betriebszeit. ständige Beobachtung oder unbeaufsichtigter Betrieb
+Die Betriebsbedingungen beschreiben die physikalische Umgebung und tägliche Betriebszeit.
 
-\subsection{Produktübersicht}
+Das Projekt läuft auf einem Server, der JSP-Spezifikation unterstützt. Da der Server-Verantwortlicher ein Student ist, ist der Server in einen unbeaufsichtigten Betrieb. Außer für Wartungsarbeiten soll die Webseite rund um die Uhr erreichbar sein.
 
-\subsection{Produktfunktionen}
+%\subsection{Produktübersicht}
 
 \subsection{Produktdaten}
 \subsubsection{Benutzer}
@@ -70,37 +80,87 @@ Für jede einzelne Lernkartei werden diese Informationen gespeichert:
 	\item Zeitpunkt der letzten richtigen Beantwortung der Frage
 \end{itemize}
 
+
+\newgeometry{margin=1cm} % modify this if you need even more space
+\begin{landscape}
+\begin{center}
+\subsection{Produktfunktionen}
+
+
+\begin{tabulary}{\textwidth}{|L|L|L|L|L|L|L|}
+\hline 
+\textbf{Anwendungsfall} & \textbf{Ziel} & \textbf{Kategorie} & \textbf{Vorbedingung} & \textbf{Nachbedingung (Erfolg)} & \textbf{Nachbedingung (Fehlschlag)} & \textbf{Auslösendes Ereignis} \\ 
+\hline 
+Karte hinzufügen & Set erweitern & primär & Set existiert & eine zusätzliche Karteikarte & Fehlermeldung wird angezeigt & Button zum Hinzufügen geklickt \\ 
+\hline 
+Karte löschen & Karteikarte vom Set entfernen & primär & Karte existiert & Karteikarte wurde entfernt & Fehlermeldung wird angezeigt & Button zum Löschen geklickt \\ 
+\hline 
+Karte bearbeiten & • & • & • & • & • & • \\ 
+\hline 
+• & • & • & • & • & • & • \\ 
+\hline 
+\end{tabulary} 
+\end{center}
+\end{landscape}
+\restoregeometry
+
 \subsection{Produktleistungen}
 
-\section{Nichtfunktionale Anforderungen}
+\subsection{Nichtfunktionale Anforderungen}
 Diese Anforderungen befassen sich nicht nicht mit der Funktionalität des Projektes, sondern mit anderen Themen wie z.B. Qualität, Schnelligkeit und Benutzerfreundlichkeit. Auch rechtliche Anforderungen können hier beschrieben werden.
 
-\subsection{Qualität}
-\begin{description}
-     \item[/NF10/] Die Webseite soll die Musskriterien erfüllen.
-     \item[/NF20/] Die Webseite soll möglichst unbeaufsichtigt betrieben werden können.
-     \item[/NF30/] Das Lernen der Karteikarten soll möglichst einfach sein.
-     \item[/NF40/] Fehler ausgelöst durch den Benutzer soll abgefangen werden und wenn nötig durch eine Fehlermeldung angezeigt werden.
-     \item[/NF50/] Die Seite soll ein Stresstest mit 300 registrierten Benutzern und 200 Aufrufe in der Minute aushalten.
-\end{description}
+\begin{enumerate}[leftmargin=2cm, label=\bfseries /NF\arabic*0/]
+	 \item Die Webseite soll die Musskriterien erfüllen.
+     \item Die Webseite soll möglichst unbeaufsichtigt betrieben werden können.
+     \item Das Lernen der Karteikarten soll möglichst einfach sein.
+     \item Fehler ausgelöst durch den Benutzer soll abgefangen werden und wenn nötig durch eine Fehlermeldung angezeigt werden.
+     \item Die Seite soll ein Stresstest mit 300 registrierten Benutzern und 200 Aufrufe in der Minute aushalten.
+\end{enumerate}
 
-\subsection{Getestete Browser}
-\begin{itemize}
-	\item Google Chrome (ab Version ...)
-	\item Mozilla Firefox (ab Version ...)
-	\item Internet Explorer (ab Version ...)
-	\item Apple Safari (ab Version ...)
-	\item Google Chrome for Android (ab Version ...)
-	\item Apple Safari for iPad (ab Version ...)
-\end{itemize}
+\subsubsection{Qualitätsanforderungen}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+\textbf{Produktqualität} & \textbf{sehr gut} & \textbf{gut} & \textbf{normal} \\ 
+\hline 
+Richtigkeit & • && \\ 
+\hline 
+Verständlichkeit & • & & \\ 
+\hline 
+Bedienbarkeit & • & & \\ 
+\hline 
+Zeitverhalten & • & & \\ 
+\hline 
+Stabilität & & • & \\ 
+\hline 
+Anpassbarkeit & & • & \\ 
+\hline 
+Installierbarkeit & • & & \\ 
+\hline 
+Fehlertoleranz & & • & \\ 
+\hline 
+Austauschbarkeit & • & & \\ 
+\hline 
+\end{tabular}
+\end{center}
 
-\subsection{Rechtliche Informationen}
+%\subsubsection{Getestete Browser}
+%\begin{itemize}
+%	\item Google Chrome (ab Version ...)
+%	\item Mozilla Firefox (ab Version ...)
+%	\item Internet Explorer (ab Version ...)
+%	\item Apple Safari (ab Version ...)
+%	\item Google Chrome for Android (ab Version ...)
+%	\item Apple Safari for iPad (ab Version ...)
+%\end{itemize}
+
+\subsubsection{Rechtliche Informationen}
 Das Produkt ist quelloffen und wird nichtkommerziell unter der freien "GNU General Public Licence"-Lizenz zur Verfügung gestellt. Dies ist mit allen verwendeten Bibliotheken und Tools vereinbar.
 
-\section{Globale Testfälle}
+\subsection{Globale Testfälle}
 Dies sind einige Testfälle, die die korrekte Ausführung verschiedener Funktionen überprüfen.
 
-\subsection{Testfälle für Pflichtkriterien}
+\subsubsection{Testfälle für Pflichtkriterien}
 \begin{description}
 	\item[/TP10/] Ein korrekt-beantwortete Karte sollte beim wiederholten Lernen kurz danach (in Abhängigkeit vom Algorithmus) nicht auftauchen.
 	\item[/TP20/] Seltene Unicode-Zeichen wie \(\pi\) werden als Eingabe benutzt und danach im Lernmodus überprüft.
@@ -110,8 +170,8 @@ Dies sind einige Testfälle, die die korrekte Ausführung verschiedener Funktion
 	\item[/TP60/] Ein im Katalog vorgefertigte Karteikartenset wird zum eigenen Account hinzugefügt.
 \end{description}
 
-\section{Benutzeroberfläche}
-\subsection{Hauptbildschirm}
+\subsection{Benutzeroberfläche}
+\subsubsection{Hauptbildschirm}
 
 \begin{figure}[H]
     \centering
@@ -123,7 +183,7 @@ Dies sind einige Testfälle, die die korrekte Ausführung verschiedener Funktion
 Der Hauptbildschirm gibt eine Übersicht zu den Karteikartensets des angemeldeten Benutzers. Beim Klicken auf eines der Sets kommt man zum Lernbildschirm
 
 
-\subsection{Lernbildschirm}
+\subsubsection{Lernbildschirm}
 
 
 \begin{figure}[H]
@@ -149,4 +209,4 @@ Der Lernbildschirm fängt mit der Vorderseite von der ersten Karteikarte des Set
     \label{fig:lernscreen-ergbenis}
 \end{figure}
 
-Nachdem man alle Karteikarten durchgegangen ist, wird eine Statistik zu der Anzahl an richtigen Antworten angezeigt.
+\noindent Nachdem man alle Karteikarten durchgegangen ist, wird eine Statistik zu der Anzahl an richtigen Antworten angezeigt.

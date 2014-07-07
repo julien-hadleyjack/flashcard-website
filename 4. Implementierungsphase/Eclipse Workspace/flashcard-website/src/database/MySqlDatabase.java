@@ -275,7 +275,7 @@ private static DataSource dataSource = null;
 			prepStatement = connection.prepareStatement("select * from Flashcards where flashcardSetId= (?)");
 			prepStatement.setInt(1,setId);
 			ResultSet rs = prepStatement.executeQuery();
-			if (rs.next()) {
+			while (rs.next()) {
 				FlashcardBean flashcard = new FlashcardBean();
 				flashcard.setAnswer(rs.getString("answer"));
 				flashcard.setQuestion(rs.getString("question"));
@@ -353,31 +353,67 @@ private static DataSource dataSource = null;
 	}
 
 	@Override
-	public void addFlashcard(FlashcardSetBean flashcardset,
-			FlashcardBean flashcard) {
+	public int addFlashcard(FlashcardSetBean flashcardset,
+			String question, String answer) {
 		PreparedStatement prepStatement;
 		Connection connection = null;
 		
 		try {
 			connection = getConnection(); 
-		String queryString = "INSERT INTO Flashcard(flashcardSetId,question,answer,correctAnswerDate, correctAnswerTimes,falseAnswerTimes) VALUES (?, ?, ?, ?, ?, ?)";
+		String queryString = "INSERT INTO Flashcards(flashcardSetId,question,answer) VALUES (?, ?, ?)";
+		int updateQuery = 0;
+
+		prepStatement = connection.prepareStatement(queryString,Statement.RETURN_GENERATED_KEYS);
+		prepStatement.setInt(1, flashcardset.getSetId());
+		prepStatement.setString(2, question);
+		prepStatement.setString(3,answer);
+	   
+		updateQuery = prepStatement.executeUpdate();
+		if (updateQuery != 0) {
+			 ResultSet keyResultSet = prepStatement.getGeneratedKeys();
+		        int newCustomerId = 0;
+		        if (keyResultSet.next()) {
+		            newCustomerId = (int) keyResultSet.getInt(1);
+		        }
+	         
+			return newCustomerId;
+		}
+		else {
+			System.out.println("HinzufŸgen nicht erfolgreich");
+			return -1;
+		}
+	}
+		catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		finally {
+			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
+		}
+		
+		return -1;
+
+	}
+	
+	@Override
+	public void modifyFlashcard(String question, String answer, int flashcardId) {
+		PreparedStatement prepStatement;
+		Connection connection = null;
+		
+		try {
+			connection = getConnection(); 
+		String queryString = "UPDATE Flashcards SET question= (?), answer=(?) WHERE flashcardId= (?)";
 		int updateQuery = 0;
 
 		prepStatement = connection.prepareStatement(queryString);
-		prepStatement.setInt(1, flashcardset.getSetId());
-		prepStatement.setString(2, flashcard.getQuestion());
-		prepStatement.setString(3, flashcard.getAnswer());
-	    java.sql.Date sqlDate = new java.sql.Date(flashcard.getCorrectAnswerTime().getTime());
-		prepStatement.setDate(4, sqlDate);
-		prepStatement.setInt(5, flashcard.getCorrectAnswerTimes());
-		prepStatement.setInt(6, flashcard.getFalseAnswerTimes());
-
+		prepStatement.setString(1,question);
+		prepStatement.setString(2,answer);
+		prepStatement.setInt(3,flashcardId);
 		updateQuery = prepStatement.executeUpdate();
 		if (updateQuery != 0) {
 			return;
 		}
 		else {
-			System.out.println("HinzufŸgen nicht erfolgreich");
+			System.out.println("Änderung nicht erfolgreich");
 			return;
 		}
 	}
@@ -388,11 +424,6 @@ private static DataSource dataSource = null;
 			if (connection!=null) try {connection.close();}catch (Exception ignore) {}
 		}
 
-	}
-	
-	@Override
-	public void modifyFlashcard(FlashcardBean flashcard) {
-		// TODO Auto-generated method stub
 	}	
 		
 
@@ -425,7 +456,7 @@ private static DataSource dataSource = null;
 	}
 
 	@Override
-	public void deleteFlashcard(FlashcardBean flashcard) {
+	public void deleteFlashcard(int flashcardId) {
 		PreparedStatement prepStatement;
 		Connection connection = null;
 		
@@ -435,7 +466,7 @@ private static DataSource dataSource = null;
 		int updateQuery = 0;
 
 		prepStatement = connection.prepareStatement(queryString);
-		prepStatement.setInt(1, flashcard.getFlashcardId());
+		prepStatement.setInt(1, flashcardId);
 		updateQuery = prepStatement.executeUpdate();
 		if (updateQuery != 0) {
 			return;

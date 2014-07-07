@@ -57,6 +57,7 @@ $(document).ready(function() {
 
 	$(document).on("click", ".answerButton", function(e){
 		e.preventDefault(); 
+		cancelEdit();
 		if(!$(".activeSlide .paper2").hasClass("flipped")){
 			$(".activeSlide .paper-buttons").delay(500).fadeIn();
 			$(".activeSlide .back").delay(500).fadeIn();
@@ -97,8 +98,12 @@ $(document).ready(function() {
 
 	function init(){
 	    // init classes
-	    $("#wrapper").find(".paper-big").eq(0).addClass("activeSlide").addClass("firstSlide").show();
+	    if(!$("#wrapper").find(".paper-big").eq(0).hasClass("stats")){
+	    	$("#wrapper").find(".paper-big").eq(0).addClass("firstSlide").show();
+	    }
 	    $(".paper-big").last().addClass("lastSlide");
+	    
+	    cardCount = $(".paper-big").length - 1;
 	}
 	
 	// reset view
@@ -160,6 +165,8 @@ $(document).ready(function() {
 			} else {
 				//$(".answerButton").html("Frage anzeigen");
 			}
+			
+			initEditors();
 		}
 	}
 		
@@ -192,6 +199,7 @@ $(document).ready(function() {
 				
 				$(".stats .bigText").html(rightAnswers + "/" + cardCount + " Richtig");
 			}
+			
 		}
 		
 		// answer button check
@@ -200,14 +208,22 @@ $(document).ready(function() {
 		} else {
 			//$(".answerButton").html("Frage anzeigen");
 		}
+		
+		initEditors();
 	}
 
 	function cancelEdit() {
 		var element = $(".activeSlide").find(".paper2"),
 			button = $(element).find(".save");
 		
-		$(element).children(".mce-container").hide();
+		tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-f-" + $(".activeSlide").attr("data-id"));
+		tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-a-" + $(".activeSlide").attr("data-id"));
+
+		//$(element).children(".mce-container").hide();
 		$(element).children(".redBorder").show();
+		if(button.length > 0){
+			$(element).find(".undo").click();
+		}
 																	
 		$(button).html('<i class="fa fa-pencil fa-2x"></i>');
 		$(button).removeClass("save");

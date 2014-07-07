@@ -20,7 +20,7 @@
     		
     	function initEditors(){
 			tinymce.init({
-			    selector: "textarea",
+			    mode: "exact",
 			    theme: "modern",
 			    menubar: false,
 			    statusbar: false,
@@ -48,11 +48,12 @@
 		$(document).ready(function() {
 			$(document).on("click", ".edit", function(e){
 				e.preventDefault();
-				var element = $(this).parents().eq(1).children(".paper2");
+				var element = $(this).parents().eq(1).children(".paper2"),
+					id = $(this).parents().eq(2).attr("data-id");
 	
 				$(element).children(".redBorder").hide();
 				$(element).children(".mce-container").show();
-				console.log(element);
+								
 				$(this).parents().eq(1).find(".undo").removeClass("hidden");
 													
 				$(this).html('<i class="fa fa-save fa-2x"></i>');
@@ -145,10 +146,12 @@
 			/* Init FlashCard Sets */
 			$.getJSON("/jsp/getFlashcardsForSetWithId.jsp", {setId: $.getUrlVar("setId")}, function(data){
 				console.log(data);
+				initEditors();
 				$.each(data, function (index, value) {
 					$("#wrapper").prepend('<div class="paper paper-big center paper-animate hidden" data-id="' + value.flashcardId + '"><div class="paper-holder"><div class="paper-buttons hidden"><a href="#" class="icon add"><i class="fa fa-plus fa-2x"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-2x"></i></a><a href="#" class="icon remove"><i class="fa fa-minus fa-2x"></i></a><a href="#" class="icon undo hidden"><i class="fa fa-undo fa-2x"></i></a><a href="#" class="icon wrong"><i class="fa fa-minus-circle fa-2x"></i></a><a href="#" class="icon right"><i class="fa fa-check fa-2x"></i></a></div><div class="paper2"><div class="redBorder"><figure class="front">' + value.question + '</figure><figure class="back hidden">' + value.answer + '</figure></div><textarea id="editor-f-' + value.flashcardId + '" class="paper-textarea-big">' + value.question + '</textarea><textarea id="editor-a-' + value.flashcardId + '" class="paper-textarea-big">' + value.answer + '</textarea></div></div></div>');
+					tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-f-" + value.flashcardId;
+					tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-a-" + value.flashcardId);
 				});
-				initEditors();
 				init();
 				highestId = $(".paper-big").eq(-2).attr("data-id");
 			});
@@ -172,7 +175,7 @@
     <a href="#" id="left-button" class="circle-button"></a>
     <a href="#" id="right-button" class="circle-button"></a>
     <div id="wrapper">
-        <!--<div class="paper paper-big center paper-animate hidden" data-id="0">
+        <div class="paper paper-big center paper-animate hidden" data-id="0">
         	<div class="paper-holder">
 	        	<div class="paper-buttons hidden">
 					<a href="#" class="icon add">
@@ -309,7 +312,7 @@
 	                </div>
 	            </div>
             </div>
-        </div>-->
+        </div>
 
 		<!-- Stats -->
         <div class="paper paper-big center paper-animate hidden stats">

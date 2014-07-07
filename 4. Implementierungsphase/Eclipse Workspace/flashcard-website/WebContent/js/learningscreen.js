@@ -162,6 +162,8 @@ $(document).ready(function() {
 			} else {
 				//$(".answerButton").html("Frage anzeigen");
 			}
+			
+			initEditors();
 		}
 	}
 		
@@ -194,6 +196,7 @@ $(document).ready(function() {
 				
 				$(".stats .bigText").html(rightAnswers + "/" + cardCount + " Richtig");
 			}
+			
 		}
 		
 		// answer button check
@@ -202,6 +205,8 @@ $(document).ready(function() {
 		} else {
 			//$(".answerButton").html("Frage anzeigen");
 		}
+		
+		initEditors();
 	}
 
 	function cancelEdit() {

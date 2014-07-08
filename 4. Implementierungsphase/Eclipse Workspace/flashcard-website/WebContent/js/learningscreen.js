@@ -86,7 +86,7 @@ $(document).ready(function() {
 	/* change to save button, insert editors */
 	$(document).on("click", ".edit", function(e){
 		e.preventDefault();
-		var element = $(this).parents().eq(1).children(".paper2"),
+		var element = $(this).parent().children(".paper2"),
 			id = $(this).parents().eq(2).attr("data-id");
 
 		$(element).children(".redBorder").hide();
@@ -94,7 +94,7 @@ $(document).ready(function() {
 		tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-a-" + id);
 
 						
-		$(this).parents().eq(1).find(".undo").removeClass("hidden");
+		$(this).parent().find(".undo").removeClass("hidden");
 											
 		$(this).html('<i class="fa fa-save fa-2x"></i>');
 		$(this).removeClass("edit");
@@ -120,7 +120,7 @@ $(document).ready(function() {
 	/* change content, submit to database, change back to edit button, remove editors */
 	$(document).on("click", ".save", function(e) {
 		e.preventDefault();
-		var element = $(this).parents().eq(1).children(".paper2"),
+		var element = $(this).parent().children(".paper2"),
 			id = $(this).parents().eq(2).attr("data-id");
 		
 		var question = $(element).find("#editor-f-" + id + "_ifr").contents().find("body").html(),
@@ -140,8 +140,8 @@ $(document).ready(function() {
 			} else {
 				$.post( "/jsp/addFlashcardToSetWithId.jsp", { question: question, answer: answer, setId: $.getUrlVar("setId") } , function( data ) {
 					
-					$(this).parents().eq(1).attr("data-id", data.replace("\n", ""));
-					$(this).parents().eq(1).removeClass("adding");
+					$(this).parent().attr("data-id", data.replace("\n", ""));
+					$(this).parent().removeClass("adding");
 				});
 			}
 									
@@ -151,7 +151,7 @@ $(document).ready(function() {
 			$(this).html('<i class="fa fa-pencil fa-2x"></i>');
 			$(this).removeClass("save");
 			$(this).addClass("edit");
-			$(this).parents().eq(1).find(".undo").addClass("hidden");
+			$(this).parent().find(".undo").addClass("hidden");
 			
 			init();
 			
@@ -170,7 +170,7 @@ $(document).ready(function() {
 
 		cancelEdit();
 		$(this).addClass("hidden");
-		var saveButton = $(this).parents().eq(1).find(".save");
+		var saveButton = $(this).parent().find(".save");
 		$(saveButton).html('<i class="fa fa-pencil fa-2x"></i>');
 		$(saveButton).removeClass("save");
 		$(saveButton).addClass("edit");

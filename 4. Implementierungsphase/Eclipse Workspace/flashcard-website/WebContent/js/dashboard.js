@@ -61,7 +61,7 @@
 		var element = $(this).parents().eq(1);
 					
 		if(confirm('Sollen die Karteikarten wirklich gelöscht werden?')){
-			if(($(element).find("add") != undefined) & (!$(element).hasClass("adding")){
+			if(($(element).find("add") != undefined) & (!$(element).hasClass("adding"))){
 				$.post( "/jsp/deleteFlashcardSet.jsp", { setId: $(element).attr("data-id") } , function( data ) {
 					$(element).remove();
 				});

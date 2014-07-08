@@ -101,7 +101,9 @@ Die nichtfunktionalen Anforderungen wurden soweit wie möglich getestet.
 Die Testfälle der Musskriterien und erfüllten Wunschkriterien wurden mit verschiedenen Browser getestet. Dies hat uns geholfen einige Fehler noch zu finden. Unterschiede zwischen z.B. Google Chrome und Mozilla Firefox führten zu unterschiedlichen Darstellungen. Wenn möglich wurde dies behoben.
 
 \section{Terminplan}
-Wir haben uns für Amazon AWS entschieden zur Bereitstellung des Servers. Dies ermöglicht eine einfache Kollaboration zwischen den Mitarbeitern und lässt die Webseite mit der Anzahl der Besucher skalieren. Dieser Dienst wird auch von Firmen wie NASA, Pinterest und Netflix für ihre produktiven Dienste benutzt. Dabei hatten wir mit komplexeren Themen wie Firewallregeln und Benutzerverwaltung öfters Probleme. Diese waren nicht eingeplant, so dass das Projektende um 2 Tage überschritten wurde. Da aber ein Puffer zwischen Projektende und Abgabetermin der Dokumentation mitkalkuliert war, konnte dieser Termin ohne Schwierigkeiten eingehalten werden.
+Wir haben uns für Amazon AWS entschieden zur Bereitstellung des Servers. Dies ermöglicht eine einfache Kollaboration zwischen den Mitarbeitern und lässt die Webseite mit der Anzahl der Besucher skalieren. Dieser Dienst wird auch von Firmen wie NASA, Pinterest und Netflix für ihre produktiven Dienste benutzt.
+
+Dabei hatten wir mit komplexeren Themen wie Firewallregeln und Benutzerverwaltung öfters Probleme. Diese waren nicht eingeplant, so dass das Projektende um 2 Tage überschritten wurde. Da aber ein Puffer zwischen Projektende und Abgabetermin der Dokumentation mitkalkuliert war, konnte dieser Termin ohne Schwierigkeiten eingehalten werden.
 
 
 \section{Ressourcenplan}
@@ -114,19 +116,34 @@ Die Zusammenarbeit zwischen den Mitgliedern des Projektes hat gut funktioniert. 
 \noindent Das Projekt konnte mit den geplanten Ressourcen umgesetzt werden.
 
 \section{Kostenplan}
+Während des Projektes erhielt der Miterarbeiter, der für die Serveradministration zuständig war, eine E-Mail von Amazon. Es enthielt eine Warnung wegen verdächtigen Aktivitäten auf dem Amazon-AWS-Account. Der Mitarbeiter hat danach beim Überprüfen Änderungen von einer unerlaubten Drittperson auf dem Account entdeckt.
+
+Nach einer mehrstündigen Fehlersuche konnte der Weg festgestellt werden, wie diese Person Zugang erlangen konnte: 
+
+Der Code des Projektes war in einem öffentlichen Versionskontrollsystem auf www.github.com veröffentlicht. Die Datei mit den nötigen Login-Daten für das Amazon-AWS-Account wurde einem Filter hinzugefügt, damit sie nicht veröffentlicht wird. Ein Mitarbeiter hatte Software verwendet, um seine Änderungen dem Versionskontrollsystem hinzuzufügen, die diesen Filter nicht benutzte.
+
+Da Amazon AWS für kleine bis riesigen Webseiten verwendet werden kann, gibt es auch kostenpflichtige Optionen. Die unerlaubte Person hat eine Vielzahl von den Optionen dazugebucht. Obwohl er nur Zugriff für einen Tag hatte, konnte er eine Rechnung von 568,14 USD in dieser Zeit für den Mitarbeiter ansammeln.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{images/amazon-bill.jpg}
-    \caption{Hauptbildschirm}
-    \label{fig:overview}
+    \caption{Rechnung Amazon AWS}
+    \label{fig:bill}
 \end{figure}
+
+
 
 \section{Risikoplan}
 
 \section{Kommunikationsplan}
 
 \section{Persönliche Einschätzung}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/amazon-bill.jpg}
+    \caption{Rechnung Amazon AWS}
+    \label{fig:bill}
+\end{figure}
 
 \section{Ehrenamtliche Erklärung}
 

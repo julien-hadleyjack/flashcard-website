@@ -27,6 +27,8 @@
 		if(!value || 0 === value.length) {
 			alert("Bitte gebe einen Titel ein!");
 		} else {
+			console.log($(this).parents().eq(1).attr("data-id"));
+			console.log($(this).parents().eq(1));
 			tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-" + $(this).parents().eq(1).attr("data-id"));
 			$(element).children(".redBorder").show();
 			

@@ -13,4 +13,4 @@ ${helper.setSetId(database.addFlashcardSet(database.getUser(loginBean),helper.ge
 <c:out value="${helper.getSetId()}"></c:out>
 <c:set target="${helper}" property="question" value="Klicke auf Antwort anzeigen und anschließend auf den Stift oder drücke E um die Karte zu editieren."/>
 <c:set target="${helper}" property="answer" value="Klicke auf den Stift rechts oben um die Karte zu bearbeiten."/>
-${database.addFlashcard(database.getFlashcardSet(helper.getSetId(),database.getUser(loginBean)),helper.getQuestion(), helper.getAnswer())}
+<c:set target="${helper}" property="flashcardId" value="${database.addFlashcard(database.getFlashcardSet(helper.getSetId(),database.getUser(loginBean)),helper.getQuestion(), helper.getAnswer())}"/>

@@ -28,7 +28,14 @@ public class AuthenticationFilter implements Filter {
 		    HttpServletRequest req = (HttpServletRequest) request;
 		    HttpServletResponse res = (HttpServletResponse) response;  
 		    if (req.getSession().getAttribute("userid") == null) {
+		    	String path = ((HttpServletRequest) request).getRequestURI();
+		    	if(path.startsWith("/help.html") || path.startsWith("/impressum.html")) {
+			    	fc.doFilter(request, response);
+
+		    	}
+		    	else {
 		        res.sendRedirect("/index.jsp");
+		    	}
 		    } else {	
 		    	
 		    	fc.doFilter(request, response);

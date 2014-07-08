@@ -21,11 +21,8 @@
 			<div class="menubar-container">
 				<ul class="menubar-nav">
 					<li class="active"><a href="javascript:void(0);">Home</a></li>
-										<li><a href="impressum.html">Impressum</a></li>
-			
+					<li><a href="impressum.html">Impressum</a></li>			
 					<li><a href="help.html">Hilfe</a></li>
-					
-					<li><a href="impressum.html">Ausloggen</a></li>
 				</ul>
 			</div>
 		</div>    

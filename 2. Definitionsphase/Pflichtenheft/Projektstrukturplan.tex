@@ -4,12 +4,27 @@
 \subsubsection{Musskriterien}
 Diese Kriterien müssen bis zum Projektende implementiert werden, damit das Projekt erfolgreich abgeschlossen ist.
 
-\begin{enumerate}[leftmargin=2cm, label=\bfseries /MK\arabic*0/]
+\begin{enumerate}[leftmargin=2cm, label=\bfseries /MK\arabic*0/, series=mk]
 	\item Der Benutzer kann Karteikartensets erstellen, die Themen für eine Sammlung von Karteikarten darstellt.
 	\item Der Benutzer kann Karteikarten zu einem Karteikartenset hinzufügen und löschen.
 	\item Der Benutzer kann angeben, ob er eine Karteikarte richtig oder falsch beantwortet hat.
 	\item\label{unicode} Unicode-Zeichen werden als Eingabe in den Karteikarten unterstützt.
 	\item\label{keyboard} Beim Lernen mit den Karteikarten kann auch nur mit der Tastatur navigiert werden.
+\end{enumerate}
+
+\noindent Da dies eine Prüfuungsleistung für die Vorlesung Webengineering ist, wurden einige Anforderungen für alle Projekte festgelegt:
+\begin{enumerate}[resume*=mk]
+	\item Es muss eine Hilfeseite/Anleitung existieren.
+	\item Es muss eine Impressum existieren.
+	\item Der Benutzer kann angeben, ob er eine Karteikarte richtig oder falsch beantwortet hat.
+	\item Die Webseite muss umgesetzt werden mit:
+	\begin{itemize}
+		\item HTML / JSP
+		\item CSS
+		\item JavaScript
+		\item Serverseitige Logik mit Java Beans
+	\end{itemize}
+	\item Mehrere Benutzer müssen gleichzeit die Webseite benutzen können.
 \end{enumerate}
 
 
@@ -60,6 +75,8 @@ Die Betriebsbedingungen beschreiben die physikalische Umgebung und tägliche Bet
 
 \noindent Das Projekt läuft auf einem Server, der JSP-Spezifikation unterstützt. Dieser kann entweder auf einem lokalen Computer oder in einem Rechenzentrum eines Server-Anbieters laufen. Da der Server-Verantwortlicher ein Student ist, ist der Server für ein Großteil des Tages in einen unbeaufsichtigten Betrieb. Außer für Wartungsarbeiten soll die Webseite rund um die Uhr erreichbar sein.
 
+Der Benutzer kann die Webseite auf jedem Desktop-Betriebssystem aufrufen. Bedingung ist, das ein Browser mit CSS3-Unterstützung installiert ist. Mobilen Endgeräten wie ein Tablet können auch verwendet werden, aber Bedienung wird nicht für kleinere Bildschirme optimiert.
+
 %\subsection{Produktübersicht}
 
 \subsection{Produktdaten}
@@ -103,48 +120,6 @@ Karte beantworten & angeben, ob Kartei richtig oder falsch beantwortet wurde & p
 \end{center}
 \end{landscape}
 \restoregeometry
-
-\subsection{Betriebs- und Entwicklungsumgebung}
-
-%\subsubsection{Entwicklung}
-%Es gibt vier technische Themenbereiche, die für die Webseite abgedeckt werden müssen:
-%\begin{itemize}
-%	\item \textbf{HTML / CSS} \\
-%	Struktur und Gestaltung der Webseite
-%	\item \textbf{Javascript / jQuery}
-%	Klientseitige Interaktion mit der Webseite
-%	\item \textbf{JSP / Java Beans} \\
-%	Serverseitige Logik der Webseite
-%	\item \textbf{MySQL} \\
-%	Speichern und Laden der Benutzerdaten (wie Karteikarten)
-%\end{itemize}
-
-\subsubsection{Server}
-Der Server läuft im unbeaufsichtigten Betrieb. Die Daten zum benutzten Server:
-\begin{itemize}
-	\item \textbf{Ubuntu Server 13.10} \\
-	Ein Debian-basiertes Linux-Betriebssystem, der für den Server-Betrieb gedacht ist. \\
-	\textit{Lizenz:} GNU GPL (und andere)
-	\item \textbf{Apache Tomcat 7} \\
-	Ein Web Server und Servlet Container. Er unterstützt die ``Java Servlet``-  und JSP-Spezifikation. \\
-	\textit{Lizenz:} Apache License 2.0
-\end{itemize}
-
-\subsubsection{Verwendete Libraries}
-\begin{itemize}
-	\item \textbf{JSP} \\
-	Web-Programmiersprache zur dynamischen Erzeugung von HTML. Sie erlaubt die Einbettung von Java und JSP-Aktionen im HTML. \\
-	\textit{Lizenz:} GNU GPL v2 und CDDL v1.1
-	\item \textbf{jQuery} \\
-	Javascript-Bibliothek zur DOM-Navigation und -Modifikation.\\
-	\textit{Lizenz:} MIT
-	\item \textbf{TinyMCE} \\
-	Ein auf JavaScript basierter freier WYSIWYG-Editor, der mit dem ``EqnEditor\_tinymce``-Plugin auch mathematische Formeln erstellen kann. \\
-	\textit{Lizenz:} LGPL
-	\item \textbf{Font Awesome} \\
-	Skalierbare Vektorbilder, die über CSS angepasst werden können. \\
-	\textit{Lizenz:} MIT
-\end{itemize}
 
 %\subsection{Produktleistungen}
 

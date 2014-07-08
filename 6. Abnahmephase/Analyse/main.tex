@@ -32,6 +32,9 @@
 % custom counters for lists
 \usepackage{enumitem}
 
+% table columns with background shading
+\usepackage{colortbl}
+
 \newcommand{\appname}{Flashcard-Website}
 
 
@@ -48,7 +51,7 @@
 
     \begin{center}
     	% H. Balzert, Lehrbuch der Software-Technik
-        \Huge SOLL-/IST-Analyse\\
+        \Huge SOLL- / IST-Analyse\\
         \Large \appname \\
         \vspace{1cm}
         \normalsize David Ehlen (5460297),\\
@@ -96,6 +99,37 @@ Das Endprodukt setzt alle Musskriterien um. Außerdem wurden noch drei Wunschkri
 
 \subsection{Nichtfunktionale Anforderungen}
 Die nichtfunktionalen Anforderungen wurden soweit wie möglich getestet.
+
+\subsection{Qualitätsanforderungen}
+
+
+\begin{center}
+\begin{tabular}{|>{\columncolor[gray]{0.8}}l|r|r|}
+\hline 
+\textbf{Produktqualität} & \textbf{SOLL} & \textbf{IST} \\ 
+\hline 
+Richtigkeit & sehr gut & gut \\ 
+\hline 
+Verständlichkeit & sehr gut & sehr gut \\ 
+\hline 
+Bedienbarkeit & sehr gut & sehr gut\\ 
+\hline 
+Zeitverhalten & sehr gut & sehr gut\\ 
+\hline 
+Stabilität & gut & sehr gut \\ 
+\hline 
+Anpassbarkeit & gut & gut \\ 
+\hline 
+Installierbarkeit & sehr gut & sehr gut \\ 
+\hline 
+Fehlertoleranz & gut & gut \\ 
+\hline 
+Austauschbarkeit & sehr gut & sehr gut \\ 
+\hline 
+\end{tabular}
+\end{center}
+
+Die Richtigkeit konnte leider nicht erreicht werden. Dies lag hauptsächlich, dass wir für den WYSYWYG-Editor 
 
 \subsection{Testfälle}
 Die Testfälle der Musskriterien und erfüllten Wunschkriterien wurden mit verschiedenen Browser getestet. Dies hat uns geholfen einige Fehler noch zu finden. Unterschiede zwischen z.B. Google Chrome und Mozilla Firefox führten zu unterschiedlichen Darstellungen. Wenn möglich wurde dies behoben.
@@ -151,12 +185,15 @@ Der Kommunikationsplan wurde durch alle Projektbeteiligten eingehalten. Darüber
     \label{fig:dashboard}
 \end{figure}
 
+Das obrige Bild zeigt den aktuellen Hauptbildschirm der Karteiverwaltung. Die Oberfläche wurde wie geplant umgesetzt und versucht mit Skeuphorismen zu designen, sodass für den Benutzer die Parallele zum Lernen mit "Stift und Papier" gegeben ist. Dadurch erhoffen wir uns auch Benutzer anzusprechen, die dem Lernen am Computer skeptisch gegenüber stehen. Besonders durch jene Designwahl wurde unsere Entscheidung für das Karteikartenprojekt bestätigt, da dieses Raum für kreatives Arbeiten ermöglichte, was rückblickend dazu führte, dass mit besonderer Freude und dem daraus resultierenden Engagement gearbeitet werden konnte.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{images/learningscreen-answer.png}
     \caption{Frageseite einer Karteikarte}
     \label{fig:learning-question}
-\end{figure}
+\end{figure}Das zweite hier angeführte Bild zeigt den "Lernbildschirm. Hier kann ein bestehendes Karteikartenset gelernt und angeschaut werden. Die Implementierung war rückblickend etwas schwieriger als erwartet, da mehrere Funktionalitäten wie das editieren, hinzufügen, löschen usw. von Karteikarten gegeben sein muss, damit das Projekt zumindest die minimale Anforderungen an ein Online - Lernsystem erfüllt, jene Funktionalitäten die auch in unseren Musskriterien verankert sind. Durch Unterschiede in den gängigen Browsern mussten hier viele individuelle Konfigurationen getätigt werden. 
+Besonders beschäftigte uns das gleichzeitige Arbeiten an einem Projekt durch mehrere Teammitglieder. Sowohl das Aufsetzen eines Versionierungssystems, als auch das Aufsetzen einer Infrastruktur (durch den Amazon Beanstalk Server) waren hier die Herausforderung. Durch die aufgesetzte Umgebung war es uns so möglich, mit den gleichen Bedingungen simultan an dem Projekt arbeiten zu können, und eventuell auftretende Fehler bei einem der Teammitglieder, oder deren Aktivitäten bezüglich des Projektes, nachzuvollziehen.
 
 \section{Ehrenamtliche Erklärung}
 

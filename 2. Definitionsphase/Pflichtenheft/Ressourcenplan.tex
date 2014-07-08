@@ -1,12 +1,63 @@
 \section{Ressourcenplan}
 \subsection{Mitarbeiter}
-Anzahl der Mitarbeiter: 3 \\
-
-\noindent Verfügbare Arbeitsstunden pro Tag: 8 \\
-
-\noindent Effektive Arbeitsstunden pro Tag: 2 \\
+\begin{center}
+\begin{tabulary}{\textwidth}{|L|L|L|L|L|}
+\hline 
+\textbf{Nr} & \textbf{Name} & \textbf{Zuständigkeit} & \textbf{Arbeitstunden pro Tag\newline (verfügbar / effektiv)}\\  
+\hline
+1 & David Ehlen & Softwareentwickler \& UX-Designer & 8 / 2\\ 
+\hline
+2 & Julien Hadley Jack & Softwareentwickler \& Server-Administrator & 8 / 2\\ 
+\hline
+3 & Sebastian Dernbach & Softwareentwickler \& Projektleiter & 8 / 2\\ 
+\hline
+%&&&&& \\ 
+%\hline 
+\end{tabulary} 
+\end{center}
 
 \noindent Da alle drei Mitarbeiter während der Projektzeit die Duale Hochschule besuchen, kann in diesem Zeitraum nur mit einer Arbeitszeit von 2 Stunde pro Tag gerechnet werden.
 
-\subsection{Infrastruktur}
-Alle notwendigen Computer, Software und Räumlichkeiten werden schon vor Projektstart von den Mitarbeitern zur Verfügung gestellt.
+\subsection{Hardware}
+Alle notwendigen Computer, die zur Planung und Entwicklung nötig sind, werden schon vor Projektstart von den Mitarbeitern zur Verfügung gestellt.
+
+%\subsubsection{Entwicklung}
+%Es gibt vier technische Themenbereiche, die für die Webseite abgedeckt werden müssen:
+%\begin{itemize}
+%	\item \textbf{HTML / CSS} \\
+%	Struktur und Gestaltung der Webseite
+%	\item \textbf{Javascript / jQuery}
+%	Klientseitige Interaktion mit der Webseite
+%	\item \textbf{JSP / Java Beans} \\
+%	Serverseitige Logik der Webseite
+%	\item \textbf{MySQL} \\
+%	Speichern und Laden der Benutzerdaten (wie Karteikarten)
+%\end{itemize}
+
+\subsubsection{Server}
+Der Server läuft im unbeaufsichtigten Betrieb. Die Daten zum benutzten Server:
+\begin{itemize}
+	\item \textbf{Ubuntu Server 13.10} \\
+	Ein Debian-basiertes Linux-Betriebssystem, der für den Server-Betrieb gedacht ist. \\
+	\textit{Lizenz:} GNU GPL (und andere)
+	\item \textbf{Apache Tomcat 7} \\
+	Ein Web Server und Servlet Container. Er unterstützt die ``Java Servlet``-  und JSP-Spezifikation. \\
+	\textit{Lizenz:} Apache License 2.0
+\end{itemize}
+
+\subsection{Software}
+\subsubsection{Verwendete Libraries}
+\begin{itemize}
+	\item \textbf{JSP} \\
+	Web-Programmiersprache zur dynamischen Erzeugung von HTML. Sie erlaubt die Einbettung von Java und JSP-Aktionen im HTML. \\
+	\textit{Lizenz:} GNU GPL v2 und CDDL v1.1
+	\item \textbf{jQuery} \\
+	Javascript-Bibliothek zur DOM-Navigation und -Modifikation.\\
+	\textit{Lizenz:} MIT
+	\item \textbf{TinyMCE} \\
+	Ein auf JavaScript basierter freier WYSIWYG-Editor, der mit dem ``EqnEditor\_tinymce``-Plugin auch mathematische Formeln erstellen kann. \\
+	\textit{Lizenz:} LGPL
+	\item \textbf{Font Awesome} \\
+	Skalierbare Vektorbilder, die über CSS angepasst werden können. \\
+	\textit{Lizenz:} MIT
+\end{itemize}

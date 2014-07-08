@@ -51,7 +51,7 @@
 
     \begin{center}
     	% H. Balzert, Lehrbuch der Software-Technik
-        \Huge SOLL- / IST-Analyse\\
+        \Huge SOLL-/IST-Analyse\\
         \Large \appname \\
         \vspace{1cm}
         \normalsize David Ehlen (5460297),\\
@@ -129,13 +129,16 @@ Austauschbarkeit & sehr gut & sehr gut \\
 \end{tabular}
 \end{center}
 
-Die Richtigkeit konnte leider nicht erreicht werden. Dies lag hauptsächlich, dass wir für den WYSYWYG-Editor 
+\noindent Die Richtigkeit konnte leider nicht erreicht werden. Dies lag hauptsächlich, dass wir uns in der Planung für den WYSYWYG-Editor TinyMCE entschieden hatten. Dieser hat uns aber viele Probleme bereitet.
+
+Es kam öfters vor, dass wir ihn in mehreren Testfälle mit korrekten Endergebnissen testen konnten. Aber als wir sie zu einem späteren Zeitpunkt wiederholten, traten plötzlich Probleme auf, obwohl am Code und am Server nichts verändert worden ist. Viele Fehler konnten im Code beseitigt werden, aber leider nicht alle. In diesen Fällen wird es meist durch ein Neuladen der eigenen Seite kurzzeitig behoben.
 
 \subsection{Testfälle}
 Die Testfälle der Musskriterien und erfüllten Wunschkriterien wurden mit verschiedenen Browser getestet. Dies hat uns geholfen einige Fehler noch zu finden. Unterschiede zwischen z.B. Google Chrome und Mozilla Firefox führten zu unterschiedlichen Darstellungen. Wenn möglich wurde dies behoben.
 
 \section{Terminplan}
-Wir haben uns für Amazon AWS entschieden zur Bereitstellung des Servers. Dies ermöglicht eine einfache Kollaboration zwischen den Mitarbeitern und lässt die Webseite mit der Anzahl der Besucher skalieren. Dieser Dienst wird auch von Firmen wie NASA, Pinterest und Netflix für ihre produktiven Dienste benutzt. Dabei hatten wir mit komplexeren Themen wie Firewallregeln und Benutzerverwaltung öfters Probleme. Diese waren nicht eingeplant, so dass das Projektende um 2 Tage überschritten wurde. Da aber ein Puffer zwischen Projektende und Abgabetermin der Dokumentation mitkalkuliert war, konnte dieser Termin ohne Schwierigkeiten eingehalten werden.
+Wir haben uns für Amazon AWS entschieden zur Bereitstellung des Servers. Dies ermöglicht eine einfache Kollaboration zwischen den Mitarbeitern und lässt die Webseite mit der Anzahl der Besucher skalieren. Dieser Dienst wird auch von Firmen wie NASA, Pinterest und Netflix für ihre produktiven Dienste benutzt.
+Dabei hatten wir mit komplexeren Themen wie Firewallregeln und Benutzerverwaltung öfters Probleme. Diese waren nicht eingeplant, so dass das Projektende um 2 Tage überschritten wurde. Da aber ein Puffer zwischen Projektende und Abgabetermin der Dokumentation mitkalkuliert war, konnte dieser Termin ohne Schwierigkeiten eingehalten werden.
 
 
 \section{Ressourcenplan}
@@ -164,7 +167,7 @@ Da Amazon AWS für kleine bis riesigen Webseiten verwendet werden kann, gibt es 
     \label{fig:bill}
 \end{figure}
 
-Nach einem Gespräch mit dem Kundenservice von Amazon waren sie freundlicherweise bereit die Kosten zu erstatten. Dadurch waren die Gesamtkosten am Ende wie geplant.
+\noindent Nach einem Gespräch mit dem Kundenservice von Amazon waren sie freundlicherweise bereit die Kosten zu erstatten. Dadurch waren die Gesamtkosten am Ende wie geplant.
 
 Um es in zukünftigen Projekten zu vermeiden, könnte man die Zugriffsrechte für die Mitarbeiter weiter eingeschränkt. Außerdem sollte man in Zukunft einen Server-Anbieter auswählen, bei dem man eine obere Kostenschranke einrichten kann.
 
@@ -173,6 +176,13 @@ Um es in zukünftigen Projekten zu vermeiden, könnte man die Zugriffsrechte fü
 Durch eine integrierte Fehlerverarbeitung haben wir verhindert, dass der Nutzer durch nicht abgefangene Fehler verwirrt wird. Es kam ebenfalls zu keinem krankheitsbedingten Verlust während des gesamten Projektzeitraums. Auch das Risiko eines Serverausfalls haben wir durch den Einsatz des Amazon AWS Services gemindert.
 
 \section{Kommunikationsplan}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/trello.png}
+    \caption{Trello}
+    \label{fig:trello}
+\end{figure}
 
 Der Kommunikationsplan wurde durch alle Projektbeteiligten eingehalten. Darüber hinaus war eine ständige Kommunikation durch die täglichen Besuche der Dualen Hochschule, öfters stattfindende Online Video Meetings via Google Hangout und durch unser Projektmanagement Tool Trello gegeben. Durch das von Trello zur Verfügung gestellte Kanban Board konnte jeder selbst den aktuellen Aufgabenstatus der anderen Mitarbeiter nachlesen. 
 
@@ -185,16 +195,22 @@ Der Kommunikationsplan wurde durch alle Projektbeteiligten eingehalten. Darüber
     \label{fig:dashboard}
 \end{figure}
 
-Das obrige Bild zeigt den aktuellen Hauptbildschirm der Karteiverwaltung. Die Oberfläche wurde wie geplant umgesetzt und versucht mit Skeuphorismen zu designen, sodass für den Benutzer die Parallele zum Lernen mit "Stift und Papier" gegeben ist. Dadurch erhoffen wir uns auch Benutzer anzusprechen, die dem Lernen am Computer skeptisch gegenüber stehen. Besonders durch jene Designwahl wurde unsere Entscheidung für das Karteikartenprojekt bestätigt, da dieses Raum für kreatives Arbeiten ermöglichte, was rückblickend dazu führte, dass mit besonderer Freude und dem daraus resultierenden Engagement gearbeitet werden konnte.
+Das obige Bild zeigt den aktuellen Hauptbildschirm der Karteiverwaltung. Die Oberfläche wurde wie geplant umgesetzt und versucht mit Skeuphorismen zu designen, sodass für den Benutzer die Parallele zum Lernen mit ``Stift und Papier`` gegeben ist. Dadurch erhoffen wir uns auch Benutzer anzusprechen, die dem Lernen am Computer skeptisch gegenüber stehen.
+
+Besonders durch jene Designwahl wurde unsere Entscheidung für das Karteikartenprojekt bestätigt, da dieses Raum für kreatives Arbeiten ermöglichte, was rückblickend dazu führte, dass mit besonderer Freude und dem daraus resultierenden Engagement gearbeitet werden konnte.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{images/learningscreen-answer.png}
     \caption{Frageseite einer Karteikarte}
     \label{fig:learning-question}
-\end{figure}Das zweite hier angeführte Bild zeigt den "Lernbildschirm. Hier kann ein bestehendes Karteikartenset gelernt und angeschaut werden. Die Implementierung war rückblickend etwas schwieriger als erwartet, da mehrere Funktionalitäten wie das editieren, hinzufügen, löschen usw. von Karteikarten gegeben sein muss, damit das Projekt zumindest die minimale Anforderungen an ein Online - Lernsystem erfüllt, jene Funktionalitäten die auch in unseren Musskriterien verankert sind. Durch Unterschiede in den gängigen Browsern mussten hier viele individuelle Konfigurationen getätigt werden. 
-Besonders beschäftigte uns das gleichzeitige Arbeiten an einem Projekt durch mehrere Teammitglieder. Sowohl das Aufsetzen eines Versionierungssystems, als auch das Aufsetzen einer Infrastruktur (durch den Amazon Beanstalk Server) waren hier die Herausforderung. Durch die aufgesetzte Umgebung war es uns so möglich, mit den gleichen Bedingungen simultan an dem Projekt arbeiten zu können, und eventuell auftretende Fehler bei einem der Teammitglieder, oder deren Aktivitäten bezüglich des Projektes, nachzuvollziehen.
+\end{figure}
 
+Das zweite hier angeführte Bild zeigt den ``Lernbildschirm``. Hier kann ein bestehendes Karteikartenset gelernt und angeschaut werden. Die Implementierung war rückblickend etwas schwieriger als erwartet, da mehrere Funktionalitäten wie das Editieren, Hinzufügen und Löschen von Karteikarten gegeben sein muss, damit das Projekt zumindest die minimale Anforderungen an ein Online-Lernsystem erfüllt, jene Funktionalitäten die auch in unseren Musskriterien verankert sind. Durch Unterschiede in den gängigen Browsern mussten hier viele individuelle Konfigurationen getätigt werden.
+
+Besonders beschäftigte uns das gleichzeitige Arbeiten an einem Projekt durch mehrere Teammitglieder. Sowohl das Aufsetzen eines Versionierungssystems, als auch das Aufsetzen einer Infrastruktur (durch den Amazon Beanstalk Server) waren mit viel Arbeit verbunden. Durch die aufgesetzte Umgebung war es uns so möglich, mit den gleichen Bedingungen simultan an dem Projekt arbeiten zu können, und eventuell auftretende Fehler bei einem der Teammitglieder, oder deren Aktivitäten bezüglich des Projektes, nachzuvollziehen.
+
+\newpage
 \section{Ehrenamtliche Erklärung}
 
 Ich erkläre ehrenwörtlich,

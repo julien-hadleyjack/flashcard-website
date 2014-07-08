@@ -84,7 +84,8 @@
 		$(element).children(".redBorder").hide();
 						
 		$(container).find(".icon").removeClass("hidden");
-		initEditors();
+		tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-" + highestId);
+		//initEditors();
 		$(element).children(".mce-container").show();
 	});
 	

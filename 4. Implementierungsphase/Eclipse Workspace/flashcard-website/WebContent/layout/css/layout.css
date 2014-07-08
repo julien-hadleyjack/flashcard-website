@@ -575,3 +575,9 @@ header {
  #deleteAccBtn:hover {
 	background-color:#5fc1ff;
 }
+
+#text {
+	color:white;
+	margin:30px auto;
+	text-align:center;
+}

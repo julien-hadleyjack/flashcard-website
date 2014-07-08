@@ -16,6 +16,18 @@
 </head>
 
 <body>
+<header>
+		<div class="menubar">
+			<div class="menubar-container">
+				<ul class="menubar-nav">
+					<li class="active"><a href="javascript:void(0);">Home</a></li>
+				
+					<li><a href="help.html">Home</a></li>
+					<li><a href="impressum.html">Ausloggen</a></li>
+				</ul>
+			</div>
+		</div>    
+	</header>
 <c:if test="${not empty userid}">
 <% response.sendRedirect("dashboard.jsp");
 %>

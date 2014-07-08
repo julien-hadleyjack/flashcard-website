@@ -33,7 +33,7 @@
 			// change before request ended
 			$(element).children(".redBorder").html(value);
 
-			if($(this).parents().eq(1).attr("data-id") != undefined){
+			if(!$(this).parents().eq(1).hasClass("adding")){
 				$.post( "/jsp/editFlashcardSet.jsp", { setId: $(this).parents().eq(1).attr("data-id"), title: value }, function( data ) {
 					$(element).children(".redBorder").html('<a href="/learningscreen.html?setId=' + $(element).parents().eq(1).attr("data-id") + '">' + value + '</a>');
 				});
@@ -59,7 +59,7 @@
 		var element = $(this).parents().eq(1);
 					
 		if(confirm('Sollen die Karteikarten wirklich gelöscht werden?')){
-			if($(element).find("add") != undefined){
+			if(($(element).find("add") != undefined) & (!$(element).hasClass("adding")){
 				$.post( "/jsp/deleteFlashcardSet.jsp", { setId: $(element).attr("data-id") } , function( data ) {
 					$(element).remove();
 				});
@@ -82,7 +82,7 @@
 		$(element).append('<textarea id="editor-' + highestId + '" class="paper-textarea"></textarea>');
 
 		$(element).children(".redBorder").hide();
-		$(element).parents().eq(1).attr("data-id", highestId);
+		$(element).parents().eq(1).attr("data-id", highestId).addClass("adding");
 		
 		$(container).find(".icon").removeClass("hidden");
 		tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-" + highestId);

@@ -1,18 +1,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <html>
-
-
 <head>
     <meta charset="UTF-8">
+	<title>FlashCard Website - Login</title>
+
     <link rel="stylesheet" href="layout/css/layout.css">
     <link href='http://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-  <script src="js/jquery.growl.js" type="text/javascript"></script>
-  <link href="layout/css/jquery.growl.css" rel="stylesheet" type="text/css" />
+	<link href="layout/css/jquery.growl.css" rel="stylesheet" type="text/css" />
+	
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/jquery.growl.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/login.js"></script>
-    
-  
+ 
 </head>
 
 <body>

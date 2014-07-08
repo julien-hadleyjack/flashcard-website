@@ -1,4 +1,4 @@
-$(document).ready(function() {    		
+﻿$(document).ready(function() {    		
 	var highestId = 0;
  		initEditors();
     		
@@ -35,12 +35,12 @@ $(document).ready(function() {
 
 			if($(this).parents().eq(1).attr("data-id") != undefined){
 				$.post( "/jsp/editFlashcardSet.jsp", { setId: $(this).parents().eq(1).attr("data-id"), title: value }, function( data ) {
-					$(element).children(".redBorder").html('<a href="/learningscreen.html?setId=' + $(this).parents().eq(1).attr("data-id") + '">' + value + '</a>');
+					$(element).children(".redBorder").html('<a href="/learningscreen.html?setId=' + $(element).parents().eq(1).attr("data-id") + '">' + value + '</a>');
 				});
 			} else {
 				$.post( "/jsp/addFlashcardSet.jsp", { title: value } , function( data ) {
 					
-					$(this).parents().eq(1).attr("data-id", data.replace("\n", ""));
+					$(element).parents().eq(1).attr("data-id", data.replace("\n", ""));
 					// add link
 					$(element).children(".redBorder").html('<a href="/learningscreen.html?setId=' + data.replace("\n", "") + '">' + value + '</a>');
 				});
@@ -58,7 +58,7 @@ $(document).ready(function() {
 		e.preventDefault();
 		var element = $(this).parents().eq(1);
 					
-		if(confirm('Sollen die Karteikarten wirklich gel�scht werden?')){
+		if(confirm('Sollen die Karteikarten wirklich gelöscht werden?')){
 			if($(element).find("add") != undefined){
 				$.post( "/jsp/deleteFlashcardSet.jsp", { setId: $(element).attr("data-id") } , function( data ) {
 					$(element).remove();

@@ -9,7 +9,8 @@
 		var element = $(this).parents().eq(1).children(".paper2");
 
 		$(element).children(".redBorder").hide();
-		$(element).children(".mce-container").show();
+		//$(element).children(".mce-container").show();
+		tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-" + $(this).parents().eq(1).attr("data-id"));
 						
 		$(this).html('<i class="fa fa-save fa-fw"></i>');
 		$(this).removeClass("edit");
@@ -27,7 +28,8 @@
 		if(!value || 0 === value.length) {
 			alert("Bitte gebe einen Titel ein!");
 		} else {
-			$(element).children(".mce-container").hide();
+			//$(element).children(".mce-container").hide();
+			tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-" + $(this).parents().eq(1).attr("data-id"));
 			$(element).children(".redBorder").show();
 			
 			// change before request ended
@@ -75,18 +77,19 @@
 		e.preventDefault();
 		var element = $(this).parents().eq(2).children(".paper2"),
 			container = $(element).parent();
-		console.log(container);
+
 		$(container).after($(container).clone());
 		
 		highestId+=5;
 		$(element).append('<textarea id="editor-' + highestId + '" class="paper-textarea"></textarea>');
 
 		$(element).children(".redBorder").hide();
-						
+		$(element).parents().eq(1).attr("data-id", highestId);
+		
 		$(container).find(".icon").removeClass("hidden");
 		tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-" + highestId);
 		//initEditors();
-		$(element).children(".mce-container").show();
+		//$(element).children(".mce-container").show();
 	});
 	
 	/* Init FlashCard Sets */

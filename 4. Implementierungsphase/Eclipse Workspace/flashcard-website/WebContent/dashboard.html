@@ -12,16 +12,16 @@
 	<script type="text/javascript">
     	function initEditors(){
 			tinymce.init({
-			    selector: "textarea",
+			    mode: "exact",
 			    theme: "modern",
 			    toolbar: false,
 			    menubar: false,
 			    statusbar: false,
-			    setup: function(ed) {
+			    /*setup: function(ed) {
 	        		ed.on('init', function(e) {
 	            		e.target.hide();
 	        		});
-	    		},
+	    		},*/
 	    		height: 134,
 	    		width: 309,
 	       		force_p_newlines : false,

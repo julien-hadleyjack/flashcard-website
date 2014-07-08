@@ -2,10 +2,12 @@
 
 <head>
     <meta charset="UTF-8">
+	<title>FlashCard Website - Lernen</title>
+		
     <link rel="stylesheet" href="layout/css/layout.css">
     <link rel="stylesheet" href="layout/css/font-awesome.min.css">
     <link rel="stylesheet" href="layout/css/ui-lightness/jquery-ui-1.10.4.min.css">
-    
+		
     <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.10.4.min.js"></script>
@@ -39,150 +41,6 @@
 	       		content_css : "layout/css/tinymce.css"
 			});
 		}
-
-		$(document).ready(function() {
-			$(document).on("click", ".edit", function(e){
-				e.preventDefault();
-				var element = $(this).parents().eq(1).children(".paper2"),
-					id = $(this).parents().eq(2).attr("data-id");
-	
-				$(element).children(".redBorder").hide();
-				tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-f-" + id);
-				tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-a-" + id);
-
-								
-				$(this).parents().eq(1).find(".undo").removeClass("hidden");
-													
-				$(this).html('<i class="fa fa-save fa-2x"></i>');
-				$(this).removeClass("edit");
-				$(this).addClass("save");
-			});
-				
-			$(document).on("click", ".add", function(e) {
-				e.preventDefault();
-				
-				var container = $(this).parents().eq(2);
-				console.log(container);
-				highestId+=5;
-				$(container).after('<div class="paper paper-big center paper-animate hidden adding" data-id="' + highestId + '"><div class="paper-holder"><div class="paper-buttons hidden"><a href="#" class="icon add"><i class="fa fa-plus fa-2x"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-2x"></i></a><a href="#" class="icon remove"><i class="fa fa-minus fa-2x"></i></a><a href="#" class="icon undo hidden"><i class="fa fa-undo fa-2x"></i></a><a href="#" class="icon wrong"><i class="fa fa-minus-circle fa-2x"></i></a><a href="#" class="icon right"><i class="fa fa-check fa-2x"></i></a></div><div class="paper2"><div class="redBorder"><figure class="front">Frage eingeben</figure><figure class="back hidden">Antwort eingeben</figure></div><textarea id="editor-f-' + highestId + '" class="paper-textarea-big">Frage eingeben</textarea><textarea id="editor-a-' + highestId + '" class="paper-textarea-big">Antwort eingeben</textarea></div></div></div>');
-				
-				//tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-f-" + highestId);
-				//tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-a-" + highestId);
-
-				slideRight();	
-				$(".answerButton").click();
-				$(".activeSlide .edit").click();	
-				
-				//$(".activeSlide .edit").click();
-				//$(".activeSlide").find(".paper-buttons").show();
-			});
-
-			$(document).on("click", ".save", function(e) {
-				e.preventDefault();
-				var element = $(this).parents().eq(1).children(".paper2"),
-					id = $(this).parents().eq(2).attr("data-id");
-				
-				var question = $(element).find("#editor-f-" + id + "_ifr").contents().find("body").html(),
-					answer = $(element).find("#editor-a-" + id + "_ifr").contents().find("body").html();
-
-				if((!question || 0 === question.length) | (!answer || 0 === answer.length)) {
-					alert("Bitte gebe eine Frage und eine Antwort ein!");
-				} else {
-					//$(element).children(".mce-container").hide();
-					$(element).children(".redBorder").show();
-						
-					$(element).find(".front").html(question);
-					$(element).find(".back").html(answer);
-
-
-					if(!$(this).parents().eq(2).hasClass("adding")){
-						$.post( "/jsp/editFlashcardWithId.jsp", { flashcardId: $(this).parents().eq(2).attr("data-id"), question: question, answer: answer } );
-					} else {
-						$.post( "/jsp/addFlashcardToSetWithId.jsp", { question: question, answer: answer, setId: $.getUrlVar("setId") } , function( data ) {
-							
-							$(this).parents().eq(1).attr("data-id", data.replace("\n", ""));
-							$(this).parents().eq(1).removeClass("adding");
-						});
-					}
-											
-					tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-f-" + id);
-					tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-a-" + id);
-
-					$(this).html('<i class="fa fa-pencil fa-2x"></i>');
-					$(this).removeClass("save");
-					$(this).addClass("edit");
-					$(this).parents().eq(1).find(".undo").addClass("hidden");
-					
-					init();
-					
-					if(!$(".activeSlide .paper2").hasClass("flipped")){
-						$(".activeSlide .paper-buttons").fadeOut(100);
-					}
-				}
-			});	
-			
-			$(document).on("click", ".undo", function(e){
-				e.preventDefault();
-				var element = $(this).parents().eq(2),
-					id = $(this).parents().eq(2).attr("data-id");
-
-				cancelEdit();
-				$(this).addClass("hidden");
-				var saveButton = $(this).parents().eq(1).find(".save");
-				$(saveButton).html('<i class="fa fa-pencil fa-2x"></i>');
-				$(saveButton).removeClass("save");
-				$(saveButton).addClass("edit");
-				
-				tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-f-" + id);
-				tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-a-" + id);
-
-				$(element).find("#editor-f-" + id).val($(element).find(".front").html());
-				$(element).find("#editor-a-" + id).val($(element).find(".back").html());
-
-				if(!$(".activeSlide .paper2").hasClass("flipped")){
-					$(".activeSlide .paper-buttons").fadeOut(100);
-				}
-
-			});
-	
-			
-			$(document).on("click", ".remove", function(e) {
-				e.preventDefault();
-				var element = $(this).parents().eq(2);
-				
-				if($(".paper-big").length < 3){
-					alert("Es ist nur noch eine Karteikarte vorhanden, bitte lösche das Set im Dashboard!");
-				} else {
-					if(confirm('Soll die Karteikarte wirklich gelöscht werden?')){
-						if(!$(element).hasClass("adding")){
-							$.post( "/jsp/removeFlashcardWithId.jsp", { flashcardId: $(element).attr("data-id") } , function( data ) {
-								$(element).remove();
-							});
-						} else {
-							$(element).remove();
-						}
-						
-						$("#right-button").click();
-						
-						// first or last slide deletion 
-						init();
-						
-						$(".ui-effects-wrapper").remove();
-					}
-				}
-			});	
-		
-			/* Init FlashCard Sets */
-			$.getJSON("/jsp/getFlashcardsForSetWithId.jsp", {setId: $.getUrlVar("setId")}, function(data){
-				initEditors();
-				$.each(data, function (index, value) {
-					$("#wrapper").prepend('<div class="paper paper-big center paper-animate hidden" data-id="' + value.flashcardId + '"><div class="paper-holder"><div class="paper-buttons hidden"><a href="#" class="icon add"><i class="fa fa-plus fa-2x"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-2x"></i></a><a href="#" class="icon remove"><i class="fa fa-minus fa-2x"></i></a><a href="#" class="icon undo hidden"><i class="fa fa-undo fa-2x"></i></a><a href="#" class="icon wrong"><i class="fa fa-minus-circle fa-2x"></i></a><a href="#" class="icon right"><i class="fa fa-check fa-2x"></i></a></div><div class="paper2"><div class="redBorder"><figure class="front">' + value.question + '</figure><figure class="back hidden">' + value.answer + '</figure></div><textarea id="editor-f-' + value.flashcardId + '" class="paper-textarea-big">' + value.question + '</textarea><textarea id="editor-a-' + value.flashcardId + '" class="paper-textarea-big">' + value.answer + '</textarea></div></div></div>');
-				});
-				init();
-				$("#wrapper").find(".paper-big").eq(0).addClass("activeSlide");
-				highestId = $(".paper-big").eq(-2).attr("data-id");
-			});
-		});
     </script>
 </head>
 
@@ -191,7 +49,7 @@
 		<div class="menubar">
 			<div class="menubar-container">
 				<ul class="menubar-nav">
-					<li><a href="javaScript:void(0);">Home</a></li>
+					<li><a href="dashboard.html">Home</a></li>
 					<li><a href="preferences.html">Einstellungen</a></li>
 					<li><a href="jsp/logout.jsp">Ausloggen</a></li>
 				</ul>

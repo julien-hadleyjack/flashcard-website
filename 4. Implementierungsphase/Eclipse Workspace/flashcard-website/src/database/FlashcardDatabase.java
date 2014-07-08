@@ -13,9 +13,15 @@ public interface FlashcardDatabase {
 	 * exists then that user will be changed to match the {@link UserBean}.
 	 * 
 	 * @param user the user that is created or modified
+	 * @return boolean if action was succesfull or not
 	 */
 	public boolean addUser(UserBean user);
 	
+	/**
+	 * Method to modify a user. For example to edit their email adress. Not implemented in the current project.
+	 * 
+	 * @param user the user that is created or modified
+	 */
 	public void modifyUser(UserBean user);
 	
 	/**
@@ -35,6 +41,7 @@ public interface FlashcardDatabase {
 	 * If no email address was provided, nothing will be done.
 	 *  
 	 * @param user the user that should be deleted
+	 * @return boolean if the deletion was successful or not
 	 */
 	public boolean deleteUser(UserBean user);
 	
@@ -43,6 +50,7 @@ public interface FlashcardDatabase {
 	 * 
 	 * @param user the user for which the set will be created
 	 * @param title the title of the newly created flash card set
+	 * @return inserted id from flashcardSet
 	 */
 	public int addFlashcardSet(UserBean user, String title);
 	
@@ -50,6 +58,7 @@ public interface FlashcardDatabase {
 	 * Modifies an existing flash card set using the flashcardsSetId.
 	 * 
 	 * @param flashcardSet the flash card set that should be modified
+	 * @param title the new title of the modified flashcardSet
 	 */
 	public void modifyFlashcardSet(FlashcardSetBean flashcardSet, String title);
 	
@@ -65,6 +74,7 @@ public interface FlashcardDatabase {
 	 * Returns a single flash card set with all of its flash cards.
 	 * 
 	 * @param flashcardSetId the id of the flash card set
+	 * @param user the user who owns this flashcardSet
 	 * @return the flash card set containing the flash cards; <code>null</code> if no corresponding flash card set exists
 	 */
 	public FlashcardSetBean getFlashcardSet(int flashcardSetId, UserBean user);
@@ -87,6 +97,13 @@ public interface FlashcardDatabase {
 	 */
 	public int addFlashcard(FlashcardSetBean flashcardset, String question, String answer);
 	
+	/**
+	 * Modifies a flash card in the flash card set.
+	 * 
+	 * @param flashcardId the id of the flashcard which should be modified
+	 * @param question the new question of the flashcard
+	 * @param answer the new answer of the flashcard
+	 */
 	public void modifyFlashcard(String question, String answer, int flashcardId);
 	
 	/**
@@ -103,7 +120,17 @@ public interface FlashcardDatabase {
 	 */
 	public void deleteFlashcard(int flashcardId);
 	
+	/**
+	 * Returns all Flashcards for a FlashcardSet
+	 * @param setId the id of the flashcard set from which you want to retrieve all the flashcards
+	 * @return a collection of all flashcards from this set; <code>null</code> otherwise
+	 */
 	public Collection<FlashcardBean> getFlashcardForSetWithId(int setId);
 	
+	/**
+	 * Checks if the given password matches with the encrypted one in the database
+	 * @param user the user with the login information
+	 * @return boolean if password matched or not
+	 */
 	public boolean checkPW(UserBean user);
 }

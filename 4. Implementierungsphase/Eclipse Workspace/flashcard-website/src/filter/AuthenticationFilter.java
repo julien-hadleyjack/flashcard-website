@@ -11,6 +11,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/** Authentifizierungsfilter, der es ermöglicht nicht eingeloggten Nutzern den Zugriff auf Seiten 
+ * zu verbieten und sie wieder zum Loginscreen zu schicken
+ * 
+ * Eingebunden in der web.xml
+ */
 public class AuthenticationFilter implements Filter {
 
 

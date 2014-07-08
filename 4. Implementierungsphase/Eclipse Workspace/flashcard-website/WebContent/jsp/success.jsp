@@ -1,3 +1,5 @@
+<%-- JSP, um einen Benutzer bei erfolgreichem Anmelden/Registrieren zum Dashboard weiterzuleiten --%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <html>

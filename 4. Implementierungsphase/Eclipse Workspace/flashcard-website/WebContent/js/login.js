@@ -1,3 +1,4 @@
+/* Funktion, um die Beschriftung der Formularelemente zu ändern, je nach Login oder Registrierung */
 function toRegister() {
 	var login = document.getElementById("loginId");
 	if (login.value === "Login") {
@@ -16,12 +17,14 @@ function toRegister() {
 	}
 }
 
+/* Prüft sämtliche Fehler bei der Eingabe zum Login/Registrieren */
 function checkForm() {
 
+	
 	var x = document.getElementById("login").value;
 	var passField = document.getElementById("password").value;
 	var regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+	/* Email nicht valide ? */
 	if (regex.test(x) == false) {
 		$.growl.error({
 			message : "Email Adresse ist nicht valide"

@@ -4,6 +4,9 @@ import java.util.Collection;
 
 import flashcard.FlashcardBean;
 
+/* Helper Klasse, um Rückgabewerte der Datenbank zu speichern, und somit in der JSP per
+ * Getter & Setter darauf zuzugreifen
+ */
 public class FlashcardHelper {
 	String uname;
 	String title;

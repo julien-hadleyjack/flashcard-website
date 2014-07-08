@@ -1,3 +1,6 @@
+<%-- JSP, um ein Set zur Datenbank hinzuzufügen, eine intiale Flashcard wird erstellt --%>
+
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:useBean id="database" class="database.MySqlDatabase" scope="session"></jsp:useBean>

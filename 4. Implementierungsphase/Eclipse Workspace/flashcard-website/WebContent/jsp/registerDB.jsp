@@ -1,3 +1,5 @@
+<%-- JSP, um einen User zu registrieren (anlegen in der Datenbank) und einzuloggen, sowie weiterzuleiten --%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:useBean id="loginBean" class="user.UserBean" scope="session"></jsp:useBean>

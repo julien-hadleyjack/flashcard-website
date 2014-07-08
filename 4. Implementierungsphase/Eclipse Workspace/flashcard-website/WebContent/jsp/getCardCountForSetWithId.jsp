@@ -1,3 +1,5 @@
+<%-- JSP, die die Anzahl an Flashcards in einem Set zurückliefert --%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:useBean id="database" class="database.MySqlDatabase" scope="session"></jsp:useBean>

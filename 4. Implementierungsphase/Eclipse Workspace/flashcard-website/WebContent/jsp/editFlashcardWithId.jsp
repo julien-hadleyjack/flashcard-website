@@ -1,3 +1,5 @@
+<%-- JSP, um Frage und Antwort einer Flashcard zu editieren --%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:useBean id="database" class="database.MySqlDatabase" scope="session"></jsp:useBean>

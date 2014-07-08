@@ -2,6 +2,11 @@ package flashcard;
 
 import java.util.Date;
 
+/**
+ * FlashcardBean
+ * hält alle relevanten Daten der Flashcard
+ */
+
 public class FlashcardBean {
 
 	private int flashcardId;

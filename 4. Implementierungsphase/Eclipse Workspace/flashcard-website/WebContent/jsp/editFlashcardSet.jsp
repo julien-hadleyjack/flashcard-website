@@ -1,3 +1,5 @@
+<%-- JSP, um ein Set zu eeditieren (dessen Titel) --%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:useBean id="database" class="database.MySqlDatabase" scope="session"></jsp:useBean>

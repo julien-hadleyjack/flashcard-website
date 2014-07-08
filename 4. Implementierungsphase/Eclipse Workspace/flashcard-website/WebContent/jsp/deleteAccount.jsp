@@ -1,3 +1,5 @@
+<%-- JSP, um einen Account aus der Datenbank zu löschen --%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:useBean id="loginBean" class="user.UserBean" scope="session"></jsp:useBean>

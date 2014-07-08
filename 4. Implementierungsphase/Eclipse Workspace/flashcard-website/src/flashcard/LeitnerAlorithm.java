@@ -2,6 +2,7 @@ package flashcard;
 
 import java.util.Collection;
 
+/* Noch nicht implmentiert */
 public class LeitnerAlorithm implements FlashcardSelector {
 
 	@Override

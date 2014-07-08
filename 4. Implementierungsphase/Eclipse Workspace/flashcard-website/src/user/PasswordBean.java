@@ -3,7 +3,7 @@ package user;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.RandomStringUtils;
 
-
+/* Bean, um das eingegebene Passwort zu verschlüsseln und einen Salt zu generieren */
 
 public class PasswordBean {
 

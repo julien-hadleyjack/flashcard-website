@@ -4,6 +4,11 @@ import java.util.Collection;
 
 import user.UserBean;
 
+/**
+ * FlashcardBean
+ * hält alle relevanten Daten eines FlashcardSets
+ */
+
 public class FlashcardSetBean {
 
 	private int setId;

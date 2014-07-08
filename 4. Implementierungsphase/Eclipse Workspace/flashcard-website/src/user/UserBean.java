@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** Bean um alle User relevanten Informationen zu speichern */
 
 public class UserBean {
 
@@ -67,6 +68,7 @@ public class UserBean {
 		this.username = username;
 	}
 
+	/* Noch nicht ausgelagert in die Datenbank Klasse */
 	public String existingSalt() {
 		String dbSalt = null;
 

@@ -1,3 +1,5 @@
+<%-- JSP, um einen User einzuloggen, Weiterleitung zur Success Page, Speichern der Session --%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:useBean id="loginBean" class="user.UserBean" scope="session"></jsp:useBean>

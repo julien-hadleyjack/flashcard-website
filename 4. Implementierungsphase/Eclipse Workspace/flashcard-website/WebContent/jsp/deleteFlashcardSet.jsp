@@ -1,3 +1,5 @@
+<%-- JSP, um ein Set aus der Datenbank zu löschen --%>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:useBean id="database" class="database.MySqlDatabase" scope="session"></jsp:useBean>

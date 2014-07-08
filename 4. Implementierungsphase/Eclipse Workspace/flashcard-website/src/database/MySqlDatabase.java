@@ -16,6 +16,8 @@ import user.UserBean;
 import flashcard.FlashcardBean;
 import flashcard.FlashcardSetBean;
 
+/* Kommentare zu einzelnen Methoden siehe FlashcardDatabase */
+
 public class MySqlDatabase implements FlashcardDatabase {
 
 private static DataSource dataSource = null;

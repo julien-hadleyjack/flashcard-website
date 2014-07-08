@@ -9,7 +9,6 @@
 		var element = $(this).parents().eq(1).children(".paper2");
 
 		$(element).children(".redBorder").hide();
-		//$(element).children(".mce-container").show();
 		tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-" + $(this).parents().eq(1).attr("data-id"));
 						
 		$(this).html('<i class="fa fa-save fa-fw"></i>');
@@ -28,7 +27,6 @@
 		if(!value || 0 === value.length) {
 			alert("Bitte gebe einen Titel ein!");
 		} else {
-			//$(element).children(".mce-container").hide();
 			tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-" + $(this).parents().eq(1).attr("data-id"));
 			$(element).children(".redBorder").show();
 			
@@ -80,7 +78,7 @@
 
 		$(container).after($(container).clone());
 		
-		highestId+=5;
+		highestId++;
 		$(element).append('<textarea id="editor-' + highestId + '" class="paper-textarea"></textarea>');
 
 		$(element).children(".redBorder").hide();
@@ -88,8 +86,6 @@
 		
 		$(container).find(".icon").removeClass("hidden");
 		tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-" + highestId);
-		//initEditors();
-		//$(element).children(".mce-container").show();
 	});
 	
 	/* Init FlashCard Sets */
@@ -98,7 +94,18 @@
 			$("#wrapper").prepend('<div class="paper paper-small paper-dashboard" data-id="' + value.setId + '"><div class="paper-buttons"><a href="#" class="icon remove"><i class="fa fa-minus fa-fw"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-fw"></i></a></div><div class="paper2"><div class="redBorder"><a href="learningscreen.html?setId=' + value.setId + '">' + value.title + '</a></div> <textarea id="editor-' + value.setId + '" class="paper-textarea">' + value.title + '</textarea></div></div>');
 		});
 		initEditors();
-		highestId = $(".paper-dashboard").eq(-2).attr("data-id");
+		highestId = getHighestID();
 	});
 
 });
+
+/* get highest ID */
+function getHighestID(){
+	var tempId = 0;
+	$(".paper-dashboard").each(function(){
+		if(tempId < $(this).attr("data-id")){
+			tempId = $(this).attr("data-id");
+		}
+	});
+	return tempId;
+}

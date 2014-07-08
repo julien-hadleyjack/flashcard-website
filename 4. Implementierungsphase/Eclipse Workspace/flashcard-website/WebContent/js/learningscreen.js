@@ -108,7 +108,7 @@ $(document).ready(function() {
 		
 		var container = $(this).parents().eq(2);
 		console.log(container);
-		highestId+=5;
+		highestId++;
 		$(container).after('<div class="paper paper-big center paper-animate hidden adding" data-id="' + highestId + '"><div class="paper-holder"><div class="paper-buttons hidden"><a href="#" class="icon add"><i class="fa fa-plus fa-2x"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-2x"></i></a><a href="#" class="icon remove"><i class="fa fa-minus fa-2x"></i></a><a href="#" class="icon undo hidden"><i class="fa fa-undo fa-2x"></i></a><a href="#" class="icon wrong"><i class="fa fa-minus-circle fa-2x"></i></a><a href="#" class="icon right"><i class="fa fa-check fa-2x"></i></a></div><div class="paper2"><div class="redBorder"><figure class="front">Frage eingeben</figure><figure class="back hidden">Antwort eingeben</figure></div><textarea id="editor-f-' + highestId + '" class="paper-textarea-big">Frage eingeben</textarea><textarea id="editor-a-' + highestId + '" class="paper-textarea-big">Antwort eingeben</textarea></div></div></div>');
 
 		slideRight();	
@@ -224,7 +224,7 @@ $(document).ready(function() {
 		});
 		init();
 		$("#wrapper").find(".paper-big").eq(0).addClass("activeSlide");
-		highestId = $(".paper-big").eq(-2).attr("data-id");
+		highestId = getHighestID();
 	});
 		
 	// Statistic Plugin Settings
@@ -250,128 +250,139 @@ $(document).ready(function() {
 	});
 });
 
-	/* Init Flashcard Classes */
-	function init(){
-	    // init classes
-	    if(!$("#wrapper").find(".paper-big").eq(0).hasClass("stats")){
-	    	$("#wrapper").find(".paper-big").eq(0).addClass("firstSlide").show();
-	    }
-	    $(".paper-big").last().addClass("lastSlide");
-	    
-	    cardCount = $(".paper-big").length - 1;
-	}
-	
-	/* reset view */
-	function reset(){
-		if($(".activeSlide .paper2").hasClass("flipped")){
-			$(".activeSlide .paper2").toggleClass("flipped");
-		} 
-		$(".answerButton").html("Antwort anzeigen");
-		$(".activeSlide .paper-buttons").hide();
-		
-		// Close Editor
-		cancelEdit();
-	}
-
-	/* Statistics */
-	/* rightanswers - 1 */
-	function wrongAnswer() {
-		var wrongElem = $(".activeSlide").find(".wrong");
-	  	if(!$(wrongElem).hasClass("checked")){
-			$(wrongElem).addClass("checked");						
-			var rightElem = $(".activeSlide").find(".right");
-			if($(rightElem).hasClass("checked")){
-				$(rightElem).removeClass("checked");
-				rightAnswers--;
-			}
+/* get highest ID */
+function getHighestID(){
+	var tempId = 0;
+	$(".paper-big").each(function(){
+		if(tempId < $(this).attr("data-id")){
+			tempId = $(this).attr("data-id");
 		}
+	});
+	return tempId;
+}
+
+/* Init Flashcard Classes */
+function init(){
+	// init classes
+	if(!$("#wrapper").find(".paper-big").eq(0).hasClass("stats")){
+		$("#wrapper").find(".paper-big").eq(0).addClass("firstSlide").show();
 	}
+	$(".paper-big").last().addClass("lastSlide");
 	
-	/* rightanswers + 1 */
-	function rightAnswer() {
+	cardCount = $(".paper-big").length - 1;
+}
+
+/* reset view */
+function reset(){
+	if($(".activeSlide .paper2").hasClass("flipped")){
+		$(".activeSlide .paper2").toggleClass("flipped");
+	} 
+	$(".answerButton").html("Antwort anzeigen");
+	$(".activeSlide .paper-buttons").hide();
+	
+	// Close Editor
+	cancelEdit();
+}
+
+/* Statistics */
+/* rightanswers - 1 */
+function wrongAnswer() {
+	var wrongElem = $(".activeSlide").find(".wrong");
+	if(!$(wrongElem).hasClass("checked")){
+		$(wrongElem).addClass("checked");						
 		var rightElem = $(".activeSlide").find(".right");
-	  	if(!$(rightElem).hasClass("checked")){
-			$(rightElem).addClass("checked");
-			var wrongElem = $(".activeSlide").find(".wrong");
-			if($(wrongElem).hasClass("checked")){
-				$(wrongElem).removeClass("checked");
-			}
-		
-			rightAnswers++;
+		if($(rightElem).hasClass("checked")){
+			$(rightElem).removeClass("checked");
+			rightAnswers--;
 		}
 	}
+}
 
-	/* Slide Functions */
-	/* slide activeSlide and prev slide to the right side if we are not on the first slide */
-	function slideLeft() {
-		if(!$(".firstSlide").hasClass("activeSlide")){
-			
-			reset();				
-			
-			var prevElement = $(".activeSlide").prev();
-			$(".activeSlide").toggle("slide", { direction: 'right' }, 700);	
-			$(".activeSlide").removeClass("activeSlide");
-
-			$(prevElement).toggle("slide", { direction: 'left' }, 700);	
-			$(prevElement).addClass("activeSlide");
-					
-			if(!$(prevElement).hasClass("stats")){
-				$(".answerButton").show().animate({opacity: 0.4}, 700);
-			}
+/* rightanswers + 1 */
+function rightAnswer() {
+	var rightElem = $(".activeSlide").find(".right");
+	if(!$(rightElem).hasClass("checked")){
+		$(rightElem).addClass("checked");
+		var wrongElem = $(".activeSlide").find(".wrong");
+		if($(wrongElem).hasClass("checked")){
+			$(wrongElem).removeClass("checked");
 		}
-	}
-		
-	/* slide activeSlide and next slide to the left side if we are not on the last slide */
-	function slideRight() {
-		if(!$(".lastSlide").hasClass("activeSlide")){
-			reset();
-						
-			var nextElement = $(".activeSlide").next();
-			$(".activeSlide").toggle("slide", { direction: 'left' }, 700);	
-			$(".activeSlide").removeClass("activeSlide");
 	
-			$(nextElement).toggle("slide", { direction: 'right' }, 700);	
-			$(nextElement).addClass("activeSlide");
-			
-			/* if next slide is statistics > init statistics plugin */
-			if($(nextElement).hasClass("stats")){
-				$(".answerButton").animate({opacity: 0}, 700, function() {
-					$(".answerButton").hide();
-				});
-				
-				var procent = (rightAnswers/cardCount) * 100;
-				
-				$({value: 0}).delay(200).animate({value: procent}, {
-				    duration: 1000,
-				    easing:'swing',
-				    step: function() 
-				    {
-				        $(".cs_knob").val(Math.ceil(this.value)).trigger('change');
-				    }
-				});
-				
-				$(".stats .bigText").html(rightAnswers + "/" + cardCount + " Richtig");
-			}
-		}
+		rightAnswers++;
 	}
+}
 
-	/* Cancel Edit */
-	/* remove editor, show content, change save button to edit button */
-	function cancelEdit() {
-		var element = $(".activeSlide").find(".paper2"),
-			button = $(element).find(".save");
+/* Slide Functions */
+/* slide activeSlide and prev slide to the right side if we are not on the first slide */
+function slideLeft() {
+	if(!$(".firstSlide").hasClass("activeSlide")){
 		
-		tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-f-" + $(".activeSlide").attr("data-id"));
-		tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-a-" + $(".activeSlide").attr("data-id"));
+		reset();				
+		
+		var prevElement = $(".activeSlide").prev();
+		$(".activeSlide").toggle("slide", { direction: 'right' }, 700);	
+		$(".activeSlide").removeClass("activeSlide");
 
-		$(element).children(".redBorder").show();
-		if(button.length > 0){
-			$(element).find(".undo").click();
+		$(prevElement).toggle("slide", { direction: 'left' }, 700);	
+		$(prevElement).addClass("activeSlide");
+				
+		if(!$(prevElement).hasClass("stats")){
+			$(".answerButton").show().animate({opacity: 0.4}, 700);
 		}
-																	
-		$(button).html('<i class="fa fa-pencil fa-2x"></i>');
-		$(button).removeClass("save");
-		$(button).addClass("edit");
-		$(element).find(".undo").addClass("hidden");
 	}
+}
+	
+/* slide activeSlide and next slide to the left side if we are not on the last slide */
+function slideRight() {
+	if(!$(".lastSlide").hasClass("activeSlide")){
+		reset();
+					
+		var nextElement = $(".activeSlide").next();
+		$(".activeSlide").toggle("slide", { direction: 'left' }, 700);	
+		$(".activeSlide").removeClass("activeSlide");
+
+		$(nextElement).toggle("slide", { direction: 'right' }, 700);	
+		$(nextElement).addClass("activeSlide");
+		
+		/* if next slide is statistics > init statistics plugin */
+		if($(nextElement).hasClass("stats")){
+			$(".answerButton").animate({opacity: 0}, 700, function() {
+				$(".answerButton").hide();
+			});
+			
+			var procent = (rightAnswers/cardCount) * 100;
+			
+			$({value: 0}).delay(200).animate({value: procent}, {
+				duration: 1000,
+				easing:'swing',
+				step: function() 
+				{
+					$(".cs_knob").val(Math.ceil(this.value)).trigger('change');
+				}
+			});
+			
+			$(".stats .bigText").html(rightAnswers + "/" + cardCount + " Richtig");
+		}
+	}
+}
+
+/* Cancel Edit */
+/* remove editor, show content, change save button to edit button */
+function cancelEdit() {
+	var element = $(".activeSlide").find(".paper2"),
+		button = $(element).find(".save");
+	
+	tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-f-" + $(".activeSlide").attr("data-id"));
+	tinymce.EditorManager.execCommand('mceRemoveEditor', false, "editor-a-" + $(".activeSlide").attr("data-id"));
+
+	$(element).children(".redBorder").show();
+	if(button.length > 0){
+		$(element).find(".undo").click();
+	}
+																
+	$(button).html('<i class="fa fa-pencil fa-2x"></i>');
+	$(button).removeClass("save");
+	$(button).addClass("edit");
+	$(element).find(".undo").addClass("hidden");
+}
 

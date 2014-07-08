@@ -7,10 +7,8 @@ Diese Kriterien müssen bis zum Projektende implementiert werden, damit das Proj
 \begin{enumerate}[leftmargin=2cm, label=\bfseries /MK\arabic*0/]
 	\item Der Benutzer kann Karteikartensets erstellen, die Themen für eine Sammlung von Karteikarten darstellt.
 	\item Der Benutzer kann Karteikarten zu einem Karteikartenset hinzufügen und löschen.
+	\item Der Benutzer kann angeben, ob er eine Karteikarte richtig oder falsch beantwortet hat.
 	\item\label{unicode} Unicode-Zeichen werden als Eingabe in den Karteikarten unterstützt.
-	\item\label{export} Ein Karteikartenset kann vom Benutzer exportiert werden.
-	%\item\label{katalog} Die Seite stellt ein Katalog von vorgefertigten Karteikartensets zur Verfügung.
-	
 	\item\label{keyboard} Beim Lernen mit den Karteikarten kann auch nur mit der Tastatur navigiert werden.
 \end{enumerate}
 
@@ -19,14 +17,16 @@ Diese Kriterien müssen bis zum Projektende implementiert werden, damit das Proj
 Diese Kriterien werden für das Projekt gewünscht, sind aber nicht zwingend erforderlich für ein erfolgreiches Projektende. Je nach Zeit und technisches Schwierigkeitsgrad wird versucht möglichst viele/wichtige Kriterien zu implementieren.
 
 \begin{enumerate}[leftmargin=2cm, label=\bfseries /WK\arabic*0/]
-\item Ein (anderer) Benutzer kann das vom \ref{export} exportierte Karteikartenset für seinen Account importieren.
-	\item Die Webseite wird zusätzlich auch für Mobilgeräte optimiert.
+	%\item Die Webseite wird zusätzlich auch für Mobilgeräte optimiert.
 	\item Für jedes Karteikartenset werden Statistiken angezeigt (Erfolgsquote,...).
 	\item Mathematische Ausdrücke werden dargestellt in natürlicher Form (z.b. \( e^{\frac{3}{4}\pi i}\))
 	\item Die Antwortkarte kann in Form von Multiple Choice sein.
 	\item Die zu lernenden Karten werden durch einen Algorithmus ausgewählt (z.B. Leitner System)
 	\item Bilder können eingefügt werden.
+	\item\label{export} Ein Karteikartenset kann vom Benutzer exportiert werden.
+	%\item\label{katalog} Die Seite stellt ein Katalog von vorgefertigten Karteikartensets zur Verfügung.
 	\item\label{share} Der Benutzer hat Option ein Karteikartenset mit einer anderen Person zu teilen.
+	\item Ein (anderer) Benutzer kann das vom \ref{export} exportierte Karteikartenset in seinen Account importieren.
 \end{enumerate}
 
 \subsubsection{Abgrenzkriterien}
@@ -45,7 +45,7 @@ Diese Kriterien beschreiben die Grenzen des Projektes und sollen auf jeden Fall 
 % in diesem Kapitel kann der Einsatz auch eingegrenzt werden
 
 \subsubsection{Anwendungsbereiche}
-Die Webseite richtet sich an Einzelpersonen, die Informationen lernen müssen, dass in das Schema "Frage" und "Antwort" eingeteilt werden kann.
+Die Webseite richtet sich an Einzelpersonen, die Informationen lernen müssen, welches in das Schema "Frage" und "Antwort" eingeordnet werden kann.
 
 \subsubsection{Zielgruppen}
 \begin{enumerate}[leftmargin=2cm, label=\bfseries /ZG\arabic*0/]
@@ -56,9 +56,9 @@ Die Webseite richtet sich an Einzelpersonen, die Informationen lernen müssen, d
 
 
 \subsubsection{Betriebsbedingungen}
-Die Betriebsbedingungen beschreiben die physikalische Umgebung und tägliche Betriebszeit.
+Die Betriebsbedingungen beschreiben die physikalische Umgebung und tägliche Betriebszeit.\\
 
-Das Projekt läuft auf einem Server, der JSP-Spezifikation unterstützt. Da der Server-Verantwortlicher ein Student ist, ist der Server in einen unbeaufsichtigten Betrieb. Außer für Wartungsarbeiten soll die Webseite rund um die Uhr erreichbar sein.
+\noindent Das Projekt läuft auf einem Server, der JSP-Spezifikation unterstützt. Dieser kann entweder auf einem lokalen Computer oder in einem Rechenzentrum eines Server-Anbieters laufen. Da der Server-Verantwortlicher ein Student ist, ist der Server für ein Großteil des Tages in einen unbeaufsichtigten Betrieb. Außer für Wartungsarbeiten soll die Webseite rund um die Uhr erreichbar sein.
 
 %\subsection{Produktübersicht}
 
@@ -87,7 +87,7 @@ Für jede einzelne Lernkartei werden diese Informationen gespeichert:
 \subsection{Produktfunktionen}
 
 
-\begin{tabulary}{1.3\textwidth}{|L|L|L|L|L|L|L|}
+\begin{tabulary}{1.35\textwidth}{|L|L|L|L|L|L|L|}
 \hline 
 \textbf{Anwendungsfall} & \textbf{Ziel} & \textbf{Kategorie} & \textbf{Vorbedingung} & \textbf{Nachbedingung (Erfolg)} & \textbf{Nachbedingung (Fehlschlag)} & \textbf{Auslösendes Ereignis} \\ 
 \hline 
@@ -95,9 +95,9 @@ Karte hinzufügen & Set erweitern & primär & Set existiert & eine zusätzliche 
 \hline 
 Karte löschen & Karteikarte vom Set entfernen & primär & Karte existiert & Karteikarte wurde entfernt & Fehlermeldung wird angezeigt & Button zum Löschen geklickt \\ 
 \hline 
-Karte bearbeiten & • & • & • & • & • & • \\ 
+Karte bearbeiten & Karteninhalt verändern & primär & Karte existiert & Inhalt wurde verändert & alter Inhalt wird beibehalten und Fehlermeldung wird angezeigt & Buttom zum Bearbeiten geklickt \\ 
 \hline 
-• & • & • & • & • & • & • \\ 
+Karte beantworten & angeben, ob Kartei richtig oder falsch beantwortet wurde & primär & Karte existiert & Auswahl wird gespeichert & Fehlermeldung wird angezeigt & Button für "Richtig" oder "Falsch" wird geklickt \\ 
 \hline 
 \end{tabulary} 
 \end{center}
@@ -106,21 +106,21 @@ Karte bearbeiten & • & • & • & • & • & • \\
 
 \subsection{Betriebs- und Entwicklungsumgebung}
 
-\subsubsection{Entwickler}
-Es gibt drei technische Themenbereiche, die für die Webseite abgedeckt werden müssen:
-\begin{itemize}
-	\item \textbf{HTML / CSS} \\
-	Struktur und Gestaltung der Webseite
-	\item \textbf{JSP / Java Beans} \\
-	Serverseitige Logik der Webseite
-	\item \textbf{MySQL} \\
-	Speichern und Laden der Benutzerdaten (wie Karteikarten)
-\end{itemize}
-Dieses Projekt wird durch drei Entwickler unterstützt, die jeweils auf eins dieser Themen ihren Schwerpunkt haben.
+%\subsubsection{Entwicklung}
+%Es gibt vier technische Themenbereiche, die für die Webseite abgedeckt werden müssen:
+%\begin{itemize}
+%	\item \textbf{HTML / CSS} \\
+%	Struktur und Gestaltung der Webseite
+%	\item \textbf{Javascript / jQuery}
+%	Klientseitige Interaktion mit der Webseite
+%	\item \textbf{JSP / Java Beans} \\
+%	Serverseitige Logik der Webseite
+%	\item \textbf{MySQL} \\
+%	Speichern und Laden der Benutzerdaten (wie Karteikarten)
+%\end{itemize}
 
 \subsubsection{Server}
-unbeaufsichtigter Betrieb
-Die Daten zum benutzten Server:
+Der Server läuft im unbeaufsichtigten Betrieb. Die Daten zum benutzten Server:
 \begin{itemize}
 	\item \textbf{Ubuntu Server 13.10} \\
 	Ein Debian-basiertes Linux-Betriebssystem, der für den Server-Betrieb gedacht ist. \\
@@ -146,8 +146,9 @@ Die Daten zum benutzten Server:
 	\textit{Lizenz:} MIT
 \end{itemize}
 
-\subsection{Produktleistungen}
+%\subsection{Produktleistungen}
 
+\newpage
 \subsection{Nichtfunktionale Anforderungen}
 Diese Anforderungen befassen sich nicht nicht mit der Funktionalität des Projektes, sondern mit anderen Themen wie z.B. Qualität, Schnelligkeit und Benutzerfreundlichkeit. Auch rechtliche Anforderungen können hier beschrieben werden.
 
@@ -197,20 +198,32 @@ Austauschbarkeit & • & & \\
 %\end{itemize}
 
 \subsubsection{Rechtliche Informationen}
-Das Produkt ist quelloffen und wird nichtkommerziell unter der freien "GNU General Public Licence"-Lizenz zur Verfügung gestellt. Dies ist mit allen verwendeten Bibliotheken und Tools vereinbar.
+Das Produkt ist quelloffen und wird nichtkommerziell unter der freien "GNU General Public Licence"-Lizenz zur Verfügung gestellt. 
 
+\newpage
 \subsection{Globale Testfälle}
 Dies sind einige Testfälle, die die korrekte Ausführung verschiedener Funktionen überprüfen.
 
-\subsubsection{Testfälle für Pflichtkriterien}
-\begin{description}
-	\item[/TP10/] Ein korrekt-beantwortete Karte sollte beim wiederholten Lernen kurz danach (in Abhängigkeit vom Algorithmus) nicht auftauchen.
-	\item[/TP20/] Seltene Unicode-Zeichen wie \(\pi\) werden als Eingabe benutzt und danach im Lernmodus überprüft.
-	\item[/TP30/] Ein Bild wird als Eingabe benutzt und danach im Lernmodus überprüft.
-	\item[/TP40/] Ein Karteikartenset wird exportiert und danach wird getestet, ob die Datei auch übereinstimmt.
-	\item[/TP50/] Das von \textbf{/TP40/} exportierte Karteikartenset wird importiert.
-	\item[/TP60/] Ein im Katalog vorgefertigte Karteikartenset wird zum eigenen Account hinzugefügt.
-\end{description}
+\subsubsection{Testfälle für Musskriterien}
+\begin{enumerate}[leftmargin=2cm, label=\bfseries /TM\arabic*0/]
+	\item Ein neues Karteikartenset wird erstellt und danach wieder gelöscht.
+	\item Eine Karteikarte wird zu einem Set hinzugefügt und danach wieder gelöscht.
+	\item Seltene Unicode-Zeichen wie \(\pi\) werden als Eingabe benutzt und danach im Lernmodus auf die korrekte Darstellung überprüft.
+	\item Der Lernbildschirm wird mit der Tastatur navigiert.
+\end{enumerate}
+
+\subsubsection{Testfälle für Musskriterien}
+\begin{enumerate}[leftmargin=2cm, label=\bfseries /TW\arabic*0/]
+	\item Die Erfolgsquote wird nach Beantwortung aller Karteikarten in einem Set angezeigt.
+	\item Eine mathematische Formel (z.b. \( e^{\frac{3}{4}\pi i}\)) wird als Eingabe benutzt und danach im Lernmodus auf die korrekte Darstellung überprüft.
+	\item Es eine Antwort in Form von Multiple Choice benutzt und danach im Lernmodus auf die korrekte Darstellung überprüft.
+	\item Ein Bild wird als Eingabe benutzt und danach im Lernmodus auf die korrekte Darstellung überprüft.
+	%\item Ein korrekt-beantwortete Karte sollte beim wiederholten Lernen kurz danach (in Abhängigkeit vom Algorithmus) nicht auftauchen.
+	\item\label{test-export} Ein Karteikartenset wird exportiert und danach wird getestet, ob die Datei auch übereinstimmt.
+	\item Das von \ref{test-export} exportierte Karteikartenset wird importiert.
+	%\item Ein im Katalog vorgefertigte Karteikartenset wird zum eigenen Account hinzugefügt.
+\end{enumerate}
+
 
 \subsection{Benutzeroberfläche}
 \subsubsection{Hauptbildschirm}
@@ -242,7 +255,7 @@ Der Hauptbildschirm gibt eine Übersicht zu den Karteikartensets des angemeldete
     \label{fig:lernscreen-antwort}
 \end{figure}
 
-Der Lernbildschirm fängt mit der Vorderseite von der ersten Karteikarte des Sets an. Wenn man sich die Rückseite mit der Antwort anzeigen lässt, hat man die Möglichkeit anzugeben, ob man richtig lag oder nicht.
+Der Lernbildschirm fängt mit der Vorderseite von der ersten Karteikarte des Sets an. Wenn man sich die Rückseite mit der Antwort anzeigen lässt, hat man die Möglichkeit anzugeben, ob man richtig oder falsch lag.
 
 \begin{figure}[H]
     \centering

@@ -20,11 +20,17 @@
 % gantt charts: http://ctan.mirrorcatalogs.com/graphics/pgf/contrib/pgfgantt/pgfgantt.pdf
 \usepackage{pgfgantt}
 
-% change margins to 2.5 cm
+% change margins to 2.5 cm and enable landscape
 \usepackage[margin=3cm]{geometry}
+\usepackage{pdflscape}
+
+\usepackage{tabulary}
 
 % place figures at exactly the position given in the code
 \usepackage{float}
+
+% custom counters for lists
+\usepackage{enumitem}
 
 \newcommand{\appname}{Flashcard-Website}
 
@@ -34,7 +40,7 @@
     \large
     \begin{flushleft}
         Web Engineering, 2. Semester \\
-        Projektmanagment, 2. Semester
+        Projektmanagment, 2. Semester \\
         TINF13B2
     \end{flushleft}
     
@@ -45,10 +51,12 @@
         \Huge SOLL-/IST-Analyse\\
         \Large \appname \\
         \vspace{1cm}
-        \normalsize David Ehlen, \\Julien Hadley Jack, \\Sebastian Dernbach, \\
+        \normalsize David Ehlen (5460297),\\
+        Julien Hadley Jack (4739854), \\
+        Sebastian Dernbach (9586963), \\
         \vspace\medskipamount
         \vspace\medskipamount
-        Karlsruhe, 04.07.2014
+        Karlsruhe, 07.07.2014
     \end{center}
     
     \vfill
@@ -75,16 +83,16 @@
 \pagestyle{plain}
 \setcounter{page}{1}
 
-\section{Anforderungen}
-\subsection{Pflichtkriterien}
-\subsection{Wunschkriterien}
+\section{Projektstrukturplan}
+\subsection{Zielbestimmung}
+\subsection{Nichtfunktionale Anforderungen}
+\subsection{Testfälle}
 
-\section{Qualität}
+\section{Terminplan}
 
+\section{Ressourcenplan}
 
-\section{Projektplanung}
-
-\section{Kosten}
+\section{Kostenplan}
 
 \begin{figure}[H]
     \centering
@@ -93,7 +101,9 @@
     \label{fig:overview}
 \end{figure}
 
-\section{Risiken}
+\section{Risikoplan}
+
+\section{Kommunikationsplan}
 
 \section{Persönliche Einschätzung}
 

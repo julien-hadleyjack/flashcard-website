@@ -82,9 +82,9 @@ public interface FlashcardDatabase {
 	/**
 	 * Deletes the flash card set. If the set doesn't exist in the database then nothing will be done.
 	 * 
-	 * @param flashcardSet the set that should be deleted
+	 * @param setId the set with the id setId that should be deleted
 	 */
-	public void deleteFlashcardSet(FlashcardSetBean flashcardSet);
+	public void deleteFlashcardSet(int setId);
 	
 	/**
 	 * Creates or modifies a flash card in the flash car set. If a flash card already exists in the flash card set

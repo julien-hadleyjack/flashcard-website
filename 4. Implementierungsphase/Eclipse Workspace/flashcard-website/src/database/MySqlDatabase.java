@@ -325,7 +325,7 @@ private static DataSource dataSource = null;
 	}
 
 	@Override
-	public void deleteFlashcardSet(FlashcardSetBean flashcardSet) {
+	public void deleteFlashcardSet(int setId) {
 		PreparedStatement prepStatement;
 		Connection connection = null;
 		
@@ -335,7 +335,7 @@ private static DataSource dataSource = null;
 		int updateQuery = 0;
 
 		prepStatement = connection.prepareStatement(queryString);
-		prepStatement.setInt(1, flashcardSet.getSetId());
+		prepStatement.setInt(1, setId);
 		updateQuery = prepStatement.executeUpdate();
 		if (updateQuery != 0) {
 			return;

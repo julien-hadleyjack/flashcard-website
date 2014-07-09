@@ -86,7 +86,7 @@ $(document).ready(function() {
 	/* change to save button, insert editors */
 	$(document).on("click", ".edit", function(e){
 		e.preventDefault();
-		var element = $(this).parent().children(".paper2"),
+		var element = $(this).parents().eq(1).children(".paper2"),
 			id = $(this).parents().eq(2).attr("data-id");
 
 		$(element).children(".redBorder").hide();
@@ -94,7 +94,7 @@ $(document).ready(function() {
 		tinymce.EditorManager.execCommand('mceAddEditor', true, "editor-a-" + id);
 
 						
-		$(this).parent().find(".undo").removeClass("hidden");
+		$(this).parents().eq(1).find(".undo").removeClass("hidden");
 											
 		$(this).html('<i class="fa fa-save fa-2x"></i>');
 		$(this).removeClass("edit");
@@ -107,7 +107,7 @@ $(document).ready(function() {
 		e.preventDefault();
 		
 		var container = $(this).parents().eq(2);
-		console.log(container);
+
 		highestId++;
 		$(container).after('<div class="paper paper-big center paper-animate hidden adding" data-id="' + highestId + '"><div class="paper-holder"><div class="paper-buttons hidden"><a href="#" class="icon add"><i class="fa fa-plus fa-2x"></i></a><a href="#" class="icon edit"><i class="fa fa-pencil fa-2x"></i></a><a href="#" class="icon remove"><i class="fa fa-minus fa-2x"></i></a><a href="#" class="icon undo hidden"><i class="fa fa-undo fa-2x"></i></a><a href="#" class="icon wrong"><i class="fa fa-minus-circle fa-2x"></i></a><a href="#" class="icon right"><i class="fa fa-check fa-2x"></i></a></div><div class="paper2"><div class="redBorder"><figure class="front">Frage eingeben</figure><figure class="back hidden">Antwort eingeben</figure></div><textarea id="editor-f-' + highestId + '" class="paper-textarea-big">Frage eingeben</textarea><textarea id="editor-a-' + highestId + '" class="paper-textarea-big">Antwort eingeben</textarea></div></div></div>');
 
@@ -120,7 +120,7 @@ $(document).ready(function() {
 	/* change content, submit to database, change back to edit button, remove editors */
 	$(document).on("click", ".save", function(e) {
 		e.preventDefault();
-		var element = $(this).parent().children(".paper2"),
+		var element = $(this).parents().eq(1).children(".paper2"),
 			id = $(this).parents().eq(2).attr("data-id");
 		
 		var question = $(element).find("#editor-f-" + id + "_ifr").contents().find("body").html(),
@@ -140,8 +140,8 @@ $(document).ready(function() {
 			} else {
 				$.post( "/jsp/addFlashcardToSetWithId.jsp", { question: question, answer: answer, setId: $.getUrlVar("setId") } , function( data ) {
 					
-					$(this).parent().attr("data-id", data.replace("\n", ""));
-					$(this).parent().removeClass("adding");
+					$(this).parents().eq(1).attr("data-id", data.replace("\n", ""));
+					$(this).parents().eq(1).removeClass("adding");
 				});
 			}
 									
@@ -151,7 +151,7 @@ $(document).ready(function() {
 			$(this).html('<i class="fa fa-pencil fa-2x"></i>');
 			$(this).removeClass("save");
 			$(this).addClass("edit");
-			$(this).parent().find(".undo").addClass("hidden");
+			$(this).parents().eq(1).find(".undo").addClass("hidden");
 			
 			init();
 			
@@ -170,7 +170,7 @@ $(document).ready(function() {
 
 		cancelEdit();
 		$(this).addClass("hidden");
-		var saveButton = $(this).parent().find(".save");
+		var saveButton = $(this).parents().eq(1).find(".save");
 		$(saveButton).html('<i class="fa fa-pencil fa-2x"></i>');
 		$(saveButton).removeClass("save");
 		$(saveButton).addClass("edit");

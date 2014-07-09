@@ -577,7 +577,8 @@ header {
 }
 
 #text {
+	display:block;
 	color:white;
-	margin:30px auto;
+	margin: 30px 100px 0px 100px auto;
 	text-align:center;
 }

@@ -131,14 +131,14 @@ Austauschbarkeit & sehr gut & sehr gut \\
 
 \noindent Die Richtigkeit konnte leider nicht erreicht werden. Dies lag hauptsächlich, dass wir uns in der Planung für den WYSYWYG-Editor TinyMCE entschieden hatten. Dieser hat uns aber viele Probleme bereitet.
 
-Es kam öfters vor, dass wir ihn in mehreren Testfälle mit korrekten Endergebnissen testen konnten. Aber als wir sie zu einem späteren Zeitpunkt wiederholten, traten plötzlich Probleme auf, obwohl am Code und am Server nichts verändert worden ist. Viele Fehler konnten im Code beseitigt werden, aber leider nicht alle. In diesen Fällen wird es meist durch ein Neuladen der eigenen Seite kurzzeitig behoben.
+Es kam öfters vor, dass wir ihn in mehreren Testfälle mit korrekten Endergebnissen testen konnten. Aber als wir sie zu einem späteren Zeitpunkt wiederholten, traten plötzlich Probleme auf, obwohl am Code und am Server nichts verändert worden ist. Viele Fehler konnten im Code beseitigt werden, aber leider nicht alle. In diesen Fällen wird es meist durch ein Neuladen der Seite kurzzeitig behoben.
 
 \subsection{Testfälle}
-Die Testfälle der Musskriterien und erfüllten Wunschkriterien wurden mit verschiedenen Browser getestet. Dies hat uns geholfen einige Fehler noch zu finden. Unterschiede zwischen z.B. Google Chrome und Mozilla Firefox führten zu unterschiedlichen Darstellungen. Wenn möglich wurde dies behoben.
+Die Testfälle der Musskriterien und erfüllten Wunschkriterien wurden mit verschiedenen Browser getestet. Dies hat uns geholfen noch einige Fehler zu finden. Unterschiede zwischen z.B. Google Chrome und Mozilla Firefox führten zu unterschiedlichen Darstellungen. Wenn möglich wurde dies behoben.
 
 \section{Terminplan}
-Wir haben uns für Amazon AWS entschieden zur Bereitstellung des Servers. Dies ermöglicht eine einfache Kollaboration zwischen den Mitarbeitern und lässt die Webseite mit der Anzahl der Besucher skalieren. Dieser Dienst wird auch von Firmen wie NASA, Pinterest und Netflix für ihre produktiven Dienste benutzt.
-Dabei hatten wir mit komplexeren Themen wie Firewallregeln und Benutzerverwaltung öfters Probleme. Diese waren nicht eingeplant, so dass das Projektende um 2 Tage überschritten wurde. Da aber ein Puffer zwischen Projektende und Abgabetermin der Dokumentation mitkalkuliert war, konnte dieser Termin ohne Schwierigkeiten eingehalten werden.
+Wir haben uns zur Bereitstellung des Servers für Amazon AWS entschieden. Dies ermöglicht eine einfache Kollaboration zwischen den Mitarbeitern und lässt die Webseite mit der Anzahl der Besucher skalieren. Dieser Dienst wird auch von Firmen wie NASA, Pinterest und Netflix für ihre produktiven Dienste benutzt.
+Dabei hatten wir mit komplexeren Themen wie Firewallregeln und Benutzerverwaltung öfters Probleme. Diese waren nicht eingeplant, so dass das Projektende um 2 Tage überschritten wurde. Da aber ein Puffer zwischen Projektende und Abgabetermin der Dokumentation einkalkuliert war, konnte dieser Termin ohne Schwierigkeiten eingehalten werden.
 
 
 \section{Ressourcenplan}
@@ -152,11 +152,11 @@ Die Zusammenarbeit zwischen den Mitgliedern des Projektes hat gut funktioniert. 
 
 \section{Kostenplan}
 
-Während des Projektes erhielt der Miterarbeiter, der für die Serveradministration zuständig war, eine E-Mail von Amazon. Es enthielt eine Warnung wegen verdächtigen Aktivitäten auf dem Amazon-AWS-Account. Der Mitarbeiter hat danach beim Überprüfen Änderungen von einer unerlaubten Drittperson auf dem Account entdeckt.
+Während des Projektes erhielt der Mitarbeiter, der für die Serveradministration zuständig war, eine E-Mail von Amazon. Diese enthielt eine Warnung wegen verdächtigen Aktivitäten auf dem Amazon-AWS-Account. Der Mitarbeiter hat danach beim Überprüfen Änderungen von einer unerlaubten Drittperson auf dem Account entdeckt.
 
 Nach einer mehrstündigen Fehlersuche konnte der Weg festgestellt werden, wie diese Person Zugang erlangen konnte: 
 
-Der Code des Projektes war in einem öffentlichen Versionskontrollsystem auf www.github.com veröffentlicht. Die Datei mit den nötigen Login-Daten für das Amazon-AWS-Account wurde einem Filter hinzugefügt, damit sie nicht veröffentlicht wird. Ein Mitarbeiter hatte Software verwendet, um seine Änderungen dem Versionskontrollsystem hinzuzufügen, die diesen Filter nicht benutzte.
+Der Code des Projektes war in einem öffentlichen Versionskontrollsystem auf www.github.com veröffentlicht. Die Datei mit den nötigen Login-Daten für das Amazon-AWS-Account wurde einem Filter hinzugefügt, damit sie nicht veröffentlicht wird. Ein Mitarbeiter hatte Software verwendet, um seine Änderungen dem Versionskontrollsystem hinzuzufügen, die diesen Filter nicht beachtete.
 
 Da Amazon AWS für kleine bis riesigen Webseiten verwendet werden kann, gibt es auch kostenpflichtige Optionen. Die unerlaubte Person hat eine Vielzahl von den Optionen dazugebucht. Obwohl er nur Zugriff für einen Tag hatte, konnte er eine Rechnung von 568,14 USD in dieser Zeit für den Mitarbeiter ansammeln.
 

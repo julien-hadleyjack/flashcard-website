@@ -12,7 +12,7 @@ Diese Kriterien müssen bis zum Projektende implementiert werden, damit das Proj
 	\item\label{keyboard} Beim Lernen mit den Karteikarten kann auch nur mit der Tastatur navigiert werden.
 \end{enumerate}
 
-\noindent Da dies eine Prüfuungsleistung für die Vorlesung Webengineering ist, wurden einige Anforderungen für alle Projekte festgelegt:
+\noindent Da dies eine Prüfungsleistung für die Vorlesung Webengineering ist, wurden einige Anforderungen für alle Projekte festgelegt:
 \begin{enumerate}[resume*=mk]
 	\item Es muss eine Hilfeseite/Anleitung existieren.
 	\item Es muss eine Impressum existieren.
@@ -24,12 +24,12 @@ Diese Kriterien müssen bis zum Projektende implementiert werden, damit das Proj
 		\item JavaScript
 		\item Serverseitige Logik mit Java Beans
 	\end{itemize}
-	\item Mehrere Benutzer müssen gleichzeit die Webseite benutzen können.
+	\item Mehrere Benutzer müssen gleichzeitig die Webseite benutzen können.
 \end{enumerate}
 
 
 \subsubsection{Wunschkriterien}
-Diese Kriterien werden für das Projekt gewünscht, sind aber nicht zwingend erforderlich für ein erfolgreiches Projektende. Je nach Zeit und technisches Schwierigkeitsgrad wird versucht möglichst viele/wichtige Kriterien zu implementieren.
+Diese Kriterien werden für das Projekt gewünscht, sind aber für ein erfolgreiches Projektende nicht zwingend erforderlich. Je nach Zeit und technisches Schwierigkeitsgrad wird versucht möglichst viele/wichtige Kriterien zu implementieren.
 
 \begin{enumerate}[leftmargin=2cm, label=\bfseries /WK\arabic*0/]
 	%\item Die Webseite wird zusätzlich auch für Mobilgeräte optimiert.
@@ -114,7 +114,7 @@ Karte löschen & Karteikarte vom Set entfernen & primär & Karte existiert & Kar
 \hline 
 Karte bearbeiten & Karteninhalt verändern & primär & Karte existiert & Inhalt wurde verändert & alter Inhalt wird beibehalten und Fehlermeldung wird angezeigt & Buttom zum Bearbeiten geklickt \\ 
 \hline 
-Karte beantworten & angeben, ob Kartei richtig oder falsch beantwortet wurde & primär & Karte existiert & Auswahl wird gespeichert & Fehlermeldung wird angezeigt & Button für ``Richtig`` oder ``Falsch`` wird geklickt \\ 
+Karte beantworten & angeben, ob Karteikarte richtig oder falsch beantwortet wurde & primär & Karte existiert & Auswahl wird gespeichert & Fehlermeldung wird angezeigt & Button für ``Richtig`` oder ``Falsch`` wird geklickt \\ 
 \hline 
 \end{tabulary} 
 \end{center}
@@ -173,7 +173,7 @@ Austauschbarkeit & • & & \\
 %\end{itemize}
 
 \subsubsection{Rechtliche Informationen}
-Das Produkt ist quelloffen und wird nichtkommerziell unter der freien ``GNU General Public Licence``-Lizenz zur Verfügung gestellt. 
+Das Produkt ist quelloffen und wird nicht kommerziell unter der freien ``GNU General Public Licence``-Lizenz zur Verfügung gestellt. 
 
 \newpage
 \subsection{Globale Testfälle}
@@ -183,16 +183,16 @@ Dies sind einige Testfälle, die die korrekte Ausführung verschiedener Funktion
 \begin{enumerate}[leftmargin=2cm, label=\bfseries /TM\arabic*0/]
 	\item Ein neues Karteikartenset wird erstellt und danach wieder gelöscht.
 	\item Eine Karteikarte wird zu einem Set hinzugefügt und danach wieder gelöscht.
-	\item Seltene Unicode-Zeichen wie \(\pi\) werden als Eingabe benutzt und danach wird im Lernmodus auf die korrekte Darstellung überprüft.
+	\item Seltene Unicode-Zeichen wie \(\pi\) werden als Eingabe benutzt und danach im Lernmodus auf die korrekte Darstellung überprüft.
 	\item Der Lernbildschirm wird mit der Tastatur navigiert.
 \end{enumerate}
 
 \subsubsection{Testfälle für Musskriterien}
 \begin{enumerate}[leftmargin=2cm, label=\bfseries /TW\arabic*0/]
 	\item Die Erfolgsquote wird nach Beantwortung aller Karteikarten in einem Set angezeigt.
-	\item Eine mathematische Formel (z.b. \( e^{\frac{3}{4}\pi i}\)) wird als Eingabe benutzt und danach wird im Lernmodus auf die korrekte Darstellung überprüft.
-	\item Es eine Antwort in Form von Multiple Choice benutzt und danach wird im Lernmodus auf die korrekte Darstellung überprüft.
-	\item Ein Bild wird als Eingabe benutzt und danach wird im Lernmodus auf die korrekte Darstellung überprüft.
+	\item Eine mathematische Formel (z.b. \( e^{\frac{3}{4}\pi i}\)) wird als Eingabe benutzt und danach im Lernmodus auf die korrekte Darstellung überprüft.
+	\item Es wird eine Antwort in Form von Multiple Choice benutzt und danach im Lernmodus auf die korrekte Darstellung überprüft.
+	\item Ein Bild wird als Eingabe benutzt und danach im Lernmodus auf die korrekte Darstellung überprüft.
 	%\item Ein korrekt-beantwortete Karte sollte beim wiederholten Lernen kurz danach (in Abhängigkeit vom Algorithmus) nicht auftauchen.
 	\item\label{test-export} Ein Karteikartenset wird exportiert und anschließend auf die Richtigkeit der Daten überprüft.
 	\item Ein exportiertes Karteikartenset wird importiert.

@@ -65,9 +65,17 @@ function checkForm() {
 	/* Login war nicht korrekt, kein Eintrag oder Passwort falsch */
 	else if (document.getElementById("loginId").value == "Login") {
 		var req = new XMLHttpRequest();
-		req.open("GET", "/jsp/loginDB.jsp?uname="
+		var params = "uname="
 				+ document.getElementById("login").value + "&password="
-				+ document.getElementById("password").value, true);
+				+ document.getElementById("password").value;
+				
+		req.open("POST", "/jsp/loginDB.jsp", true);
+		
+		//Send the proper header information along with the request
+		req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		req.setRequestHeader("Content-length", params.length);
+		req.setRequestHeader("Connection", "close");
+
 		req.onreadystatechange = function receive() {
 			if (req.readyState == 4) {
 				if (req.responseText.trim() == "incorrect") {
@@ -86,6 +94,6 @@ function checkForm() {
 
 		};
 
-		req.send();
+		req.send(params);
 	}
 }

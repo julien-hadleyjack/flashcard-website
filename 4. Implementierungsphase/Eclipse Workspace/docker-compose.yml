@@ -1,0 +1,29 @@
+build:
+  container_name: flashcard_build
+  image: maven:3.3.3-jdk-7
+  command: mvn package
+  working_dir: /usr/src/app
+  volumes:
+    - ~/.m2:/root/.m2
+    - ./flashcard-website:/usr/src/app
+
+server:
+  container_name: flashcard_server
+  image: tomcat:8.0-jre7
+  links:
+    - db:db
+  environment:
+    JAVA_OPTS: -DJDBC_CONNECTION_STRING="jdbc:mysql://db:3306/web_engineering?user=root"
+  ports:
+    - 8080:8080
+  volumes:
+    # - ./tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml
+    - ./flashcard-website/target/webapps/:/usr/local/tomcat/webapps/
+
+db:
+  container_name: flashcard_db
+  image: mysql:5.7
+  environment:
+    - MYSQL_ALLOW_EMPTY_PASSWORD=true
+  volumes:
+    - ./db-backup:/docker-entrypoint-initdb.d/

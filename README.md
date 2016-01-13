@@ -1,13 +1,31 @@
-flashcard-website
-=================
+# flashcard-website
 
-###**MySQL und Tomcat lokal 
+![Login screen](6.\ Abnahmephase/Analyse/login.png)
 
-Die Login und Signup Funktion funktioniert zurzeit noch lokal und nicht über Juliens Server.
-Hierfür muss folgendes aufgesetzt werden, falls ihr das ganze an eurem Rechner ausprobieren wollt:
+A demo site to create and learn with flashcards. It was created for the lecture "Web Engineering" at the Baden-Wuerttemberg Cooperative State University Karlsruhe. The goal was to use the technologies taught like JSP, Javabeans, HTML, Javascript and MySQL.
 
-1. Tomcat lokal installieren
-2. Projekt in das Verzeichnis *$CATALINA_HOME/webapps/ *legen.
-3. MYSQL Datenbank lokal aufsetzen mit der Datenbank *web_engineering*
-4. In der Datenbank eine Tabelle *Users* anlegen mit (*id, email, pwhash, salt)*
-5. *login.jsp* über *localhost:8080/login.jsp* aufrufen
+## Installation
+
+The simplest was of trying the demo is by using docker-compose. After installing docker-compose and cloning the repository, you need 
+
+```sh
+cd flashcard-website/4.\ Implementierungsphase/Eclipse\ Workspace/
+
+# Creates war file
+docker-compose up build
+
+# Start website and database
+docker-compose up -d server && docker-compose logs
+```
+
+Now you should be able to see the website at <http://localhost:8080>. You can use the dummy account with the username `test@test.de` and the password `test` or create your own account.
+
+## More Screenshots
+
+![Overview screen](6.\ Abnahmephase/Analyse/overview.png)
+
+![Question screen](6.\ Abnahmephase/Analyse/learningscreen-answer.png)
+
+![Edit screen](6.\ Abnahmephase/Analyse/learningscreen-edit.png)
+
+![Result screen](6.\ Abnahmephase/Analyse/learningscreen-end.png)

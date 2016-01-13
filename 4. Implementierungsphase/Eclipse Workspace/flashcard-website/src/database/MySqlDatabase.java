@@ -1,4 +1,4 @@
-﻿package database;
+package database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -50,7 +50,8 @@ private static DataSource dataSource = null;
 			p.setRemoveAbandoned(true);
 			p.setJdbcInterceptors("org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;"+
 					"org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer");
-			
+
+			LOGGER.info("Database url: " +  p.getUrl());
 			dataSource = new DataSource();
 			dataSource.setPoolProperties(p); 
 		}

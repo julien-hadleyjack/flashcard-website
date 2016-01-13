@@ -1,6 +1,6 @@
 # flashcard-website
 
-![Login screen](6. Abnahmephase/Analyse/login.png)
+<img src="6.%20Abnahmephase/Analyse/login.png" alt="Login screen">
 
 A demo site to create and learn with flashcards. It was created for the lecture "Web Engineering" at the Baden-Wuerttemberg Cooperative State University Karlsruhe. The goal was to use the technologies taught like JSP, Javabeans, HTML, Javascript and MySQL.
 
@@ -22,10 +22,10 @@ Now you should be able to see the website at <http://localhost:8080>. You can us
 
 ## More Screenshots
 
-![Overview screen](6. Abnahmephase/Analyse/overview.png)
+<img src="6.%20Abnahmephase/Analyse/overview.png" alt="Overview screen">
 
-![Question screen](6. Abnahmephase/Analyse/learningscreen-answer.png)
+<img src="6.%20Abnahmephase/Analyse/learningscreen-answer.png" alt="Question screen">
 
-![Edit screen](6. Abnahmephase/Analyse/learningscreen-edit.png)
+<img src="6.%20Abnahmephase/Analyse/learningscreen-edit.png" alt="Edit screen">
 
-![Result screen](6. Abnahmephase/Analyse/learningscreen-end.png)
+<img src="6.%20Abnahmephase/Analyse/learningscreen-end.png" alt="Result screen">

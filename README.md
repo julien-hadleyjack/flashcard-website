@@ -1,6 +1,6 @@
 # flashcard-website
 
-+![Login screen](6.%20Abnahmephase/Analyse/login.png)
+![Login screen](6.%20Abnahmephase/Analyse/images/login.png)
 
 A demo site to create and learn with flashcards. It was created for the lecture "Web Engineering" at the Baden-Wuerttemberg Cooperative State University Karlsruhe. The goal was to use the technologies taught like JSP, Javabeans, HTML, Javascript and MySQL.
 
@@ -22,10 +22,11 @@ Now you should be able to see the website at <http://localhost:8080>. You can us
 
 ## More Screenshots
 
-<img src="https://raw.githubusercontent.com/julien-hadleyjack/flashcard-website/master/6.%20Abnahmephase/Analyse/overview.png" alt="Overview screen">
+![Overview screen](6. Abnahmephase/Analyse/images/overview.png)
 
-<img src="https://raw.githubusercontent.com/julien-hadleyjack/flashcard-website/master/6.%20Abnahmephase/Analyse/learningscreen-answer.png" alt="Question screen">
 
-<img src="https://raw.githubusercontent.com/julien-hadleyjack/flashcard-website/master/6.%20Abnahmephase/Analyse/learningscreen-edit.png" alt="Edit screen">
+<img src="https://raw.githubusercontent.com/julien-hadleyjack/flashcard-website/master/6.%20Abnahmephase/Analyse/images/learningscreen-answer.png" alt="Question screen">
 
-<img src="https://raw.githubusercontent.com/julien-hadleyjack/flashcard-website/master/6.%20Abnahmephase/Analyse/learningscreen-end.png" alt="Result screen">
+<img src="https://raw.githubusercontent.com/julien-hadleyjack/flashcard-website/master/6.%20Abnahmephase/Analyse/images/learningscreen-edit.png" alt="Edit screen">
+
+<img src="https://raw.githubusercontent.com/julien-hadleyjack/flashcard-website/master/6.%20Abnahmephase/Analyse/images/learningscreen-end.png" alt="Result screen">
